@@ -3,9 +3,9 @@
    ================================================================ */
 
 :root {
-  /* Brand colors */
-  --yellow: #F2BB13;
-  --yellow-soft: #FFF8E1;
+  /* Brand colors - official palette from Cash Clinic logo */
+  --yellow: #F2C402;
+  --yellow-soft: #FEF7CC;
   --yellow-section: #FEF3C7;
   --dark: #1F2937;
   --gray-900: #111827;
@@ -16,12 +16,18 @@
   --gray-200: #E5E7EB;
   --gray-100: #F3F4F6;
   --gray-50: #F9FAFB;
-  --accent: #C2410C;
+  --accent: #F3AF2F;
+  --accent-deep: #C28617;
+  --orange: #F3AF2F;
+  --orange-soft: #FEF1D5;
+  --purple: #702084;
+  --purple-soft: #F3E7F5;
   --success: #047857;
   --success-light: #D1FAE5;
   --danger: #B91C1C;
   --danger-light: #FEE2E2;
-  --blue: #1E40AF;
+  --blue: #2578C4;
+  --blue-soft: #E0EEFC;
   --blue-light: #DBEAFE;
 
   /* Typography */
@@ -68,8 +74,8 @@ button { cursor: pointer; border: none; background: none; }
 
 .dashboard-bg {
   background:
-    radial-gradient(circle at 100% 0%, rgba(242,187,19,0.08) 0%, transparent 40%),
-    radial-gradient(circle at 0% 100%, rgba(242,187,19,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(242,196,2,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(242,196,2,0.04) 0%, transparent 40%),
     var(--gray-50);
   min-height: 100vh;
 }
@@ -97,12 +103,18 @@ button { cursor: pointer; border: none; background: none; }
   display: flex; align-items: center; gap: 14px;
 }
 .brand-logo {
-  width: 44px; height: 44px;
-  background: var(--yellow);
+  width: 48px; height: 48px;
+  background: white;
   border-radius: var(--radius);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; color: var(--dark); font-size: 22px;
-  box-shadow: 0 4px 12px rgba(242,187,19,0.4);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+.brand-logo img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 2px;
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 .brand-name { font-weight: 700; color: var(--dark); font-size: 20px; }
@@ -305,11 +317,11 @@ button { cursor: pointer; border: none; background: none; }
 .btn-primary {
   background: var(--yellow); color: var(--dark);
   font-weight: 700;
-  box-shadow: 0 2px 4px rgba(242,187,19,0.3);
+  box-shadow: 0 2px 4px rgba(242,196,2,0.3);
 }
 .btn-primary:hover {
   background: #E5AB00; transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(242,187,19,0.4);
+  box-shadow: 0 4px 8px rgba(242,196,2,0.4);
 }
 .btn-danger {
   background: white; color: var(--danger); border-color: var(--gray-300);
@@ -766,7 +778,7 @@ textarea.field.tall { min-height: 120px; }
   color: var(--dark) !important;
   font-weight: 700 !important;
   padding: 9px 18px !important;
-  box-shadow: 0 2px 4px rgba(242,187,19,0.25);
+  box-shadow: 0 2px 4px rgba(242,196,2,0.25);
 }
 .nav-cta:hover {
   background: #E5AB00 !important;
@@ -788,7 +800,7 @@ textarea.field.tall { min-height: 120px; }
   position: absolute;
   top: -200px; right: -300px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(242,187,19,0.18) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(242,196,2,0.18) 0%, transparent 60%);
   z-index: 0;
 }
 .hero-landing-inner {
@@ -875,7 +887,7 @@ textarea.field.tall { min-height: 120px; }
 .btn-large.yellow {
   background: var(--yellow);
   color: var(--dark);
-  box-shadow: 0 4px 12px rgba(242,187,19,0.35);
+  box-shadow: 0 4px 12px rgba(242,196,2,0.35);
 }
 .btn-large.yellow:hover {
   background: #E5AB00;
@@ -1189,7 +1201,7 @@ textarea.field.tall { min-height: 120px; }
   position: absolute;
   top: -80px; left: -80px;
   width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(242,187,19,0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(242,196,2,0.2) 0%, transparent 70%);
 }
 .vision-eyebrow {
   display: inline-block;
