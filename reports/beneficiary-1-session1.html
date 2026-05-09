@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الأولى – أين أنا الآن؟ – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+
+<div class="toolbar no-print">
+  <div class="container toolbar-inner">
+    <a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+    <div class="toolbar-actions">
+      <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+      <input type="file" id="import-file" accept=".json" style="display:none;">
+      <button id="import-btn" class="btn btn-secondary">استيراد</button>
+      <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+      <button id="reset-btn" class="btn btn-danger">مسح</button>
+      <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="document" data-form-id="beneficiary-1">
+  <div class="doc-header">
+    <div class="doc-brand">
+      <div class="doc-brand-mark">ك</div>
+      <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div>
+    </div>
+    <div class="doc-subtitle">كرّاس المستفيد – الجلسة الأولى<br><span style="font-family:var(--font-en); font-size:11px;">My Starting Point</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">جلستي الأولى – أين أنا الآن؟</h1>
+    <div class="doc-title-en">My Starting Point</div>
+  </div>
+
+  <div class="callout">
+    هذا الكرّاس لك وحدك. اكتب فيه بصدق دون أحكام. الهدف ليس أن أُحرجك، بل أن نرى معًا أين تقف الآن، حتى نعرف إلى أين تريد أن تصل. كل سطر تكتبه هو خطوة باتجاه مال أهدأ ومستقبل أوضح.
+  </div>
+
+  <h1 class="section-h">١. أنا في سطور</h1>
+  <table class="tbl">
+    <tr><td class="label">اسمي</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">عمري</td><td><input type="text" class="field field-num" data-field="age"> سنة</td></tr>
+    <tr><td class="label">حالتي الاجتماعية</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="marital" data-field="marital" value="أعزب"><span>أعزب</span></label>
+        <label class="choice"><input type="radio" name="marital" data-field="marital" value="متزوج"><span>متزوج</span></label>
+        <label class="choice"><input type="radio" name="marital" data-field="marital" value="مطلق"><span>مطلق</span></label>
+        <label class="choice"><input type="radio" name="marital" data-field="marital" value="أرمل"><span>أرمل</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">عدد من أعولهم</td><td><input type="text" class="field field-num" data-field="dependents"></td></tr>
+    <tr><td class="label">وظيفتي / مصدر دخلي</td><td><input type="text" class="field" data-field="job"></td></tr>
+    <tr><td class="label">تاريخ هذه الجلسة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. كيف أشعر تجاه وضعي المالي اليوم؟</h1>
+  <p class="muted">(اختر كل ما ينطبق عليك - ولا تخجل، الصدق هو نقطة البداية)</p>
+  <div id="feelings-list"></div>
+  <script>
+    document.getElementById("feelings-list").innerHTML = [
+      ["pressured", "أشعر بالضغط والتوتر معظم الوقت بسبب المال"],
+      ["avoid_bank", "أتجنّب فتح كشف حسابي لأني أعرف أن النتيجة محبطة"],
+      ["embarrassed", "أشعر بالخجل من حالتي المالية أمام الأهل"],
+      ["loop", "أشعر بأنني في حلقة لا تنتهي من القروض والديون"],
+      ["sleepless", "أعجز عن النوم أحيانًا بسبب التفكير في المال"],
+      ["helpless", "أشعر بالعجز - كأن المشكلة أكبر منّي"],
+      ["guilty", "أحس بالذنب عند كل عملية صرف، حتى الضرورية"],
+      ["wish_external", "أتمنى لو يأتي شخص ويحلّ المشكلة بدلًا منّي"],
+      ["hopeless", "فقدت الأمل في تحسّن وضعي المالي"],
+      ["dependent", "بدأت أعتاد على طلب المساعدة من جهات خيرية"],
+    ].map(([id, text]) => `<label class="cb-line"><input type="checkbox" data-field="feel_${id}"><span>${text}</span></label>`).join("");
+  </script>
+  <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="feel_other"><span>شيء آخر يصف شعوري:</span></label>
+    <input type="text" class="field" data-field="feel_other_text" style="flex:1;">
+  </div>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٣. ما الذي يؤلمني ماليًا؟</h1>
+  <p class="muted">(اكتب بكلماتك أنت – ليس هناك إجابة صحيحة أو خاطئة)</p>
+  <h2 class="subsection-h">أكثر شيء يضايقني في وضعي المالي حاليًا هو:</h2>
+  <textarea class="field tall" data-field="biggest_pain"></textarea>
+  <h2 class="subsection-h">لو قدرت أُغيّر شيء واحد فقط في حياتي المالية، راح أُغيّر:</h2>
+  <textarea class="field tall" data-field="one_change"></textarea>
+  <h2 class="subsection-h">الذكرى أو الموقف الأصعب اللي عشته بسبب وضعي المالي:</h2>
+  <textarea class="field tall" data-field="hardest_memory"></textarea>
+
+  <h1 class="section-h">٤. حقيقتي بالأرقام (بدون تجميل)</h1>
+  <p class="muted">الخطوة الأولى للتغيير هي أن نواجه الواقع كما هو. عبّ هذا الجدول بصدق:</p>
+  <table class="tbl">
+    <thead><tr><th>السؤال</th><th>جوابي</th></tr></thead>
+    <tbody>
+      <tr><td class="label">كم دخلي الشهري بالضبط؟</td><td class="num"><input type="text" class="field field-num" data-field="monthly_income"> د.ك</td></tr>
+      <tr><td class="label">كم مصروفي الشهري التقريبي؟</td><td class="num"><input type="text" class="field field-num" data-field="monthly_expense"> د.ك</td></tr>
+      <tr><td class="label" style="background:var(--danger-light);">كم إجمالي الديون اللي عليّ اليوم؟</td><td class="num" style="background:var(--danger-light); color:var(--danger); font-weight:700;"><input type="text" class="field field-num" data-field="total_debt"> د.ك</td></tr>
+      <tr><td class="label" style="background:var(--danger-light);">كم أقساطي الشهرية مجتمعة؟</td><td class="num" style="background:var(--danger-light); color:var(--danger); font-weight:700;"><input type="text" class="field field-num" data-field="monthly_installments"> د.ك</td></tr>
+      <tr><td class="label">كم بقي معاي في الحساب اليوم؟</td><td class="num"><input type="text" class="field field-num" data-field="bank_balance"> د.ك</td></tr>
+      <tr><td class="label">كم مدخراتي (لو فيه)؟</td><td class="num"><input type="text" class="field field-num" data-field="savings"> د.ك</td></tr>
+      <tr><td class="label" style="background:var(--yellow-soft);">لو فقدت دخلي اليوم، كم شهر أصمد؟</td><td class="num" style="background:var(--yellow-soft); color:var(--accent); font-weight:700;"><input type="text" class="field field-num" data-field="runway"> شهر</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٥. خريطة مصاريفي الشهرية</h1>
+  <p class="muted">ضع المبلغ التقريبي بكل بند. هذي ميزانيتك الحالية كما هي اليوم:</p>
+  <table class="tbl">
+    <thead><tr><th>الفئة</th><th>البند</th><th style="width:18%">المبلغ (د.ك)</th><th style="width:14%">ضروري؟</th></tr></thead>
+    <tbody id="budget-table"></tbody>
+  </table>
+  <script>
+    (function(){
+      const items = [
+        ["السكن وفواتير", "السكن (إيجار/قسط)", "housing"],
+        ["", "كهرباء وماء", "utilities"],
+        ["", "إنترنت واتصالات", "internet"],
+        ["الأكل والمواصلات", "أكل وبقالة", "groceries"],
+        ["", "مطاعم ومقاهي", "restaurants"],
+        ["", "بنزين/مواصلات", "transport"],
+        ["الأبناء والصحة", "مصاريف الأبناء/المدرسة", "children"],
+        ["", "صحة وأدوية", "health"],
+        ["الديون", "أقساط بنكية", "loans"],
+        ["", "بطاقات ائتمان", "credit_cards"],
+        ["", "ديون أفراد", "personal_debt"],
+        ["كماليات", "اشتراكات (Netflix...)", "subscriptions"],
+        ["", "تسوق إلكتروني", "shopping"],
+        ["", "ملابس وعطور", "clothing"],
+        ["", "هدايا ومناسبات", "gifts"],
+        ["", "سفر", "travel"],
+        ["أخرى", "صدقات/زكاة", "charity"],
+        ["", "ادخار", "saving"],
+        ["", "مصاريف غير متوقعة", "unexpected"],
+      ];
+      let lastCat = "";
+      const tbody = document.getElementById("budget-table");
+      tbody.innerHTML = items.map(([cat, item, id]) => {
+        const showCat = cat ? cat : "";
+        const catClass = cat ? "label center" : "center";
+        return `<tr>
+          <td class="${cat ? 'subhead' : ''} center" style="font-size:14px;">${showCat}</td>
+          <td>${item}</td>
+          <td class="num"><input type="text" class="field field-num" data-field="bud_${id}"></td>
+          <td class="center">
+            <div class="choice-group" style="justify-content:center;">
+              <label class="choice"><input type="radio" name="need_${id}" data-field="need_${id}" value="نعم"><span>نعم</span></label>
+              <label class="choice"><input type="radio" name="need_${id}" data-field="need_${id}" value="لا"><span>لا</span></label>
+            </div>
+          </td>
+        </tr>`;
+      }).join("");
+    })();
+  </script>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٦. ديوني... كل واحد على حدة</h1>
+  <p class="muted">(اكتب كل دين عليك، حتى لو صغير. عشان أول مرة نراه كله في مكان واحد)</p>
+  <table class="tbl">
+    <thead><tr><th>نوع الدين</th><th>لمن؟</th><th>المتبقي (د.ك)</th><th>القسط</th><th>متى يخلص؟</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><input type="text" class="field" data-field="debt1_type"></td>
+        <td><input type="text" class="field" data-field="debt1_to"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt1_balance"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt1_payment"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt1_end"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="field" data-field="debt2_type"></td>
+        <td><input type="text" class="field" data-field="debt2_to"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt2_balance"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt2_payment"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt2_end"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="field" data-field="debt3_type"></td>
+        <td><input type="text" class="field" data-field="debt3_to"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt3_balance"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt3_payment"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt3_end"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="field" data-field="debt4_type"></td>
+        <td><input type="text" class="field" data-field="debt4_to"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt4_balance"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt4_payment"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt4_end"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="field" data-field="debt5_type"></td>
+        <td><input type="text" class="field" data-field="debt5_to"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt5_balance"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt5_payment"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="debt5_end"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="total center">المجموع</td>
+        <td class="num total danger"><input type="text" class="field field-num" data-field="debt_total" style="font-weight:700;"></td>
+        <td class="num total danger"><input type="text" class="field field-num" data-field="debt_payment_total" style="font-weight:700;"></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-weight:600; margin-top:16px;">سؤال مهم لنفسي: هل أعرف بالضبط متى آخر دين راح يخلص؟</p>
+  <div class="choice-group">
+    <label class="choice"><input type="radio" name="know_end" data-field="know_end" value="نعم"><span>نعم، أعرف</span></label>
+    <label class="choice"><input type="radio" name="know_end" data-field="know_end" value="لا"><span>لا أعرف بالضبط</span></label>
+    <label class="choice"><input type="radio" name="know_end" data-field="know_end" value="ما فكرت"><span>لم أفكر فيها أبدًا</span></label>
+  </div>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٧. شو جربت قبل تصلح وضعك؟</h1>
+  <div id="tried-list"></div>
+  <script>
+    document.getElementById("tried-list").innerHTML = [
+      ["save_self", "حاولت أوفّر بنفسي بدون نجاح"],
+      ["new_loan", "أخذت قرض جديد لأسدّد قروض قديمة"],
+      ["bank_reschedule", "تواصلت مع البنك لإعادة جدولة"],
+      ["family", "طلبت مساعدة من الأهل"],
+      ["charity", "طلبت مساعدة من جهات خيرية"],
+      ["cancel_subs", "حذفت أو ألغيت بعض الاشتراكات"],
+      ["move_house", "غيّرت سكني لأقل تكلفة"],
+      ["extra_income", "بحثت عن دخل إضافي"],
+      ["youtube", "حاولت أفهم بنفسي عن طريق يوتيوب أو كتب"],
+      ["nothing", "ما جربت أي شيء جدّي حتى الآن"],
+    ].map(([id, text]) => `<label class="cb-line"><input type="checkbox" data-field="tried_${id}"><span>${text}</span></label>`).join("");
+  </script>
+  <h2 class="subsection-h">أكثر شيء جربته ولم ينجح كان:</h2>
+  <textarea class="field" data-field="tried_failed"></textarea>
+  <h2 class="subsection-h">والسبب اللي حسّيت إنه فشّله:</h2>
+  <textarea class="field" data-field="tried_failed_why"></textarea>
+
+  <h1 class="section-h">٨. ما الذي يخيفني من هذي الرحلة؟</h1>
+  <div id="fears-list"></div>
+  <script>
+    document.getElementById("fears-list").innerHTML = [
+      ["commit", "أخاف ما أقدر ألتزم بالتغيير"],
+      ["worse", "أخاف يطلع وضعي أسوأ مما أتخيل"],
+      ["people", "أخاف الناس تعرف عن وضعي"],
+      ["habits", "أخاف ما أقدر أتنازل عن عاداتي"],
+      ["children", "أخاف على أبنائي إذا غيّرت أسلوب حياتنا"],
+      ["regress", "أخاف أرجع لنفس الوضع بعد البرنامج"],
+      ["nothing", "ما أخاف من شيء معيّن، فقط أبي أبدأ"],
+    ].map(([id, text]) => `<label class="cb-line"><input type="checkbox" data-field="fear_${id}"><span>${text}</span></label>`).join("");
+  </script>
+  <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="fear_other"><span>شي آخر:</span></label>
+    <input type="text" class="field" data-field="fear_other_text" style="flex:1;">
+  </div>
+
+  <h1 class="section-h">٩. لو وضعي اتحسّن، شو راح أحس وأعمل؟</h1>
+  <p class="muted">(تخيّل بعد ٦ أشهر من اليوم، وضعك أحسن. كيف راح يكون؟)</p>
+  <textarea class="field tall" data-field="dream_state"></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">١٠. التزامي اليوم</h1>
+  <div class="callout bold">
+    أنا <input type="text" class="field field-inline" data-field="commit_name" style="min-width:200px;">، اليوم <input type="text" class="field field-inline" data-field="commit_date" data-fill-today style="min-width:160px;">، أبدأ هذي الرحلة بنية صادقة. أتعهّد لنفسي قبل أي شخص آخر بأن أكون صادقًا، ومنفتحًا، ومتعاونًا، ولن أكتفي بالاستماع، بل سأطبّق.
+  </div>
+  <h2 class="subsection-h">ثلاث خطوات بسيطة سأبدأ بها هذا الأسبوع:</h2>
+  <textarea class="field" data-field="step_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="step_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="step_3" placeholder="٣. ..."></textarea>
+
+  <div style="text-align:center; margin: 32px 0; font-weight:700;">
+    توقيعي: <input type="text" class="field field-inline" data-field="signature" style="min-width:200px;">
+    &nbsp;&nbsp;&nbsp;التاريخ: <input type="text" class="field field-inline" data-field="signature_date" style="min-width:140px;">
+  </div>
+
+  <div class="callout success" style="text-align: center;">
+    💛 تذكّر: لست وحدك. كل شخص بدأ رحلته من نقطة ما. الفرق بين من يبقى مكانه ومن يتقدّم هو خطوة واحدة فقط: أن تكتب الحقيقة كما هي. أنت بدأت اليوم.
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

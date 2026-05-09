@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير الجلسة الثالثة – متابعة 2 – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="committee-3">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">تقرير الجلسة الثالثة – متابعة 2<br><span style="font-family:var(--font-en); font-size:11px;">Session 3 – Follow-up 2</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">تقرير الجلسة الثالثة – متابعة (٢)</h1>
+    <div class="doc-title-en">Session 3 – Follow-up Report</div>
+  </div>
+
+  <div class="callout danger">
+    ⚠️ <strong>تنبيه:</strong> الجلسة القادمة هي الجلسة الختامية. يجب التحضير للمقارنة قبل/بعد الإلزامية، والتأكد من امتلاك بيانات قابلة للمقارنة من الجلسة الأولى.
+  </div>
+
+  <h1 class="section-h">١. معلومات الجلسة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم الحالة (مرجع كاش كلينيك)</td><td><input type="text" class="field" data-field="case_no_cc"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="case_no_charity"></td></tr>
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="ben_name"></td></tr>
+    <tr><td class="label">تاريخ الجلسة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">مدة الجلسة الفعلية</td><td><input type="text" class="field field-num" data-field="duration"> دقيقة</td></tr>
+    <tr><td class="label">المستشار</td><td><input type="text" class="field" data-field="consultant"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. مراجعة الواجبات من الجلسة الثانية</h1>
+  <table class="tbl">
+    <thead><tr><th>الواجب</th><th style="width:18%">حالة الإنجاز</th><th style="width:35%">ملاحظات المستشار</th></tr></thead>
+    <tbody id="hw-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        html += `<tr>
+          <td><input type="text" class="field" data-field="hw${i}_text"></td>
+          <td>
+            <div class="choice-group" style="flex-direction:column; align-items:flex-start;">
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="كاملًا"><span>كاملًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="جزئيًا"><span>جزئيًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="لم ينفّذ"><span>لم ينفّذ</span></label>
+            </div>
+          </td>
+          <td><input type="text" class="field" data-field="hw${i}_note"></td>
+        </tr>`;
+      }
+      document.getElementById("hw-tbody").innerHTML = html;
+    })();
+  </script>
+
+  <h1 class="section-h">٣. تتبع المؤشرات المالية</h1>
+  <table class="tbl">
+    <thead><tr><th>المؤشر</th><th style="width:22%">الجلسة الأولى</th><th style="width:22%">الجلسة الثانية</th><th style="width:22%">اليوم</th></tr></thead>
+    <tbody>
+      <tr><td class="label">الدخل</td><td class="num"><input type="text" class="field field-num" data-field="t_income_1"></td><td class="num"><input type="text" class="field field-num" data-field="t_income_2"></td><td class="num"><input type="text" class="field field-num" data-field="t_income_3"></td></tr>
+      <tr><td class="label">المصاريف</td><td class="num"><input type="text" class="field field-num" data-field="t_exp_1"></td><td class="num"><input type="text" class="field field-num" data-field="t_exp_2"></td><td class="num"><input type="text" class="field field-num" data-field="t_exp_3"></td></tr>
+      <tr><td class="label">الديون</td><td class="num"><input type="text" class="field field-num" data-field="t_debt_1"></td><td class="num"><input type="text" class="field field-num" data-field="t_debt_2"></td><td class="num"><input type="text" class="field field-num" data-field="t_debt_3"></td></tr>
+      <tr><td class="label">المدخرات</td><td class="num"><input type="text" class="field field-num" data-field="t_save_1"></td><td class="num"><input type="text" class="field field-num" data-field="t_save_2"></td><td class="num"><input type="text" class="field field-num" data-field="t_save_3"></td></tr>
+      <tr><td class="label">الفائض الشهري</td><td class="num"><input type="text" class="field field-num" data-field="t_surplus_1"></td><td class="num"><input type="text" class="field field-num" data-field="t_surplus_2"></td><td class="num"><input type="text" class="field field-num" data-field="t_surplus_3"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٤. تثبيت العادات الجديدة</h1>
+  <p class="muted">تقييم استقرار العادات المالية المكتسبة خلال البرنامج:</p>
+  <table class="tbl">
+    <thead><tr><th>العادة</th><th style="width:50%">المستوى الحالي</th></tr></thead>
+    <tbody id="habits-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      const habits = [
+        ["budget", "إعداد الميزانية الشهرية"],
+        ["track", "متابعة المصاريف اليومية"],
+        ["distinguish", "التمييز بين الحاجة والرغبة"],
+        ["save", "الادخار التلقائي"],
+        ["bank_check", "مراجعة الحساب البنكي"],
+        ["plan", "التخطيط قبل الشراء"],
+      ];
+      const levels = ["لم تبدأ", "بدأت", "متذبذبة", "ثابتة"];
+      document.getElementById("habits-tbody").innerHTML = habits.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td>
+            <div class="choice-group">
+              ${levels.map(l => `<label class="choice"><input type="radio" name="hab_${id}" data-field="hab_${id}" value="${l}"><span>${l}</span></label>`).join("")}
+            </div>
+          </td>
+        </tr>`).join("");
+    })();
+  </script>
+
+  <h1 class="section-h">٥. التحديات الباقية</h1>
+  <textarea class="field tall" data-field="remaining_challenges" placeholder="ما الذي لم يستطع المستفيد تغييره بعد؟ ما العوائق؟"></textarea>
+
+  <h1 class="section-h">٦. محتوى الجلسة الثالثة</h1>
+  <div id="content-list"></div>
+  <script>
+    document.getElementById("content-list").innerHTML = [
+      ["habit_consolidation", "تثبيت العادات المكتسبة"],
+      ["debt_progress", "متابعة استراتيجية سداد الديون"],
+      ["emergency_fund", "بناء صندوق طوارئ"],
+      ["long_term_plan", "التخطيط طويل المدى"],
+      ["scenario_planning", "محاكاة سيناريوهات (فقدان دخل، طارئ)"],
+      ["before_after_prep", "تحضير المستفيد لمقارنة الجلسة الختامية"],
+      ["sustainability", "خطة الاستدامة بعد البرنامج"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="content_${id}"><span>${t}</span></label>`).join("");
+  </script>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٧. مستوى الالتزام والتفاعل</h1>
+  <table class="tbl">
+    <tr><td class="label">حضور الجلسة</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="att" data-field="att" value="في الموعد"><span>في الموعد</span></label>
+        <label class="choice"><input type="radio" name="att" data-field="att" value="متأخر <15"><span>متأخر أقل من ١٥د</span></label>
+        <label class="choice"><input type="radio" name="att" data-field="att" value="مؤجلة سابقًا"><span>مؤجلة سابقًا</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">مستوى التفاعل</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="engagement" data-field="engagement" value="عالي"><span>عالي</span></label>
+        <label class="choice"><input type="radio" name="engagement" data-field="engagement" value="متوسط"><span>متوسط</span></label>
+        <label class="choice"><input type="radio" name="engagement" data-field="engagement" value="ضعيف"><span>ضعيف</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">جاهزية الحالة للجلسة الختامية</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="ready" data-field="ready" value="جاهزة"><span>جاهزة</span></label>
+        <label class="choice"><input type="radio" name="ready" data-field="ready" value="تحتاج تعزيز"><span>تحتاج تعزيز</span></label>
+        <label class="choice"><input type="radio" name="ready" data-field="ready" value="غير جاهزة"><span>غير جاهزة</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <h1 class="section-h">٨. خطة العمل للأسبوع القادم – استعدادًا للجلسة الختامية</h1>
+  <textarea class="field" data-field="prep_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="prep_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="prep_3" placeholder="٣. ..."></textarea>
+  <textarea class="field" data-field="prep_4" placeholder="٤. ..."></textarea>
+
+  <h1 class="section-h">٩. توصيات إضافية</h1>
+  <textarea class="field tall" data-field="extra_notes"></textarea>
+
+  <h1 class="section-h">١٠. التوقيعات</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">المستشار</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_c_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_c"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_c_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_cc_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_cc"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_cc_date"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

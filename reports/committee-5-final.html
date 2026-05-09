@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التقرير اليومي الشامل النهائي – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="committee-5">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">التقرير اليومي الشامل النهائي<br><span style="font-family:var(--font-en); font-size:11px;">Final Comprehensive Report</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">التقرير اليومي الشامل النهائي</h1>
+    <div class="doc-title-en">Final Comprehensive Daily Report</div>
+  </div>
+
+  <div class="callout">
+    <strong>هذا التقرير مطلوب نصًا في العقد:</strong> «التقرير اليومي الشامل بعد انتهاء جميع الجلسات». يُسلَّم للجمعية في ختام البرنامج مع الفاتورة النهائية.
+  </div>
+
+  <h1 class="section-h">١. معلومات الحالة والباقة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم الحالة (مرجع كاش كلينيك)</td><td><input type="text" class="field" data-field="case_no_cc"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="case_no_charity"></td></tr>
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="ben_name"></td></tr>
+    <tr><td class="label">الجمعية المُحوِّلة</td><td>جمعية بذل الندى الخيرية للأعمال الخيرية</td></tr>
+    <tr><td class="label">تاريخ بدء البرنامج</td><td><input type="text" class="field" data-field="start_date"></td></tr>
+    <tr><td class="label">تاريخ إصدار التقرير</td><td><input type="text" class="field" data-field="report_date" data-fill-today></td></tr>
+    <tr><td class="label">المستشار المنفّذ</td><td><input type="text" class="field" data-field="consultant"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. السجل اليومي للجلسات</h1>
+  <table class="tbl">
+    <thead>
+      <tr><th>الجلسة</th><th>التاريخ</th><th>الحضور</th><th>المدة</th><th>المخصوم (د.ك)</th><th>الرصيد المتبقي (د.ك)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label center">الأولى (تشخيصية)</td>
+        <td><input type="text" class="field" data-field="s1_date"></td>
+        <td>
+          <div class="choice-group" style="justify-content:center;">
+            <label class="choice"><input type="radio" name="s1_att" data-field="s1_att" value="حضر"><span>حضر</span></label>
+            <label class="choice"><input type="radio" name="s1_att" data-field="s1_att" value="تأخر"><span>تأخر</span></label>
+            <label class="choice"><input type="radio" name="s1_att" data-field="s1_att" value="غاب"><span>غاب</span></label>
+          </div>
+        </td>
+        <td class="num"><input type="text" class="field field-num" data-field="s1_dur"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s1_deduct"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s1_remain"></td>
+      </tr>
+      <tr>
+        <td class="label center">الثانية (متابعة ١)</td>
+        <td><input type="text" class="field" data-field="s2_date"></td>
+        <td>
+          <div class="choice-group" style="justify-content:center;">
+            <label class="choice"><input type="radio" name="s2_att" data-field="s2_att" value="حضر"><span>حضر</span></label>
+            <label class="choice"><input type="radio" name="s2_att" data-field="s2_att" value="تأخر"><span>تأخر</span></label>
+            <label class="choice"><input type="radio" name="s2_att" data-field="s2_att" value="غاب"><span>غاب</span></label>
+          </div>
+        </td>
+        <td class="num"><input type="text" class="field field-num" data-field="s2_dur"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s2_deduct"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s2_remain"></td>
+      </tr>
+      <tr>
+        <td class="label center">الثالثة (متابعة ٢)</td>
+        <td><input type="text" class="field" data-field="s3_date"></td>
+        <td>
+          <div class="choice-group" style="justify-content:center;">
+            <label class="choice"><input type="radio" name="s3_att" data-field="s3_att" value="حضر"><span>حضر</span></label>
+            <label class="choice"><input type="radio" name="s3_att" data-field="s3_att" value="تأخر"><span>تأخر</span></label>
+            <label class="choice"><input type="radio" name="s3_att" data-field="s3_att" value="غاب"><span>غاب</span></label>
+          </div>
+        </td>
+        <td class="num"><input type="text" class="field field-num" data-field="s3_dur"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s3_deduct"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s3_remain"></td>
+      </tr>
+      <tr>
+        <td class="label center">الرابعة (ختامية)</td>
+        <td><input type="text" class="field" data-field="s4_date"></td>
+        <td>
+          <div class="choice-group" style="justify-content:center;">
+            <label class="choice"><input type="radio" name="s4_att" data-field="s4_att" value="حضر"><span>حضر</span></label>
+            <label class="choice"><input type="radio" name="s4_att" data-field="s4_att" value="تأخر"><span>تأخر</span></label>
+            <label class="choice"><input type="radio" name="s4_att" data-field="s4_att" value="غاب"><span>غاب</span></label>
+          </div>
+        </td>
+        <td class="num"><input type="text" class="field field-num" data-field="s4_dur"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s4_deduct"></td>
+        <td class="num"><input type="text" class="field field-num" data-field="s4_remain"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٣. التسوية المالية الكاملة</h1>
+  <table class="tbl">
+    <tr><td class="label">إجمالي قيمة الباقة (٤ جلسات بعد خصم ٣٠٪)</td><td class="num">١٤٠٫٠٠٠ د.ك</td></tr>
+    <tr><td class="label">المبلغ المدفوع مقدمًا (١٠٠٪)</td><td class="num">١٤٠٫٠٠٠ د.ك</td></tr>
+    <tr><td class="label">إجمالي المخصوم خلال البرنامج</td><td class="num"><input type="text" class="field field-num" data-field="total_deducted"> د.ك</td></tr>
+    <tr><td class="label">عدد الجلسات المُنفَّذة</td><td class="num"><input type="text" class="field field-num" data-field="sessions_done"> جلسة</td></tr>
+    <tr><td class="label">عدد الجلسات الملغاة (تأخر/غياب)</td><td class="num"><input type="text" class="field field-num" data-field="sessions_canceled"></td></tr>
+    <tr><td class="label">عدد الجلسات المؤجلة</td><td class="num"><input type="text" class="field field-num" data-field="sessions_postponed"></td></tr>
+    <tr><td class="label total">الرصيد المتبقي عند الختام</td><td class="num total"><input type="text" class="field field-num" data-field="final_balance"> د.ك</td></tr>
+    <tr><td class="label">حالة التسوية</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="settle" data-field="settle" value="مغلقة"><span>مغلقة</span></label>
+        <label class="choice"><input type="radio" name="settle" data-field="settle" value="بحاجة لتسوية"><span>بحاجة لتسوية</span></label>
+        <label class="choice"><input type="radio" name="settle" data-field="settle" value="استرداد"><span>استرداد رصيد</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٤. ملخص الإنجازات</h1>
+  <textarea class="field tall" data-field="achievement_summary" placeholder="ملخص لأبرز ما تحقّق خلال البرنامج..."></textarea>
+
+  <h1 class="section-h">٥. ملخص المقارنة قبل/بعد</h1>
+  <p class="muted">المؤشرات الستة الأساسية من تقرير الجلسة الرابعة الختامية:</p>
+  <table class="tbl">
+    <thead><tr><th>المؤشر</th><th style="width:25%">قبل البرنامج</th><th style="width:25%">عند الختام</th><th style="width:18%">التغيير</th></tr></thead>
+    <tbody>
+      <tr><td class="label">الديون الإجمالية</td><td class="before"><input type="text" class="field field-num" data-field="sm_debt_b"></td><td class="after"><input type="text" class="field field-num" data-field="sm_debt_a"></td><td class="num"><input type="text" class="field field-num" data-field="sm_debt_d"></td></tr>
+      <tr><td class="label">الفائض الشهري</td><td class="before"><input type="text" class="field field-num" data-field="sm_surplus_b"></td><td class="after"><input type="text" class="field field-num" data-field="sm_surplus_a"></td><td class="num"><input type="text" class="field field-num" data-field="sm_surplus_d"></td></tr>
+      <tr><td class="label">المدخرات</td><td class="before"><input type="text" class="field field-num" data-field="sm_save_b"></td><td class="after"><input type="text" class="field field-num" data-field="sm_save_a"></td><td class="num"><input type="text" class="field field-num" data-field="sm_save_d"></td></tr>
+      <tr><td class="label">عدد أشهر الصمود</td><td class="before"><input type="text" class="field field-num" data-field="sm_runway_b"></td><td class="after"><input type="text" class="field field-num" data-field="sm_runway_a"></td><td class="num"><input type="text" class="field field-num" data-field="sm_runway_d"></td></tr>
+      <tr><td class="label">الوعي المالي العام</td><td class="before"><input type="text" class="field" data-field="sm_aware_b"></td><td class="after"><input type="text" class="field" data-field="sm_aware_a"></td><td>—</td></tr>
+      <tr><td class="label">مستوى الاستقلالية</td><td class="before"><input type="text" class="field" data-field="sm_indep_b"></td><td class="after"><input type="text" class="field" data-field="sm_indep_a"></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٦. التوصية النهائية</h1>
+  <p class="muted">اختر تصنيف الحالة عند الإغلاق:</p>
+  <label class="cb-line"><input type="checkbox" data-field="rec_close"><span><strong>إغلاق ملف الحالة</strong> – الحالة حقّقت أهداف البرنامج وأصبحت مستقلة ماليًا</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="rec_followup"><span><strong>إغلاق مع متابعة دورية</strong> – الحالة في وضع جيد لكنها تستفيد من جلسة متابعة بعد ٣ أو ٦ أشهر</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="rec_special"><span><strong>تحتاج دعمًا محددًا</strong> – الحالة بحاجة لخدمة إضافية (نفسية، قانونية، إعادة جدولة بنكية، إلخ)</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="rec_referral"><span><strong>إحالة لجهة متخصصة</strong> – وضع الحالة يتجاوز نطاق برنامج الإرشاد المالي</span></label>
+  <textarea class="field tall" data-field="rec_details" placeholder="تفاصيل وأسباب التوصية..."></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٧. مرفقات التقرير</h1>
+  <p class="muted">يُرفق مع هذا التقرير:</p>
+  <label class="cb-line"><input type="checkbox" data-field="att_s1"><span>تقرير الجلسة الأولى التشخيصية</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_s2"><span>تقرير الجلسة الثانية (متابعة ١)</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_s3"><span>تقرير الجلسة الثالثة (متابعة ٢)</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_s4"><span>تقرير الجلسة الرابعة الختامية</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_invoices"><span>فواتير التسوية للجلسات الأربع</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_acknowledgment"><span>إقرار العميل بالشروط الموقّع</span></label>
+
+  <h1 class="section-h">٨. الإقرار النهائي</h1>
+  <div class="callout bold">
+    أُقرّ بأنّ هذا التقرير الشامل قد أُعدّ بدقّة وأمانة ووفقًا لشروط العقد المُبرم بين كاش كلينيك وجمعية بذل الندى الخيرية للأعمال الخيرية. يعكس التقرير حقيقة سير برنامج الحالة المذكورة من بدايته إلى ختامه.
+  </div>
+
+  <h1 class="section-h">٩. التوقيعات</h1>
+  <div class="sig-grid three">
+    <div class="sig-card">
+      <div class="sig-card-title">المستشار المنفّذ</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_c_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_c"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_c_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_cc_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_cc"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_cc_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">استلام الجمعية</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_ch_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_ch"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_ch_date"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الثالثة – كم تقدّمت؟ – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="beneficiary-3">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">كرّاس المستفيد – الجلسة الثالثة<br><span style="font-family:var(--font-en); font-size:11px;">Session 3 – How Far Have I Come?</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">جلستي الثالثة – كم تقدّمت؟</h1>
+    <div class="doc-title-en">Session 3 – How Far Have I Come?</div>
+  </div>
+
+  <div class="callout">
+    أنت الآن في منتصف الرحلة. هذي الجلسة فرصة لتتوقّف وتقارن: من أين بدأت، وأين أنت الآن. النصف الباقي من الرحلة هو الذي يثبّت التغيير في حياتك.
+  </div>
+
+  <h1 class="section-h">١. تاريخ الجلسة</h1>
+  <table class="tbl">
+    <tr><td class="label">اسمي</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">تاريخ الجلسة الثالثة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">عدد الأسابيع منذ البداية</td><td><input type="text" class="field field-num" data-field="weeks_since"> أسبوع</td></tr>
+  </table>
+
+  <h1 class="section-h">٢. مقارنة سريعة – من أين بدأت إلى أين وصلت</h1>
+  <p class="muted">ارجع لكرّاس الجلسة الأولى وقارن:</p>
+  <table class="tbl">
+    <thead><tr><th>السؤال</th><th style="width:25%">في الجلسة الأولى</th><th style="width:25%">اليوم</th></tr></thead>
+    <tbody>
+      <tr><td class="label">كم ديوني الإجمالية؟</td><td class="before"><input type="text" class="field field-num" data-field="cmp_debt_before"></td><td class="after"><input type="text" class="field field-num" data-field="cmp_debt_after"></td></tr>
+      <tr><td class="label">كم أقساطي الشهرية؟</td><td class="before"><input type="text" class="field field-num" data-field="cmp_inst_before"></td><td class="after"><input type="text" class="field field-num" data-field="cmp_inst_after"></td></tr>
+      <tr><td class="label">كم مدخراتي؟</td><td class="before"><input type="text" class="field field-num" data-field="cmp_save_before"></td><td class="after"><input type="text" class="field field-num" data-field="cmp_save_after"></td></tr>
+      <tr><td class="label">هل عندي ميزانية مكتوبة؟</td><td class="before"><input type="text" class="field" data-field="cmp_budget_before"></td><td class="after"><input type="text" class="field" data-field="cmp_budget_after"></td></tr>
+      <tr><td class="label">هل أتابع مصاريفي؟</td><td class="before"><input type="text" class="field" data-field="cmp_track_before"></td><td class="after"><input type="text" class="field" data-field="cmp_track_after"></td></tr>
+      <tr><td class="label">كم شهر أصمد لو فقدت دخلي؟</td><td class="before"><input type="text" class="field field-num" data-field="cmp_runway_before"></td><td class="after"><input type="text" class="field field-num" data-field="cmp_runway_after"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٣. كيف تطوّرت عاداتي المالية؟</h1>
+  <table class="tbl">
+    <thead><tr><th>العادة</th><th style="width:25%">قبل البرنامج</th><th style="width:25%">اليوم</th></tr></thead>
+    <tbody id="habits-table"></tbody>
+  </table>
+  <script>
+    (function(){
+      const habits = [
+        ["budget", "أعدّ ميزانية شهرية"],
+        ["track", "أتابع مصاريفي اليومية"],
+        ["distinguish", "أُفرّق بين الحاجة والرغبة"],
+        ["save", "أوفّر جزء من راتبي"],
+        ["avoid_debt", "أتجنّب الديون"],
+        ["bank", "أراجع كشف حسابي البنكي"],
+        ["plan", "أخطّط قبل ما أتسوّق"],
+      ];
+      const opts = ["لا", "أحيانًا", "دائمًا"];
+      document.getElementById("habits-table").innerHTML = habits.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td class="before">
+            <div class="choice-group">
+              ${opts.map(o => `<label class="choice"><input type="radio" name="h_${id}_b" data-field="h_${id}_b" value="${o}"><span>${o}</span></label>`).join("")}
+            </div>
+          </td>
+          <td class="after">
+            <div class="choice-group">
+              ${opts.map(o => `<label class="choice"><input type="radio" name="h_${id}_a" data-field="h_${id}_a" value="${o}"><span>${o}</span></label>`).join("")}
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    })();
+  </script>
+
+  <h1 class="section-h">٤. أكثر شيء أنا فخور به في رحلتي حتى الآن</h1>
+  <textarea class="field tall" data-field="proud_of"></textarea>
+
+  <h1 class="section-h">٥. أكثر شيء كان صعب عليّ تغييره</h1>
+  <textarea class="field tall" data-field="hardest_change"></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٦. مراجعة واجباتي من الجلسة الثانية</h1>
+  <table class="tbl">
+    <thead><tr><th>الواجب</th><th style="width:18%">سويته؟</th><th style="width:30%">ملاحظتي</th></tr></thead>
+    <tbody id="hw-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        html += `<tr>
+          <td><input type="text" class="field" data-field="hw${i}_text"></td>
+          <td>
+            <div class="choice-group" style="flex-direction:column; align-items:flex-start;">
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="كاملًا"><span>كاملًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="جزئيًا"><span>جزئيًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="لا"><span>لا</span></label>
+            </div>
+          </td>
+          <td><input type="text" class="field" data-field="hw${i}_note"></td>
+        </tr>`;
+      }
+      document.getElementById("hw-tbody").innerHTML = html;
+    })();
+  </script>
+
+  <h1 class="section-h">٧. ما الذي يقلقني بخصوص ما بعد البرنامج؟</h1>
+  <div id="worries-list"></div>
+  <script>
+    document.getElementById("worries-list").innerHTML = [
+      ["regress", "أخاف أرجع لعاداتي القديمة"],
+      ["no_guide", "أخاف ما ألقى من يوجّهني لو احتجت"],
+      ["sudden", "أخاف أواجه ضغط مالي مفاجئ"],
+      ["family", "أخاف ضغط الأهل / المحيط"],
+      ["confident", "ما أخاف، حسّيت أنّي قويت بمعرفتي"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="worry_${id}"><span>${t}</span></label>`).join("");
+  </script>
+  <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="worry_other"><span>شيء آخر:</span></label>
+    <input type="text" class="field" data-field="worry_other_text" style="flex:1;">
+  </div>
+
+  <h1 class="section-h">٨. خطتي للأسبوع القادم - تحضيرًا للجلسة الختامية</h1>
+  <p class="muted">سأركّز هذا الأسبوع على:</p>
+  <textarea class="field" data-field="focus_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="focus_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="focus_3" placeholder="٣. ..."></textarea>
+
+  <div class="callout success" style="text-align: center; margin-top: 32px;">
+    💛 الجلسة القادمة هي جلستك الختامية. خذ وقتك هذا الأسبوع لتفكّر: ما هي الحياة المالية التي تريد أن تعيشها بعد البرنامج؟
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

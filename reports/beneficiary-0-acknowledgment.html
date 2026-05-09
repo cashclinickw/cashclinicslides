@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إقرار العميل بالشروط – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="beneficiary-0">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">إقرار العميل بالشروط<br><span style="font-family:var(--font-en); font-size:11px;">Client Acknowledgment</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">إقرار العميل (المستفيد) بالشروط</h1>
+    <div class="doc-title-en">Client Acknowledgment & Consent</div>
+  </div>
+
+  <div class="callout">
+    يوقّع هذا النموذج من قبل المستفيد قبل الجلسة الأولى، ويوضح إطّلاعه وموافقته على شروط البرنامج المتفق عليها بين كاش كلينيك والجمعية.
+  </div>
+
+  <h1 class="section-h">١. بيانات المستفيد</h1>
+  <table class="tbl">
+    <tr><td class="label">الاسم الكامل</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">الرقم المدني</td><td><input type="text" class="field" data-field="civil_id"></td></tr>
+    <tr><td class="label">رقم ملف الحالة</td><td><input type="text" class="field" data-field="case_no"></td></tr>
+    <tr><td class="label">الجمعية المُحوِّلة</td><td>جمعية بذل الندى الخيرية للأعمال الخيرية</td></tr>
+    <tr><td class="label">تاريخ الإقرار</td><td><input type="text" class="field" data-field="ack_date" data-fill-today></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. الشروط التي يقرّ المستفيد بقراءتها وفهمها</h1>
+
+  <h2 class="subsection-h">٢-١ نطاق الخدمة</h2>
+  <p>أُقرّ بأنني اطّلعت على نطاق الخدمة المقدمة، وهي:</p>
+  <label class="cb-line"><input type="checkbox" data-field="scope_1"><span>عدد الجلسات: ٤ جلسات (تشخيصية + متابعتان + ختامية)</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="scope_2"><span>مدة الجلسة الواحدة: ٤٥ – ٦٠ دقيقة</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="scope_3"><span>تُعقد الجلسات بشكل أسبوعي يوم السبت</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="scope_4"><span>مع مراعاة عدم تعارض المواعيد مع العطل الرسمية والأعياد</span></label>
+
+  <h2 class="subsection-h">٢-٢ سياسة الحضور والتأخر</h2>
+  <p>أُقرّ بأنني أعلم وأوافق على ما يلي:</p>
+  <label class="cb-line"><input type="checkbox" data-field="att_1"><span>في حال غيابي عن الجلسة الثانية، لا يتم استرجاع مبلغ الجلسات</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_2"><span>موعد الحضور المطلوب يسبق وقت الجلسة الفعلي بـ ٣٠ دقيقة</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_3"><span>إذا تأخرت ١٥ دقيقة عن الموعد الفعلي تُعدّ الجلسة ملغاة</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="att_4"><span>الجلسة الملغاة بسبب التأخر تُحتسب مدفوعة وغير قابلة للاسترجاع</span></label>
+
+  <h2 class="subsection-h">٢-٣ سياسة تغيير وتأجيل المواعيد</h2>
+  <p>أُقرّ بأنني أعلم وأوافق على ما يلي:</p>
+  <label class="cb-line"><input type="checkbox" data-field="resch_1"><span>في حال رغبتي بتغيير موعد جلسة، أُبلغ كاش كلينيك قبل الموعد بـ ٤٨ ساعة على الأقل</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="resch_2"><span>آخر موعد لتأكيد أو تعديل جلسة يوم السبت هو يوم الخميس</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="resch_3"><span>يحق لي تأجيل الموعد بحدّ أقصى مرتين فقط طوال الباقة</span></label>
+
+  <div class="page-break"></div>
+  <h2 class="subsection-h">٢-٤ سياسة عدم التعاون والسلوك</h2>
+  <p>أُقرّ بأنني أعلم وأوافق على ما يلي:</p>
+  <label class="cb-line"><input type="checkbox" data-field="conduct_1"><span>في حال عدم تعاوني، أو وجود تجاوزات لفظية أو سلوك غير لائق، يحق لكاش كلينيك إيقاف الاستشارة</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="conduct_2"><span>في حال الإيقاف، لا يوجد التزام باستكمال الجلسات أو استرجاع المبالغ</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="conduct_3"><span>أتعهد بالصدق في تقديم البيانات المالية والتعاون التام مع المستشار</span></label>
+
+  <h2 class="subsection-h">٢-٥ السرية والخصوصية</h2>
+  <p>أُقرّ بأنني أعلم وأوافق على ما يلي:</p>
+  <label class="cb-line"><input type="checkbox" data-field="conf_1"><span>بياناتي وملف حالتي يُتداول فقط بين كاش كلينيك وجمعية بذل الندى الخيرية</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="conf_2"><span>الجلسات سرية ولن تُشارك مع أي طرف ثالث دون موافقتي الخطية</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="conf_3"><span>تُعدّ تقارير دورية للجمعية عن وضع الحالة وتقدمها</span></label>
+
+  <h2 class="subsection-h">٢-٦ استثناءات الحالات غير المؤهلة</h2>
+  <p>أُقرّ بأنني لست في إحدى الحالات التالية، والتي تجعلني غير مؤهل للبرنامج:</p>
+  <label class="cb-line danger"><input type="checkbox" data-field="excl_1"><span style="color:var(--danger);">حالة إدمان قمار</span></label>
+  <label class="cb-line danger"><input type="checkbox" data-field="excl_2"><span style="color:var(--danger);">حالة إدمان مخدرات</span></label>
+  <p style="color:var(--danger); font-style:italic; font-size:14px; margin-top:8px;">أُقرّ بصحة ما سبق، وأتحمل المسؤولية كاملة في حال ثبت خلاف ذلك.</p>
+
+  <h1 class="section-h">٣. الإقرار النهائي</h1>
+  <div class="callout bold">
+    أُقرّ أنا الموقّع أدناه، بأنني قرأت جميع الشروط المذكورة أعلاه، وفهمتها فهمًا تامًا، ووافقت عليها بإرادتي الحرة، وأتعهّد بالالتزام بها طوال فترة البرنامج.
+  </div>
+
+  <h1 class="section-h">٤. التوقيعات</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">المستفيد (إقرار وموافقة)</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="ben_sig_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="ben_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="ben_sig_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">ممثل كاش كلينيك (شاهد)</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="cc_sig_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="cc_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="cc_sig_date"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

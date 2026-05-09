@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير الجلسة الأولى التشخيصية – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="committee-1">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">تقرير الجلسة الأولى التشخيصية<br><span style="font-family:var(--font-en); font-size:11px;">Session 1 – Diagnostic Report</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">تقرير الجلسة الأولى التشخيصية</h1>
+    <div class="doc-title-en">Session 1 – Diagnostic Report</div>
+  </div>
+
+  <h1 class="section-h">١. معلومات الجلسة والحالة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم الحالة (مرجع كاش كلينيك)</td><td><input type="text" class="field" data-field="case_no_cc"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="case_no_charity"></td></tr>
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="ben_name"></td></tr>
+    <tr><td class="label">الجمعية المُحوِّلة</td><td>جمعية بذل الندى الخيرية للأعمال الخيرية</td></tr>
+    <tr><td class="label">تاريخ الجلسة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">مدة الجلسة الفعلية</td><td><input type="text" class="field field-num" data-field="duration"> دقيقة</td></tr>
+    <tr><td class="label">المستشار المنفّذ</td><td><input type="text" class="field" data-field="consultant"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. ملاحظات المستشار (سرّية – لكاش كلينيك فقط)</h1>
+  <p class="muted">هذا القسم مُعَدّ للملاحظات الإكلينيكية للمستشار. يُحذف من النسخة المُرسلة للجمعية.</p>
+
+  <h2 class="subsection-h">٢-١ الانطباع العام والربط الإنساني</h2>
+  <textarea class="field tall" data-field="rapport" placeholder="كيف بدأت الجلسة؟ هل كان المستفيد مرتاحًا؟ متعاونًا؟ متحفظًا؟ ما الذي كسر الجليد؟"></textarea>
+
+  <h2 class="subsection-h">٢-٢ المستفيد بكلماته (اقتباسات حرفية)</h2>
+  <p class="muted">سجّل ٣–٥ جمل قالها المستفيد بحرفيتها — تكشف الكثير لاحقًا</p>
+  <textarea class="field" data-field="quote_1" placeholder="«...»"></textarea>
+  <textarea class="field" data-field="quote_2" placeholder="«...»"></textarea>
+  <textarea class="field" data-field="quote_3" placeholder="«...»"></textarea>
+  <textarea class="field" data-field="quote_4" placeholder="«...»"></textarea>
+  <textarea class="field" data-field="quote_5" placeholder="«...»"></textarea>
+
+  <h2 class="subsection-h">٢-٣ جذور المشكلة كما يراها المستفيد</h2>
+  <div id="root-list"></div>
+  <script>
+    document.getElementById("root-list").innerHTML = [
+      ["low_income", "ضعف الدخل / عدم كفايته"],
+      ["sudden_event", "حدث طارئ (مرض، طلاق، وفاة)"],
+      ["family_pressure", "ضغط من الأسرة"],
+      ["consumer", "ثقافة استهلاكية / مظاهر اجتماعية"],
+      ["loans_access", "سهولة الحصول على القروض والبطاقات"],
+      ["no_education", "نقص في الثقافة المالية"],
+      ["health", "ظروف صحية"],
+      ["job_loss", "فقدان عمل سابق"],
+      ["dependents", "عبء الإعالة"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="root_${id}"><span>${t}</span></label>`).join("");
+  </script>
+  <div style="display:flex; gap:8px; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="root_other"><span>أخرى:</span></label>
+    <input type="text" class="field" data-field="root_other_text" style="flex:1;">
+  </div>
+
+  <h2 class="subsection-h">٢-٤ الأنماط المتكررة في حديثه</h2>
+  <textarea class="field tall" data-field="patterns" placeholder="مثال: لوم الآخرين، نفي المسؤولية، التبرير المستمر، التهوين، المثالية..."></textarea>
+
+  <h2 class="subsection-h">٢-٥ المحفّزات (Triggers) للسلوك المالي السلبي</h2>
+  <textarea class="field" data-field="triggers" placeholder="ما الذي يدفعه للصرف الانفعالي؟ التسوّق العاطفي؟ القروض؟"></textarea>
+
+  <h2 class="subsection-h">٢-٦ المؤشرات النفسية</h2>
+  <div id="psych-list"></div>
+  <script>
+    document.getElementById("psych-list").innerHTML = [
+      ["anxiety", "علامات قلق واضحة (توتر صوت، حركة يد، تنفس)"],
+      ["depression", "علامات اكتئاب / فقدان أمل"],
+      ["denial", "إنكار حجم المشكلة"],
+      ["shame", "خجل واضح من حالته"],
+      ["dependency", "اعتماد متكرر على المساعدات الخارجية"],
+      ["relief", "ارتياح وانفتاح بمجرد فتح الموضوع"],
+      ["resistance", "مقاومة للمواجهة بالأرقام"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="psych_${id}"><span>${t}</span></label>`).join("");
+  </script>
+
+  <h2 class="subsection-h">🚩 ٢-٧ علامات تحذيرية (Red Flags)</h2>
+  <div class="callout danger" style="font-size:14px;">انتبه لهذي العلامات — تستدعي تقييم إضافي أو إحالة:</div>
+  <div id="redflags-list"></div>
+  <script>
+    document.getElementById("redflags-list").innerHTML = [
+      ["gambling", "إشارات إلى رهانات أو قمار"],
+      ["substance", "علامات أو ذكر إدمان مواد"],
+      ["domestic", "علامات إساءة منزلية أو عنف أسري"],
+      ["mental_severe", "إشارات لاضطرابات نفسية تحتاج تدخل متخصص"],
+      ["fraud", "احتيال مالي عليه أو منه"],
+      ["legal", "قضايا قانونية مالية مفتوحة"],
+      ["self_harm", "إشارات لإيذاء النفس"],
+      ["none", "لا توجد علامات تحذيرية"],
+    ].map(([id, t]) => `<label class="cb-line danger"><input type="checkbox" data-field="rf_${id}"><span>${t}</span></label>`).join("");
+  </script>
+  <textarea class="field" data-field="rf_notes" placeholder="ملاحظات إضافية على العلامات التحذيرية..."></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٣. التحليل المالي</h1>
+
+  <h2 class="subsection-h">٣-١ الدخل</h2>
+  <table class="tbl">
+    <tr><td class="label">الدخل الشهري الأساسي</td><td class="num"><input type="text" class="field field-num" data-field="income_main"> د.ك</td></tr>
+    <tr><td class="label">دخل إضافي (إن وُجد)</td><td class="num"><input type="text" class="field field-num" data-field="income_extra"> د.ك</td></tr>
+    <tr><td class="label total">إجمالي الدخل</td><td class="num total"><input type="text" class="field field-num" data-field="income_total"> د.ك</td></tr>
+    <tr><td class="label">ثبات مصدر الدخل</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="income_stability" data-field="income_stability" value="ثابت"><span>ثابت</span></label>
+        <label class="choice"><input type="radio" name="income_stability" data-field="income_stability" value="متذبذب"><span>متذبذب</span></label>
+        <label class="choice"><input type="radio" name="income_stability" data-field="income_stability" value="مهدد"><span>مهدد</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <h2 class="subsection-h">٣-٢ المصاريف</h2>
+  <table class="tbl">
+    <thead><tr><th>الفئة</th><th style="width:25%">الشهرية (د.ك)</th><th style="width:18%">% من الدخل</th></tr></thead>
+    <tbody>
+      <tr><td class="label">السكن والفواتير</td><td class="num"><input type="text" class="field field-num" data-field="exp_housing"></td><td class="num"><input type="text" class="field field-num" data-field="exp_housing_pct">%</td></tr>
+      <tr><td class="label">الأكل والمواصلات</td><td class="num"><input type="text" class="field field-num" data-field="exp_food"></td><td class="num"><input type="text" class="field field-num" data-field="exp_food_pct">%</td></tr>
+      <tr><td class="label">الأبناء والصحة</td><td class="num"><input type="text" class="field field-num" data-field="exp_children"></td><td class="num"><input type="text" class="field field-num" data-field="exp_children_pct">%</td></tr>
+      <tr><td class="label" style="background:var(--danger-light);">أقساط وديون</td><td class="num" style="background:var(--danger-light);"><input type="text" class="field field-num" data-field="exp_debt"></td><td class="num" style="background:var(--danger-light);"><input type="text" class="field field-num" data-field="exp_debt_pct">%</td></tr>
+      <tr><td class="label">كماليات واشتراكات</td><td class="num"><input type="text" class="field field-num" data-field="exp_luxury"></td><td class="num"><input type="text" class="field field-num" data-field="exp_luxury_pct">%</td></tr>
+      <tr><td class="label">أخرى</td><td class="num"><input type="text" class="field field-num" data-field="exp_other"></td><td class="num"><input type="text" class="field field-num" data-field="exp_other_pct">%</td></tr>
+      <tr><td class="label total">إجمالي المصاريف</td><td class="num total"><input type="text" class="field field-num" data-field="exp_total"></td><td class="num total"><input type="text" class="field field-num" data-field="exp_total_pct">%</td></tr>
+      <tr><td class="label total" style="background:var(--success-light);">الفائض / العجز الشهري</td><td class="num total"><input type="text" class="field field-num" data-field="surplus"></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="subsection-h">٣-٣ الديون التفصيلية</h2>
+  <table class="tbl">
+    <thead><tr><th>نوع الدين</th><th>الجهة</th><th>الرصيد المتبقي (د.ك)</th><th>القسط الشهري</th><th>الفائدة %</th><th>تاريخ الانتهاء</th></tr></thead>
+    <tbody>
+      <tr><td><input type="text" class="field" data-field="d1_type"></td><td><input type="text" class="field" data-field="d1_to"></td><td class="num"><input type="text" class="field field-num" data-field="d1_balance"></td><td class="num"><input type="text" class="field field-num" data-field="d1_payment"></td><td class="num"><input type="text" class="field field-num" data-field="d1_rate"></td><td class="num"><input type="text" class="field field-num" data-field="d1_end"></td></tr>
+      <tr><td><input type="text" class="field" data-field="d2_type"></td><td><input type="text" class="field" data-field="d2_to"></td><td class="num"><input type="text" class="field field-num" data-field="d2_balance"></td><td class="num"><input type="text" class="field field-num" data-field="d2_payment"></td><td class="num"><input type="text" class="field field-num" data-field="d2_rate"></td><td class="num"><input type="text" class="field field-num" data-field="d2_end"></td></tr>
+      <tr><td><input type="text" class="field" data-field="d3_type"></td><td><input type="text" class="field" data-field="d3_to"></td><td class="num"><input type="text" class="field field-num" data-field="d3_balance"></td><td class="num"><input type="text" class="field field-num" data-field="d3_payment"></td><td class="num"><input type="text" class="field field-num" data-field="d3_rate"></td><td class="num"><input type="text" class="field field-num" data-field="d3_end"></td></tr>
+      <tr><td><input type="text" class="field" data-field="d4_type"></td><td><input type="text" class="field" data-field="d4_to"></td><td class="num"><input type="text" class="field field-num" data-field="d4_balance"></td><td class="num"><input type="text" class="field field-num" data-field="d4_payment"></td><td class="num"><input type="text" class="field field-num" data-field="d4_rate"></td><td class="num"><input type="text" class="field field-num" data-field="d4_end"></td></tr>
+      <tr><td colspan="2" class="total center">المجموع</td><td class="num total danger"><input type="text" class="field field-num" data-field="d_total_balance"></td><td class="num total danger"><input type="text" class="field field-num" data-field="d_total_payment"></td><td colspan="2">—</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="subsection-h">٣-٤ الأصول والمدخرات</h2>
+  <table class="tbl">
+    <tr><td class="label">رصيد الحساب البنكي</td><td class="num"><input type="text" class="field field-num" data-field="bank"> د.ك</td></tr>
+    <tr><td class="label">المدخرات</td><td class="num"><input type="text" class="field field-num" data-field="savings"> د.ك</td></tr>
+    <tr><td class="label">أصول أخرى (عقار، سيارة...)</td><td><input type="text" class="field" data-field="other_assets"></td></tr>
+    <tr><td class="label">عدد أشهر الصمود لو فقد الدخل</td><td class="num"><input type="text" class="field field-num" data-field="runway"> شهر</td></tr>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٤. التشخيص السلوكي</h1>
+
+  <h2 class="subsection-h">٤-١ تقييم الوعي المالي</h2>
+  <table class="tbl">
+    <thead><tr><th>المهارة</th><th style="width:50%">المستوى</th></tr></thead>
+    <tbody id="skills-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      const skills = [
+        ["budget", "إعداد ميزانية شهرية"],
+        ["track", "متابعة المصاريف"],
+        ["distinguish", "التمييز بين الحاجة والرغبة"],
+        ["save_habit", "عادة الادخار"],
+        ["debt_aware", "الوعي بحجم الديون"],
+        ["plan", "التخطيط المالي طويل المدى"],
+      ];
+      const levels = ["ضعيف", "متوسط", "جيد", "ممتاز"];
+      document.getElementById("skills-tbody").innerHTML = skills.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td>
+            <div class="choice-group">
+              ${levels.map(l => `<label class="choice"><input type="radio" name="skill_${id}" data-field="skill_${id}" value="${l}"><span>${l}</span></label>`).join("")}
+            </div>
+          </td>
+        </tr>`).join("");
+    })();
+  </script>
+
+  <h2 class="subsection-h">٤-٢ السلوكيات الإشكالية الملاحظة</h2>
+  <div id="behaviors-list"></div>
+  <script>
+    document.getElementById("behaviors-list").innerHTML = [
+      ["impulse", "صرف انفعالي / اندفاعي"],
+      ["chronic_loans", "الاعتماد المزمن على القروض"],
+      ["new_for_old", "أخذ قرض جديد لسداد قرض قديم"],
+      ["denial", "تجنب مواجهة الأرقام"],
+      ["lifestyle", "نمط حياة فوق المستوى المالي"],
+      ["lending", "إقراض الآخرين فوق طاقته"],
+      ["no_planning", "غياب أي تخطيط مسبق"],
+      ["passive", "اعتماد سلبي على المساعدات"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="bh_${id}"><span>${t}</span></label>`).join("");
+  </script>
+
+  <h2 class="subsection-h">٤-٣ نقاط القوة في الحالة</h2>
+  <textarea class="field tall" data-field="strengths" placeholder="ما الذي تستطيع البناء عليه في خطة العلاج؟"></textarea>
+
+  <h1 class="section-h">٥. تصنيف الحالة الأولي</h1>
+  <table class="tbl">
+    <tr><td class="label">شدة الحالة</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="severity" data-field="severity" value="بسيطة"><span>بسيطة</span></label>
+        <label class="choice"><input type="radio" name="severity" data-field="severity" value="متوسطة"><span>متوسطة</span></label>
+        <label class="choice"><input type="radio" name="severity" data-field="severity" value="معقدة"><span>معقدة</span></label>
+        <label class="choice"><input type="radio" name="severity" data-field="severity" value="حرجة"><span>حرجة</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">احتمالية التحسّن مع البرنامج</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="prognosis" data-field="prognosis" value="عالية"><span>عالية</span></label>
+        <label class="choice"><input type="radio" name="prognosis" data-field="prognosis" value="متوسطة"><span>متوسطة</span></label>
+        <label class="choice"><input type="radio" name="prognosis" data-field="prognosis" value="ضعيفة"><span>ضعيفة</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">يحتاج تدخل خارجي إضافي؟</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="external" data-field="external" value="لا"><span>لا</span></label>
+        <label class="choice"><input type="radio" name="external" data-field="external" value="نفسي"><span>دعم نفسي</span></label>
+        <label class="choice"><input type="radio" name="external" data-field="external" value="قانوني"><span>قانوني</span></label>
+        <label class="choice"><input type="radio" name="external" data-field="external" value="بنكي"><span>بنكي/إعادة جدولة</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٦. الأهداف المحدّدة للحالة</h1>
+  <p class="muted">أهداف ذكية (SMART): محدّدة، قابلة للقياس، قابلة للتحقيق، واقعية، محددة بوقت</p>
+  <table class="tbl">
+    <thead><tr><th style="width:18%">المدى</th><th>الهدف</th><th style="width:20%">معيار النجاح</th></tr></thead>
+    <tbody>
+      <tr><td class="label center">قصير (٤ أسابيع)</td><td><input type="text" class="field" data-field="goal_short"></td><td><input type="text" class="field" data-field="goal_short_metric"></td></tr>
+      <tr><td class="label center">متوسط (٦ أشهر)</td><td><input type="text" class="field" data-field="goal_med"></td><td><input type="text" class="field" data-field="goal_med_metric"></td></tr>
+      <tr><td class="label center">طويل (سنة)</td><td><input type="text" class="field" data-field="goal_long"></td><td><input type="text" class="field" data-field="goal_long_metric"></td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٧. خطة العمل للأسبوع القادم</h1>
+  <p class="muted">واجبات محددة للمستفيد بين الجلستين:</p>
+  <textarea class="field" data-field="hw_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="hw_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="hw_3" placeholder="٣. ..."></textarea>
+  <textarea class="field" data-field="hw_4" placeholder="٤. ..."></textarea>
+  <textarea class="field" data-field="hw_5" placeholder="٥. ..."></textarea>
+
+  <h1 class="section-h">٨. التوصية للجمعية</h1>
+  <table class="tbl">
+    <tr><td class="label">قرار استكمال البرنامج</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="decision" data-field="decision" value="استكمال"><span>استكمال البرنامج</span></label>
+        <label class="choice"><input type="radio" name="decision" data-field="decision" value="استكمال_متابعة"><span>استكمال مع متابعة خاصة</span></label>
+        <label class="choice"><input type="radio" name="decision" data-field="decision" value="إحالة"><span>إحالة لجهة متخصصة</span></label>
+      </div>
+    </td></tr>
+  </table>
+  <textarea class="field tall" data-field="recommendation" placeholder="ملخص التوصية للجمعية..."></textarea>
+
+  <h1 class="section-h">٩. التوقيعات</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">المستشار المنفّذ</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_consultant_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_consultant"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_consultant_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_cc_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_cc"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_cc_date"></div>
+    </div>
+  </div>
+
+  <p class="disclaimer">سرّي – لا يُتداول إلا بين كاش كلينيك وجمعية بذل الندى الخيرية. ملاحظات المستشار في القسم ٢ تُحذف من النسخة المُرسلة للجمعية.</p>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

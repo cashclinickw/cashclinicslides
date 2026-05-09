@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فاتورة تسوية بعد الجلسة – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+
+<div class="toolbar no-print">
+  <div class="container toolbar-inner">
+    <a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+    <div class="toolbar-actions">
+      <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+      <input type="file" id="import-file" accept=".json" style="display:none;">
+      <button id="import-btn" class="btn btn-secondary">استيراد</button>
+      <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+      <button id="reset-btn" class="btn btn-danger">مسح</button>
+      <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="document" data-form-id="invoice">
+  <div class="doc-header">
+    <div class="doc-brand">
+      <div class="doc-brand-mark">ك</div>
+      <div>
+        <div class="doc-brand-name">كاش كلينيك</div>
+        <div class="doc-brand-en">CASH CLINIC</div>
+      </div>
+    </div>
+    <div class="doc-subtitle">
+      فاتورة تسوية<br>
+      <span style="font-family: var(--font-en); font-size: 11px;">Settlement Invoice</span>
+    </div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">فاتورة تسوية بعد الجلسة</h1>
+    <div class="doc-title-en">Settlement Invoice – Per Session</div>
+  </div>
+
+  <h1 class="section-h">١. معلومات الفاتورة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم الفاتورة</td><td><input type="text" class="field" data-field="invoice_no"></td></tr>
+    <tr><td class="label">تاريخ إصدار الفاتورة</td><td><input type="text" class="field" data-field="invoice_date" data-fill-today></td></tr>
+    <tr><td class="label">رقم الجلسة</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="session_no" data-field="session_no" value="١"><span>١</span></label>
+          <label class="choice"><input type="radio" name="session_no" data-field="session_no" value="٢"><span>٢</span></label>
+          <label class="choice"><input type="radio" name="session_no" data-field="session_no" value="٣"><span>٣</span></label>
+          <label class="choice"><input type="radio" name="session_no" data-field="session_no" value="٤"><span>٤</span></label>
+        </div>
+      </td>
+    </tr>
+    <tr><td class="label">تاريخ الجلسة</td><td><input type="text" class="field" data-field="session_date" placeholder="السبت __ / __ / ٢٠٢٦"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. الأطراف</h1>
+  <h2 class="subsection-h">المنفِّذ</h2>
+  <table class="tbl">
+    <tr><td class="label">الجهة</td><td>كاش كلينيك للاستشارات المالية</td></tr>
+    <tr><td class="label">الترخيص / السجل</td><td><input type="text" class="field" data-field="executor_license"></td></tr>
+  </table>
+  <h2 class="subsection-h">الجهة المتعاقدة</h2>
+  <table class="tbl">
+    <tr><td class="label">اسم الجمعية</td><td>جمعية بذل الندى الخيرية للأعمال الخيرية</td></tr>
+    <tr><td class="label">جهة الإشراف</td><td>وزارة الشؤون الاجتماعية – دولة الكويت</td></tr>
+  </table>
+  <h2 class="subsection-h">المستفيد (الحالة)</h2>
+  <table class="tbl">
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="beneficiary_name"></td></tr>
+    <tr><td class="label">رقم ملف الحالة</td><td><input type="text" class="field" data-field="case_file"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="charity_ref"></td></tr>
+  </table>
+
+  <h1 class="section-h">٣. تفاصيل التسوية</h1>
+  <table class="tbl">
+    <thead>
+      <tr><th style="width:40%">البند</th><th>القيمة</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">سعر الجلسة الأصلي</td><td class="num">٥٠٫٠٠٠ د.ك</td></tr>
+      <tr><td class="label">نسبة الخصم المقدمة من المنفِّذ</td><td class="num">٣٠٪</td></tr>
+      <tr><td class="label">سعر الجلسة بعد الخصم</td><td class="num"><strong>٣٥٫٠٠٠ د.ك</strong></td></tr>
+      <tr><td class="label">إجمالي قيمة الباقة (٤ جلسات)</td><td class="num"><strong>١٤٠٫٠٠٠ د.ك</strong></td></tr>
+      <tr><td class="label">نسبة الدفع المقدم</td><td class="num">١٠٠٪</td></tr>
+      <tr><td class="label">المبلغ المدفوع مقدمًا</td><td class="num">١٤٠٫٠٠٠ د.ك</td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٤. حركة هذه الجلسة</h1>
+  <table class="tbl">
+    <tr><td class="label">حالة الجلسة</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="session_status" data-field="session_status" value="حضر"><span>حضر</span></label>
+          <label class="choice"><input type="radio" name="session_status" data-field="session_status" value="غائب"><span>غائب (وفق سياسة الإلغاء)</span></label>
+          <label class="choice"><input type="radio" name="session_status" data-field="session_status" value="متأخر"><span>متأخر أكثر من ١٥ دقيقة (تُحتسب ملغاة)</span></label>
+          <label class="choice"><input type="radio" name="session_status" data-field="session_status" value="مؤجلة"><span>مؤجلة بإخطار قبل ٤٨ ساعة</span></label>
+        </div>
+      </td>
+    </tr>
+    <tr><td class="label">المخصوم من رصيد الحالة</td><td class="num"><input type="text" class="field field-num" data-field="deducted" placeholder="٣٥٫٠٠٠"> د.ك</td></tr>
+    <tr><td class="label">الرصيد المتبقي بعد هذه الجلسة</td><td class="num"><strong style="color: var(--accent);"><input type="text" class="field field-num" data-field="remaining_balance"> د.ك</strong></td></tr>
+  </table>
+
+  <h1 class="section-h">٥. ملاحظات</h1>
+  <textarea class="field tall" data-field="notes" placeholder="أي ملاحظات على هذه الجلسة (تأخر، إلغاء، تأجيل، إلخ)..."></textarea>
+
+  <h1 class="section-h">٦. الاعتماد</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد من الجمعية</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="charity_sig_name"></div>
+      <div class="sig-row"><label>الصفة:</label><input type="text" class="field" data-field="charity_sig_role"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="charity_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="charity_sig_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد من كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="cc_sig_name"></div>
+      <div class="sig-row"><label>الصفة:</label><input type="text" class="field" data-field="cc_sig_role"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="cc_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="cc_sig_date"></div>
+    </div>
+  </div>
+
+  <p class="disclaimer">هذه الفاتورة سرّية ولا تُتداول إلا بين كاش كلينيك وجمعية بذل الندى الخيرية للأعمال الخيرية. تُصدر بعد كل جلسة مع التقرير الشامل بعد ختام الباقة وفق شروط العقد.</p>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

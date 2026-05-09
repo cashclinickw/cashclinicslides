@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج تقييم وقرار القبول – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="committee-7-evaluation">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">نموذج تقييم وقرار القبول<br><span style="font-family:var(--font-en); font-size:11px;">Case Evaluation & Decision</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">نموذج تقييم الحالة وقرار القبول</h1>
+    <div class="doc-title-en">Case Evaluation & Acceptance Decision</div>
+  </div>
+
+  <div class="callout">
+    يُعبّأ هذا النموذج من قِبل فريق كاش كلينيك بعد استلام نموذج «استلام الحالة» من الجمعية وملف الحالة الكامل. يُحدّد قرار القبول أو الرفض أو الإحالة.
+  </div>
+
+  <h1 class="section-h">١. معلومات الحالة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم مرجع كاش كلينيك</td><td><input type="text" class="field" data-field="case_no_cc"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="case_no_charity"></td></tr>
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="ben_name"></td></tr>
+    <tr><td class="label">تاريخ استلام الملف</td><td><input type="text" class="field" data-field="received_date"></td></tr>
+    <tr><td class="label">تاريخ التقييم</td><td><input type="text" class="field" data-field="eval_date" data-fill-today></td></tr>
+    <tr><td class="label">المُقَيِّم</td><td><input type="text" class="field" data-field="evaluator"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. مراجعة المرفقات الواردة من الجمعية</h1>
+  <table class="tbl">
+    <thead><tr><th>المرفق</th><th style="width:18%">مُستلم؟</th><th style="width:35%">ملاحظات</th></tr></thead>
+    <tbody id="att-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      const items = [
+        ["intake", "نموذج استلام الحالة موقّع"],
+        ["id", "صورة الرقم المدني"],
+        ["salary", "كشف راتب / شهادة دخل"],
+        ["bank", "كشف حساب بنكي ٣ أشهر"],
+        ["loans", "تفاصيل القروض والديون"],
+        ["aid_history", "سجل مساعدات سابقة"],
+        ["social", "تقرير الحالة الاجتماعية"],
+      ];
+      document.getElementById("att-tbody").innerHTML = items.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td>
+            <div class="choice-group" style="flex-direction:column; align-items:flex-start;">
+              <label class="choice"><input type="radio" name="att_${id}" data-field="att_${id}" value="نعم"><span>نعم</span></label>
+              <label class="choice"><input type="radio" name="att_${id}" data-field="att_${id}" value="ناقص"><span>ناقص</span></label>
+              <label class="choice"><input type="radio" name="att_${id}" data-field="att_${id}" value="غير مطلوب"><span>غير مطلوب</span></label>
+            </div>
+          </td>
+          <td><input type="text" class="field" data-field="att_${id}_note"></td>
+        </tr>`).join("");
+    })();
+  </script>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٣. التقييم الأولي</h1>
+
+  <h2 class="subsection-h">٣-١ مدى استيفاء شروط البرنامج</h2>
+  <table class="tbl">
+    <thead><tr><th>المعيار</th><th style="width:50%">التقييم</th></tr></thead>
+    <tbody>
+      <tr><td class="label">اكتمال البيانات المُرسلة</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="completeness" data-field="completeness" value="مكتمل"><span>مكتمل</span></label>
+          <label class="choice"><input type="radio" name="completeness" data-field="completeness" value="جزئي"><span>جزئي – يحتاج استكمال</span></label>
+          <label class="choice"><input type="radio" name="completeness" data-field="completeness" value="ناقص"><span>ناقص جدًا</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">وضوح المشكلة المالية</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="clarity" data-field="clarity" value="واضحة"><span>واضحة</span></label>
+          <label class="choice"><input type="radio" name="clarity" data-field="clarity" value="تحتاج توضيح"><span>تحتاج توضيح</span></label>
+          <label class="choice"><input type="radio" name="clarity" data-field="clarity" value="غامضة"><span>غامضة</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">ملاءمة برنامج الإرشاد المالي للحالة</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="suitability" data-field="suitability" value="ملائمة جدًا"><span>ملائمة جدًا</span></label>
+          <label class="choice"><input type="radio" name="suitability" data-field="suitability" value="ملائمة"><span>ملائمة</span></label>
+          <label class="choice"><input type="radio" name="suitability" data-field="suitability" value="غير ملائمة"><span>غير ملائمة</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">احتمالية الاستفادة من البرنامج</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="benefit" data-field="benefit" value="عالية"><span>عالية</span></label>
+          <label class="choice"><input type="radio" name="benefit" data-field="benefit" value="متوسطة"><span>متوسطة</span></label>
+          <label class="choice"><input type="radio" name="benefit" data-field="benefit" value="ضعيفة"><span>ضعيفة</span></label>
+        </div>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="subsection-h">٣-٢ التحقق من استثناءات الأهلية</h2>
+  <p class="muted">وفق العقد، الحالات التالية غير مؤهّلة:</p>
+  <table class="tbl">
+    <tr><td class="label">حالة إدمان قمار</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="exc_gambling" data-field="exc_gambling" value="غير موجود"><span>غير موجود</span></label>
+        <label class="choice"><input type="radio" name="exc_gambling" data-field="exc_gambling" value="موجود"><span>⚠️ موجود</span></label>
+        <label class="choice"><input type="radio" name="exc_gambling" data-field="exc_gambling" value="مشكوك"><span>مشكوك</span></label>
+      </div>
+    </td></tr>
+    <tr><td class="label">حالة إدمان مخدرات</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="exc_drugs" data-field="exc_drugs" value="غير موجود"><span>غير موجود</span></label>
+        <label class="choice"><input type="radio" name="exc_drugs" data-field="exc_drugs" value="موجود"><span>⚠️ موجود</span></label>
+        <label class="choice"><input type="radio" name="exc_drugs" data-field="exc_drugs" value="مشكوك"><span>مشكوك</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <h2 class="subsection-h">٣-٣ ملاحظات إضافية للتقييم</h2>
+  <textarea class="field tall" data-field="eval_notes"></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٤. القرار النهائي</h1>
+
+  <div class="callout success" style="font-size: 16px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="dec_accept">
+      <span><strong>✓ قبول الحالة</strong> – يحوّل الملف للمستشار لبدء البرنامج</span>
+    </label>
+  </div>
+
+  <div class="callout" style="font-size: 16px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="dec_review">
+      <span><strong>↗ رفع للمراجعة</strong> – يحتاج اجتماع لجنة الجودة قبل القرار</span>
+    </label>
+  </div>
+
+  <div class="callout danger" style="font-size: 16px;">
+    <label class="cb-line danger" style="margin:0;"><input type="checkbox" data-field="dec_reject">
+      <span><strong>✗ رفض الحالة</strong> – لا تستوفي شروط البرنامج (يذكر السبب)</span>
+    </label>
+  </div>
+
+  <h2 class="subsection-h">تفاصيل وأسباب القرار</h2>
+  <textarea class="field tall" data-field="decision_reasons"></textarea>
+
+  <h2 class="subsection-h">إذا تم القبول، تُحدَّد التفاصيل التالية:</h2>
+  <table class="tbl">
+    <tr><td class="label">المستشار المُسنَد للحالة</td><td><input type="text" class="field" data-field="assigned_consultant"></td></tr>
+    <tr><td class="label">تاريخ بدء البرنامج المقترح</td><td><input type="text" class="field" data-field="program_start"></td></tr>
+    <tr><td class="label">يوم وموعد الجلسات</td><td><input type="text" class="field" data-field="session_schedule" placeholder="مثال: السبت ١٠:٠٠ ص"></td></tr>
+    <tr><td class="label">طريقة التواصل المعتمدة</td><td>
+      <div class="choice-group">
+        <label class="choice"><input type="radio" name="comm" data-field="comm" value="مباشر"><span>مباشر مع المستفيد</span></label>
+        <label class="choice"><input type="radio" name="comm" data-field="comm" value="عبر الجمعية"><span>عبر الجمعية</span></label>
+      </div>
+    </td></tr>
+  </table>
+
+  <h2 class="subsection-h">إذا تم الرفض، التوصية بالبديل</h2>
+  <textarea class="field tall" data-field="alternative" placeholder="اقتراح بديل (إحالة لجهة متخصصة، خدمة أخرى من الجمعية، إلخ)..."></textarea>
+
+  <h1 class="section-h">٥. التوقيعات والاعتماد</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">المُقَيِّم</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_eval_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_eval"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_eval_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="sig_cc_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="sig_cc"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="sig_cc_date"></div>
+    </div>
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

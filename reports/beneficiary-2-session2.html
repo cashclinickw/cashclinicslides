@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الثانية – أسبوعي الأول – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+<div class="toolbar no-print"><div class="container toolbar-inner">
+<a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+<div class="toolbar-actions">
+  <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+  <input type="file" id="import-file" accept=".json" style="display:none;">
+  <button id="import-btn" class="btn btn-secondary">استيراد</button>
+  <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+  <button id="reset-btn" class="btn btn-danger">مسح</button>
+  <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+</div></div></div>
+
+<main class="document" data-form-id="beneficiary-2">
+  <div class="doc-header">
+    <div class="doc-brand"><div class="doc-brand-mark">ك</div>
+    <div><div class="doc-brand-name">كاش كلينيك</div><div class="doc-brand-en">CASH CLINIC</div></div></div>
+    <div class="doc-subtitle">كرّاس المستفيد – الجلسة الثانية<br><span style="font-family:var(--font-en); font-size:11px;">Session 2 – My First Week</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">جلستي الثانية – أسبوعي الأول، شو تغيّر؟</h1>
+    <div class="doc-title-en">Session 2 – My First Week</div>
+  </div>
+
+  <div class="callout">
+    مضى أسبوع منذ بداية رحلتك. التغيير الحقيقي لا يحدث في الجلسة، يحدث في الأيام بين الجلسات. هذي مساحتك لتراجع نفسك بصدق، بدون حكم.
+  </div>
+
+  <h1 class="section-h">١. تاريخ هذه الجلسة</h1>
+  <table class="tbl">
+    <tr><td class="label">اسمي</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">تاريخ الجلسة الثانية</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">عدد الأيام منذ الجلسة الأولى</td><td><input type="text" class="field field-num" data-field="days_since"> يوم</td></tr>
+  </table>
+
+  <h1 class="section-h">٢. كيف كان أسبوعي؟</h1>
+  <p class="muted">اختر شعورك العام خلال الأسبوع:</p>
+  <div id="mood-list"></div>
+  <script>
+    document.getElementById("mood-list").innerHTML = [
+      ["motivated", "كنت متحمسًا ومستعدًا للتغيير"],
+      ["mixed", "كانت لديّ لحظات قوية ولحظات تراجع"],
+      ["stressed", "كان فيه ضغط وتوتر زاد عليّ"],
+      ["discovering", "اكتشفت أشياء عن نفسي ما كنت أعرفها"],
+      ["overwhelmed", "حسّيت أن المهمة كبيرة عليّ"],
+      ["positive", "حسّيت بفرق إيجابي ولو بسيط"],
+      ["nochange", "ما تغيّر شي كثير، الصدق"],
+    ].map(([id, t]) => `<label class="cb-line"><input type="checkbox" data-field="mood_${id}"><span>${t}</span></label>`).join("");
+  </script>
+
+  <h1 class="section-h">٣. مراجعة واجباتي من الجلسة الأولى</h1>
+  <table class="tbl">
+    <thead><tr><th>الواجب</th><th style="width:18%">سويته؟</th><th style="width:30%">صعوبتي معه</th></tr></thead>
+    <tbody id="hw-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      const tbody = document.getElementById("hw-tbody");
+      let html = "";
+      for (let i = 1; i <= 5; i++) {
+        html += `<tr>
+          <td><input type="text" class="field" data-field="hw${i}_text"></td>
+          <td>
+            <div class="choice-group" style="flex-direction:column; align-items:flex-start;">
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="كاملًا"><span>كاملًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="جزئيًا"><span>جزئيًا</span></label>
+              <label class="choice"><input type="radio" name="hw${i}_status" data-field="hw${i}_status" value="لا"><span>لا</span></label>
+            </div>
+          </td>
+          <td><input type="text" class="field" data-field="hw${i}_difficulty"></td>
+        </tr>`;
+      }
+      tbody.innerHTML = html;
+    })();
+  </script>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٤. ماذا صرفت هذا الأسبوع؟</h1>
+  <p class="muted">سجّل أكبر ٧ مصاريف خلال الأسبوع. هذا مو لتلوم نفسك، هذا عشان تشوف الواقع.</p>
+  <table class="tbl">
+    <thead><tr><th style="width:14%">اليوم</th><th>على ماذا صرفت؟</th><th style="width:18%">المبلغ (د.ك)</th><th style="width:12%">ضروري؟</th><th style="width:12%">ندمت؟</th></tr></thead>
+    <tbody id="spend-tbody"></tbody>
+  </table>
+  <script>
+    (function(){
+      let html = "";
+      for (let i = 1; i <= 7; i++) {
+        html += `<tr>
+          <td><input type="text" class="field" data-field="sp${i}_day"></td>
+          <td><input type="text" class="field" data-field="sp${i}_what"></td>
+          <td class="num"><input type="text" class="field field-num" data-field="sp${i}_amount"></td>
+          <td class="center">
+            <div class="choice-group" style="justify-content:center;">
+              <label class="choice"><input type="radio" name="sp${i}_need" data-field="sp${i}_need" value="نعم"><span>نعم</span></label>
+              <label class="choice"><input type="radio" name="sp${i}_need" data-field="sp${i}_need" value="لا"><span>لا</span></label>
+            </div>
+          </td>
+          <td class="center">
+            <div class="choice-group" style="justify-content:center;">
+              <label class="choice"><input type="radio" name="sp${i}_regret" data-field="sp${i}_regret" value="نعم"><span>نعم</span></label>
+              <label class="choice"><input type="radio" name="sp${i}_regret" data-field="sp${i}_regret" value="لا"><span>لا</span></label>
+            </div>
+          </td>
+        </tr>`;
+      }
+      document.getElementById("spend-tbody").innerHTML = html;
+    })();
+  </script>
+
+  <h1 class="section-h">٥. انتصاراتي الصغيرة هذا الأسبوع</h1>
+  <p class="muted">(حتى لو شيء بسيط - مثلًا: قاومت رغبة شراء، رتبت كشف حسابي، تكلمت مع البنك...)</p>
+  <textarea class="field" data-field="win_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="win_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="win_3" placeholder="٣. ..."></textarea>
+
+  <h1 class="section-h">٦. التحدّيات التي واجهتها</h1>
+  <textarea class="field" data-field="challenge_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="challenge_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="challenge_3" placeholder="٣. ..."></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٧. درس تعلّمته عن نفسي ماليًا هذا الأسبوع</h1>
+  <textarea class="field tall" data-field="lesson"></textarea>
+
+  <h1 class="section-h">٨. خطتي للأسبوع القادم</h1>
+  <p class="muted">ثلاث أشياء سأركّز عليها هذا الأسبوع:</p>
+  <textarea class="field" data-field="next_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="next_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="next_3" placeholder="٣. ..."></textarea>
+
+  <h1 class="section-h">٩. شيء أبي أسأل عنه أو أستوضحه في الجلسة القادمة</h1>
+  <textarea class="field tall" data-field="question"></textarea>
+
+  <div class="callout success" style="text-align: center; margin-top: 32px;">
+    💛 خطوة بخطوة. التغيير الحقيقي ليس في الجلسة، بل في القرارات الصغيرة كل يوم. أنت تتقدّم.
+  </div>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

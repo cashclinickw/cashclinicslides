@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الرابعة – رحلتي قبل وبعد – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+
+<div class="toolbar no-print">
+  <div class="container toolbar-inner">
+    <a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+    <div class="toolbar-actions">
+      <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+      <input type="file" id="import-file" accept=".json" style="display:none;">
+      <button id="import-btn" class="btn btn-secondary">استيراد</button>
+      <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+      <button id="reset-btn" class="btn btn-danger">مسح</button>
+      <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="document" data-form-id="beneficiary-4">
+  <div class="doc-header">
+    <div class="doc-brand">
+      <div class="doc-brand-mark">ك</div>
+      <div>
+        <div class="doc-brand-name">كاش كلينيك</div>
+        <div class="doc-brand-en">CASH CLINIC</div>
+      </div>
+    </div>
+    <div class="doc-subtitle">كرّاس المستفيد – الجلسة الختامية<br><span style="font-family: var(--font-en); font-size: 11px;">My Journey – Before & After</span></div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">جلستي الرابعة – رحلتي قبل وبعد</h1>
+    <div class="doc-title-en">My Journey – Before & After</div>
+  </div>
+
+  <div class="callout">
+    وصلت لنهاية الرحلة. هذا الكرّاس مو آخر صفحة، هو نقطة الانطلاق. اليوم راح تشوف بعينك من أين بدأت، وأين أنت الآن، وأهم من ذلك: إلى أين راح تكمل بنفسك. هذي الجلسة عن الاستقلالية، عن أن تعرف أنك أنت من غيّر حياتك، لا أحد غيرك.
+  </div>
+
+  <h1 class="section-h">١. ختام الرحلة</h1>
+  <table class="tbl">
+    <tr><td class="label">اسمي</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">تاريخ الجلسة الختامية</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">بدأت رحلتي بتاريخ</td><td><input type="text" class="field" data-field="start_date" placeholder="__ / __ / ٢٠٢٦"></td></tr>
+    <tr><td class="label">عدد الأسابيع التي قضيتها</td><td><input type="text" class="field field-num" data-field="weeks" placeholder="٤"> أسبوع</td></tr>
+  </table>
+
+  <h1 class="section-h">٢. أرقامي... قبل وبعد</h1>
+  <p class="muted">ارجع لكرّاس الجلسة الأولى وامسك القلم. هذي اللحظة اللي تشوف فيها أنك بالفعل تحرّكت:</p>
+  <table class="tbl">
+    <thead><tr><th>الرقم</th><th style="width:30%">في الجلسة الأولى</th><th style="width:30%">اليوم</th></tr></thead>
+    <tbody>
+      <tr><td class="label">دخلي الشهري</td><td class="before"><input type="text" class="field field-num" data-field="income_before" placeholder="د.ك"></td><td class="after"><input type="text" class="field field-num" data-field="income_after"></td></tr>
+      <tr><td class="label">مصاريفي الشهرية</td><td class="before"><input type="text" class="field field-num" data-field="expense_before"></td><td class="after"><input type="text" class="field field-num" data-field="expense_after"></td></tr>
+      <tr><td class="label">صرفي على الكماليات</td><td class="before"><input type="text" class="field field-num" data-field="luxury_before"></td><td class="after"><input type="text" class="field field-num" data-field="luxury_after"></td></tr>
+      <tr><td class="label">إجمالي ديوني</td><td class="before"><input type="text" class="field field-num" data-field="debt_before"></td><td class="after"><input type="text" class="field field-num" data-field="debt_after"></td></tr>
+      <tr><td class="label">مجموع أقساطي الشهرية</td><td class="before"><input type="text" class="field field-num" data-field="installments_before"></td><td class="after"><input type="text" class="field field-num" data-field="installments_after"></td></tr>
+      <tr><td class="label">مدخراتي</td><td class="before"><input type="text" class="field field-num" data-field="savings_before"></td><td class="after"><input type="text" class="field field-num" data-field="savings_after"></td></tr>
+      <tr><td class="label">كم شهر أصمد لو فقدت دخلي؟</td><td class="before"><input type="text" class="field field-num" data-field="runway_before"></td><td class="after"><input type="text" class="field field-num" data-field="runway_after"></td></tr>
+      <tr><td class="label">الفائض الشهري بعد كل المصاريف</td><td class="before"><input type="text" class="field field-num" data-field="surplus_before"></td><td class="after"><input type="text" class="field field-num" data-field="surplus_after"></td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px; font-weight:600;">نظرة على الأرقام تقول لي:</p>
+  <textarea class="field tall" data-field="numbers_reflection" placeholder="ماذا تخبرك هذي الأرقام؟"></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٣. عاداتي... قبل وبعد</h1>
+  <table class="tbl">
+    <thead><tr><th>العادة</th><th style="width:25%">قبل البرنامج</th><th style="width:25%">اليوم</th></tr></thead>
+    <tbody>
+    <!-- Pattern: each habit has 3 radio sets (لا/أحيانًا/دائمًا) for before and after -->
+    </tbody>
+  </table>
+
+  <table class="tbl">
+    <thead><tr><th>العادة</th><th style="width:30%">قبل البرنامج</th><th style="width:30%">اليوم</th></tr></thead>
+    <tbody id="habits-table">
+      <!-- Populated by inline script below for brevity -->
+    </tbody>
+  </table>
+
+  <script>
+    (function(){
+      const habits = [
+        ["budget", "أعدّ ميزانية شهرية مكتوبة"],
+        ["track", "أتابع كل ما أصرفه يوميًا"],
+        ["distinguish", "أُفرّق بين الحاجة والرغبة"],
+        ["save", "أوفّر جزء من راتبي تلقائيًا"],
+        ["avoid_debt", "أتجنّب القروض والديون الجديدة"],
+        ["review_bank", "أراجع كشف حسابي البنكي بانتظام"],
+        ["plan_purchases", "أخطّط قبل أي عملية شراء"],
+        ["negotiate", "أتفاوض على المصاريف الثابتة"],
+        ["emergency", "أملك صندوق طوارئ"],
+        ["self_first", "أعتمد على نفسي قبل اللجوء لجهة خيرية"],
+      ];
+      const tbody = document.getElementById("habits-table");
+      const opts = ["لا", "أحيانًا", "دائمًا"];
+      tbody.innerHTML = habits.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td class="before">
+            <div class="choice-group">
+              ${opts.map(o => `<label class="choice"><input type="radio" name="habit_${id}_before" data-field="habit_${id}_before" value="${o}"><span>${o}</span></label>`).join("")}
+            </div>
+          </td>
+          <td class="after">
+            <div class="choice-group">
+              ${opts.map(o => `<label class="choice"><input type="radio" name="habit_${id}_after" data-field="habit_${id}_after" value="${o}"><span>${o}</span></label>`).join("")}
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    })();
+  </script>
+
+  <h1 class="section-h">٤. شعوري تجاه المال... قبل وبعد</h1>
+  <p class="muted">قيّم نفسك على مقياس من ١ إلى ٥، حيث ١ = ضعيف جدًا، ٥ = ممتاز.</p>
+
+  <table class="tbl">
+    <thead><tr><th>الشعور</th><th style="width:30%">قبل</th><th style="width:30%">اليوم</th></tr></thead>
+    <tbody id="feelings-table"></tbody>
+  </table>
+  <script>
+    (function(){
+      const feels = [
+        ["control", "شعوري بالسيطرة على وضعي المالي"],
+        ["confidence", "ثقتي بقدرتي على حلّ المشاكل المالية"],
+        ["awareness", "وعيي بحجم وضعي الحقيقي"],
+        ["optimism", "تفاؤلي بمستقبلي المالي"],
+        ["calm", "هدوئي وقلة قلقي تجاه المال"],
+        ["independence", "إحساسي بالاستقلالية"],
+        ["choice", "إحساسي بأنّي أملك خياراتي"],
+      ];
+      const tbody = document.getElementById("feelings-table");
+      const scaleHTML = (name) => `
+        <div class="scale">
+          ${[1,2,3,4,5].map(n => `<label><input type="radio" name="${name}" data-field="${name}" value="${n}">${n}</label>`).join("")}
+        </div>`;
+      tbody.innerHTML = feels.map(([id, label]) => `
+        <tr>
+          <td class="label">${label}</td>
+          <td class="before center">${scaleHTML(`feel_${id}_before`)}</td>
+          <td class="after center">${scaleHTML(`feel_${id}_after`)}</td>
+        </tr>
+      `).join("");
+    })();
+  </script>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٥. أهم خمسة دروس تعلّمتها عن نفسي وعن المال</h1>
+  <p class="muted">(ليس عن النظرية... عن نفسك أنت)</p>
+  <textarea class="field tall" data-field="lesson_1" placeholder="١. ..."></textarea>
+  <textarea class="field tall" data-field="lesson_2" placeholder="٢. ..."></textarea>
+  <textarea class="field tall" data-field="lesson_3" placeholder="٣. ..."></textarea>
+  <textarea class="field tall" data-field="lesson_4" placeholder="٤. ..."></textarea>
+  <textarea class="field tall" data-field="lesson_5" placeholder="٥. ..."></textarea>
+
+  <h1 class="section-h">٦. أسئلة لي... من نفسي إلى نفسي</h1>
+  <h2 class="subsection-h">ما الذي اكتشفته عن نفسي ولم أكن أعرفه قبل البرنامج؟</h2>
+  <textarea class="field tall" data-field="discovery"></textarea>
+  <h2 class="subsection-h">لو قابلت نفسي قبل ٤ أسابيع، شو راح أقول لها؟</h2>
+  <textarea class="field tall" data-field="message_to_past"></textarea>
+  <h2 class="subsection-h">ما هي العادة الواحدة التي لو رجعت إليها، أعرف أن وضعي راح يخرب؟</h2>
+  <textarea class="field" data-field="dangerous_habit"></textarea>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٧. عهدي على نفسي – الاستقلالية</h1>
+  <div class="callout bold">
+    أنا <input type="text" class="field field-inline" data-field="oath_name" style="min-width:200px;">، اليوم <input type="text" class="field field-inline" data-field="oath_date" data-fill-today style="min-width:160px;">، أُقرّ أنّ ما تعلّمته خلال هذه الرحلة هو ملك يدي وعقلي. أُقرّ أنني لست عاجزًا عن إدارة مالي، وأنّ الاعتمادية على المساعدات لم تكن قدري، بل عادة كسرتها بنفسي. من اليوم، أنا مسؤول عن قراري المالي، ومسؤول عن نتائجه.
+  </div>
+
+  <h2 class="subsection-h">التزاماتي للأشهر الستة القادمة</h2>
+  <p class="muted">(اكتب التزامات واقعية، لا مثالية)</p>
+  <label class="cb-line"><input type="checkbox" data-field="commit_budget"><span>سأكتب ميزانية شهرية كل شهر، حتى لو كانت بسيطة</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_track"><span>سأتابع مصاريفي أسبوعيًا في تطبيق أو دفتر</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_save"><span>سأحوّل ادخارًا ثابتًا تلقائيًا قبل أي صرف</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_no_credit"><span>لن أستخدم بطاقات الائتمان لأي شيء غير ضروري</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_no_loan"><span>لن آخذ قرضًا جديدًا لمدة سنة على الأقل</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_emergency"><span>سأبني صندوق طوارئ يكفيني ٣ أشهر من المصاريف الأساسية</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_review"><span>سأراجع وضعي المالي كل شهر وأقارنه بالشهر السابق</span></label>
+  <label class="cb-line"><input type="checkbox" data-field="commit_self_first"><span>إذا ضغطت عليّ ظروف، سأرجع لما تعلّمته قبل أن أرجع لطلب المساعدة</span></label>
+  <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="commit_other"><span>التزام إضافي خاص بي:</span></label>
+    <input type="text" class="field" data-field="commit_other_text" style="flex:1;">
+  </div>
+
+  <h1 class="section-h">٨. خطتي – من اليوم إلى ستة أشهر</h1>
+  <table class="tbl">
+    <thead><tr><th style="width:22%">الفترة</th><th>هدفي</th><th style="width:30%">كيف سأقيس النجاح؟</th></tr></thead>
+    <tbody>
+      <tr><td class="label center">الشهر الأول</td><td><input type="text" class="field" data-field="plan_m1_goal"></td><td><input type="text" class="field" data-field="plan_m1_metric"></td></tr>
+      <tr><td class="label center">الشهر الثاني</td><td><input type="text" class="field" data-field="plan_m2_goal"></td><td><input type="text" class="field" data-field="plan_m2_metric"></td></tr>
+      <tr><td class="label center">الشهر الثالث</td><td><input type="text" class="field" data-field="plan_m3_goal"></td><td><input type="text" class="field" data-field="plan_m3_metric"></td></tr>
+      <tr><td class="label center">نهاية ٦ أشهر</td><td><input type="text" class="field" data-field="plan_m6_goal"></td><td><input type="text" class="field" data-field="plan_m6_metric"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+  <h1 class="section-h">٩. خطتي إذا ضعفت لحظة</h1>
+  <p class="muted">لكل إنسان لحظات ضعف. التفكير الجاهز قبلها هو الفرق بين من يرجع لعاداته القديمة، ومن يثبت.</p>
+
+  <h2 class="subsection-h">لو حسّيت أنّي أبي أرجع لعاداتي القديمة، راح أعمل التالي:</h2>
+  <textarea class="field" data-field="weakness_plan_1" placeholder="١. ..."></textarea>
+  <textarea class="field" data-field="weakness_plan_2" placeholder="٢. ..."></textarea>
+  <textarea class="field" data-field="weakness_plan_3" placeholder="٣. ..."></textarea>
+
+  <h2 class="subsection-h">لو واجهت ضائقة مالية مفاجئة، خطوتي الأولى ستكون:</h2>
+  <p class="muted">(قبل أن أفكر في قرض أو طلب مساعدة)</p>
+  <textarea class="field tall" data-field="crisis_step"></textarea>
+
+  <h2 class="subsection-h">الجملة التي سأقولها لنفسي عندما يصعب عليّ الالتزام:</h2>
+  <textarea class="field tall" data-field="self_mantra" placeholder="«...»"></textarea>
+
+  <h1 class="section-h">١٠. إقراري الختامي</h1>
+  <div class="callout bold" style="font-size: 17px;">
+    أنا، الموقّع أدناه، أُقرّ بأنّني أنهيت رحلتي بنفسي، وأنّ ما حقّقته هو ثمرة جهدي. أُدرك تمامًا أنّ الاعتمادية على المساعدات الخيرية لحلّ مشاكلي المالية ليست حلًا دائمًا، بل بداية مشكلة جديدة. اليوم، أملك الأدوات والمعرفة والثقة لأكون مستقلًا ماليًا. وأتعهّد بأن أكون مرجعًا لمن حولي إن استطعت، لا عبئًا على أحد.
+  </div>
+
+  <div class="sig-grid" style="grid-template-columns: 1fr; max-width: 480px; margin: 24px auto;">
+    <div class="sig-card">
+      <div class="sig-card-title">توقيعي</div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="final_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="final_date" data-fill-today></div>
+    </div>
+  </div>
+
+  <div class="callout success" style="text-align: center;">
+    💛 هذا الكرّاس ليس نهاية... هو شهادتك على نفسك. ارجع له كل ٣ أشهر، اقرأ ما كتبته في الجلسة الأولى، ثم اقرأ ما كتبته اليوم. ستذكر دائمًا أنّك قادر. وتذكّر: المال ليس قدرًا، هو قرار يومي تتخذه أنت.
+  </div>
+  <p style="text-align: center; margin-top: 16px; color: var(--gray-600); font-style: italic;">- فريق كاش كلينيك</p>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>
