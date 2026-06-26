@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير الجلسة الأولى التشخيصية – بذل الندى – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+
+<div class="toolbar no-print">
+  <div class="container toolbar-inner">
+    <a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+    <div class="toolbar-actions">
+      <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+      <input type="file" id="import-file" accept=".json" style="display:none;">
+      <button id="import-btn" class="btn btn-secondary">استيراد</button>
+      <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+      <button id="reset-btn" class="btn btn-danger">مسح</button>
+      <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="document" data-form-id="committee-diagnostic-bn">
+  <div class="doc-header">
+    <div class="doc-brand">
+      <div class="doc-brand-mark">ك</div>
+      <div>
+        <div class="doc-brand-name">كاش كلينيك</div>
+        <div class="doc-brand-en">CASH CLINIC</div>
+      </div>
+    </div>
+    <div class="doc-subtitle">
+      تقرير الجلسة الأولى التشخيصية<br>
+      <span style="font-family: var(--font-en); font-size: 11px;">Session 1 – Diagnostic Report</span>
+    </div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">تقرير الجلسة الأولى التشخيصية</h1>
+    <div class="doc-title-en">Session 1 – Diagnostic Report</div>
+  </div>
+
+  <h1 class="section-h">١. معلومات الجلسة والحالة</h1>
+  <table class="tbl">
+    <tr><td class="label">رقم الحالة (مرجع كاش كلينيك)</td><td><input type="text" class="field" data-field="cc_ref"></td></tr>
+    <tr><td class="label">رقم مرجع الجمعية</td><td><input type="text" class="field" data-field="charity_ref"></td></tr>
+    <tr><td class="label">اسم المستفيد</td><td><input type="text" class="field" data-field="beneficiary_name"></td></tr>
+    <tr><td class="label">الجمعية المحوّلة</td><td>جمعية بذل الندى الخيرية للأعمال الخيرية</td></tr>
+    <tr><td class="label">تاريخ الجلسة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">مدة الجلسة الفعلية</td><td><input type="text" class="field field-num" data-field="duration" value="60"> دقيقة</td></tr>
+    <tr><td class="label">المستشار المنفّذ</td><td><input type="text" class="field" data-field="consultant_name"></td></tr>
+  </table>
+
+  <h1 class="section-h">٢. ملاحظات المستشار (سرّية – لكاش كلينيك وجمعية بذل الندى فقط)</h1>
+
+  <h2 class="subsection-h">٢-١ الانطباع العام والربط الإنساني</h2>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 6px;">كيف بدأت الجلسة؟ هل كان المستفيد مرتاحًا؟ متعاونًا؟ متحفظًا؟ ما الذي كسر الجليد؟</p>
+  <textarea class="field tall" data-field="opening_impression"></textarea>
+
+  <h2 class="subsection-h">٢-٢ المستفيد بكلماته (اقتباسات حرفية)</h2>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 6px;">سجّل ٣–٥ جمل قالها المستفيد بحرفيتها – تكشف الكثير لاحقًا</p>
+  <input type="text" class="field" data-field="quote_1" placeholder="«...»" style="margin-bottom:8px;">
+  <input type="text" class="field" data-field="quote_2" placeholder="«...»" style="margin-bottom:8px;">
+  <input type="text" class="field" data-field="quote_3" placeholder="«...»" style="margin-bottom:8px;">
+  <input type="text" class="field" data-field="quote_4" placeholder="«...»" style="margin-bottom:8px;">
+  <input type="text" class="field" data-field="quote_5" placeholder="«...»">
+
+  <h2 class="subsection-h">٢-٣ جذور المشكلة كما يراها المستفيد</h2>
+  <div class="cb-grid">
+    <label class="cb-line"><input type="checkbox" data-field="root_income"><span>ضعف الدخل / عدم كفايته</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_emergency"><span>حدث طارئ (مرض، طلاق، وفاة)</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_family"><span>ضغط من الأسرة</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_culture"><span>ثقافة استهلاكية / مظاهر اجتماعية</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_loans"><span>سهولة الحصول على القروض والبطاقات</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_literacy"><span>نقص في الثقافة المالية</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_health"><span>ظروف صحية</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_unemployment"><span>فقدان عمل سابق</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="root_dependents"><span>عبء الإعالة</span></label>
+  </div>
+  <div style="display:flex; gap:10px; align-items:center; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="root_other"><span>أخرى:</span></label>
+    <input type="text" class="field" data-field="root_other_text" style="flex:1;">
+  </div>
+
+  <h2 class="subsection-h">٢-٤ الأنماط المتكررة في حديثه</h2>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 6px;">مثال: لوم الآخرين، نفي المسؤولية، التبرير المستمر، التهوين، المثالية...</p>
+  <textarea class="field" data-field="recurring_patterns"></textarea>
+
+  <h2 class="subsection-h">٢-٥ المحفّزات (Triggers) للسلوك المالي السلبي</h2>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 6px;">ما الذي يدفعه للصرف الانفعالي؟ التسوق العاطفي؟ القروض؟</p>
+  <textarea class="field" data-field="triggers"></textarea>
+
+  <h2 class="subsection-h">٢-٦ المؤشرات النفسية</h2>
+  <div class="cb-grid">
+    <label class="cb-line"><input type="checkbox" data-field="psy_anxiety"><span>علامات قلق واضحة (توتر صوت، حركة يد، تنفس)</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_depression"><span>علامات اكتئاب / فقدان أمل</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_denial"><span>إنكار حجم المشكلة</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_shame"><span>خجل واضح من حالته</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_dependent"><span>اعتماد متكرر على المساعدات الخارجية</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_open"><span>ارتياح وانفتاح بمجرد فتح الموضوع</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="psy_resist"><span>مقاومة للمواجهة بالأرقام</span></label>
+  </div>
+
+  <h2 class="subsection-h">🚩 ٢-٧ علامات تحذيرية (Red Flags)</h2>
+  <div class="alert-box" style="background: #FEF2F2; border-right: 4px solid #DC2626; padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;">
+    <strong style="color: #DC2626;">انتبه لهذه العلامات</strong> – تستدعي تقييم إضافي أو إحالة:
+  </div>
+  <div class="cb-grid">
+    <label class="cb-line"><input type="checkbox" data-field="flag_gambling"><span>إشارات إلى رهانات أو قمار</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_addiction"><span>علامات أو ذكر إدمان مواد</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_abuse"><span>علامات إساءة منزلية أو عنف أسري</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_mental"><span>إشارات لاضطرابات نفسية تحتاج تدخل متخصص</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_fraud"><span>احتيال مالي عليه أو منه</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_legal"><span>قضايا قانونية مالية مفتوحة</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_selfharm"><span>إشارات لإيذاء النفس</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="flag_none"><span>لا توجد علامات تحذيرية</span></label>
+  </div>
+  <textarea class="field" data-field="flags_notes" placeholder="تفاصيل إضافية (إن وُجدت)..." style="margin-top:8px;"></textarea>
+
+  <h1 class="section-h">٣. التحليل المالي</h1>
+  <h2 class="subsection-h">٣-١ الدخل</h2>
+  <table class="tbl">
+    <tr><td class="label">الراتب الشهري الأساسي</td><td class="num"><input type="text" class="field field-num" data-field="income_salary"> د.ك</td></tr>
+    <tr><td class="label">مصادر دخل أخرى</td><td class="num"><input type="text" class="field field-num" data-field="income_other"> د.ك</td></tr>
+    <tr><td class="label">إجمالي الدخل الشهري</td><td class="num"><strong><input type="text" class="field field-num" data-field="income_total"> د.ك</strong></td></tr>
+  </table>
+
+  <h2 class="subsection-h">٣-٢ المصاريف الشهرية الثابتة</h2>
+  <textarea class="field" data-field="expenses_fixed" placeholder="الإيجار، الفواتير، المواصلات، المدارس، إلخ..."></textarea>
+
+  <h2 class="subsection-h">٣-٣ الديون التفصيلية</h2>
+  <textarea class="field" data-field="debts" placeholder="نوع الدين، الجهة، المبلغ المتبقي، القسط الشهري..."></textarea>
+
+  <h2 class="subsection-h">٣-٤ الأصول والمدخرات</h2>
+  <textarea class="field" data-field="assets" placeholder="أصول، مدخرات، أو ممتلكات يمكن الاستفادة منها..."></textarea>
+
+  <h1 class="section-h">٤. التشخيص السلوكي</h1>
+
+  <h2 class="subsection-h">٤-١ تقييم الوعي المالي</h2>
+  <table class="tbl">
+    <thead>
+      <tr><th>المهارة</th><th>المستوى</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">إعداد ميزانية شهرية</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_budget" data-field="skill_budget" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_budget" data-field="skill_budget" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_budget" data-field="skill_budget" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_budget" data-field="skill_budget" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">متابعة المصاريف</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_track" data-field="skill_track" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_track" data-field="skill_track" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_track" data-field="skill_track" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_track" data-field="skill_track" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">التمييز بين الحاجة والرغبة</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_need" data-field="skill_need" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_need" data-field="skill_need" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_need" data-field="skill_need" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_need" data-field="skill_need" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">عادة الادخار</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_save" data-field="skill_save" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_save" data-field="skill_save" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_save" data-field="skill_save" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_save" data-field="skill_save" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">الوعي بحجم الديون</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_debt" data-field="skill_debt" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_debt" data-field="skill_debt" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_debt" data-field="skill_debt" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_debt" data-field="skill_debt" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+      <tr><td class="label">التخطيط المالي طويل المدى</td><td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="skill_plan" data-field="skill_plan" value="ضعيف"><span>ضعيف</span></label>
+          <label class="choice"><input type="radio" name="skill_plan" data-field="skill_plan" value="متوسط"><span>متوسط</span></label>
+          <label class="choice"><input type="radio" name="skill_plan" data-field="skill_plan" value="جيد"><span>جيد</span></label>
+          <label class="choice"><input type="radio" name="skill_plan" data-field="skill_plan" value="ممتاز"><span>ممتاز</span></label>
+        </div>
+      </td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="subsection-h">٤-٢ السلوكيات الإشكالية الملاحظة</h2>
+  <div class="cb-grid">
+    <label class="cb-line"><input type="checkbox" data-field="beh_impulsive"><span>صرف انفعالي / اندفاعي</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_loans"><span>الاعتماد المزمن على القروض</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_loanloop"><span>أخذ قرض جديد لسداد قرض قديم</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_avoid"><span>تجنب مواجهة الأرقام</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_overspend"><span>نمط حياة فوق المستوى المالي</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_lend"><span>إقراض الآخرين فوق طاقته</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_noplan"><span>غياب أي تخطيط مسبق</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="beh_dependent"><span>اعتماد سلبي على المساعدات</span></label>
+  </div>
+
+  <h2 class="subsection-h">٤-٣ نقاط القوة في الحالة</h2>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 6px;">ما الذي تستطيع البناء عليه في خطة العلاج؟</p>
+  <textarea class="field" data-field="strengths"></textarea>
+
+  <h1 class="section-h">٥. تصنيف الحالة الأولي</h1>
+  <table class="tbl">
+    <tr><td class="label">شدة الحالة</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="severity" data-field="severity" value="بسيطة"><span>بسيطة</span></label>
+          <label class="choice"><input type="radio" name="severity" data-field="severity" value="متوسطة"><span>متوسطة</span></label>
+          <label class="choice"><input type="radio" name="severity" data-field="severity" value="معقدة"><span>معقدة</span></label>
+          <label class="choice"><input type="radio" name="severity" data-field="severity" value="حرجة"><span>حرجة</span></label>
+        </div>
+      </td>
+    </tr>
+    <tr><td class="label">احتمالية التحسن مع البرنامج</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="improve" data-field="improve" value="عالية"><span>عالية</span></label>
+          <label class="choice"><input type="radio" name="improve" data-field="improve" value="متوسطة"><span>متوسطة</span></label>
+          <label class="choice"><input type="radio" name="improve" data-field="improve" value="ضعيفة"><span>ضعيفة</span></label>
+        </div>
+      </td>
+    </tr>
+    <tr><td class="label">يحتاج تدخل خارجي إضافي؟</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="external" data-field="external" value="لا"><span>لا</span></label>
+          <label class="choice"><input type="radio" name="external" data-field="external" value="دعم نفسي"><span>دعم نفسي</span></label>
+          <label class="choice"><input type="radio" name="external" data-field="external" value="قانوني"><span>قانوني</span></label>
+          <label class="choice"><input type="radio" name="external" data-field="external" value="بنكي/إعادة جدولة"><span>بنكي/إعادة جدولة</span></label>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <h1 class="section-h">٦. الأهداف المحدّدة للحالة</h1>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 10px;">أهداف ذكية (SMART): محددة، قابلة للقياس، قابلة للتحقيق، واقعية، محددة بوقت</p>
+  <table class="tbl">
+    <thead>
+      <tr><th style="width:25%">المدى</th><th>الهدف</th><th style="width:30%">معيار النجاح</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">قصير (٤ أسابيع)</td><td><input type="text" class="field" data-field="goal_short"></td><td><input type="text" class="field" data-field="goal_short_kpi"></td></tr>
+      <tr><td class="label">متوسط (٦ أشهر)</td><td><input type="text" class="field" data-field="goal_mid"></td><td><input type="text" class="field" data-field="goal_mid_kpi"></td></tr>
+      <tr><td class="label">طويل (سنة)</td><td><input type="text" class="field" data-field="goal_long"></td><td><input type="text" class="field" data-field="goal_long_kpi"></td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٧. خطة العمل للأسبوع القادم</h1>
+  <p class="lead-small" style="font-size:13px; color: var(--ink-soft); margin-bottom: 10px;">واجبات محددة للمستفيد بين الجلستين:</p>
+  <textarea class="field" data-field="hw_1" placeholder="١. ..." style="margin-bottom:8px;"></textarea>
+  <textarea class="field" data-field="hw_2" placeholder="٢. ..." style="margin-bottom:8px;"></textarea>
+  <textarea class="field" data-field="hw_3" placeholder="٣. ..." style="margin-bottom:8px;"></textarea>
+  <textarea class="field" data-field="hw_4" placeholder="٤. ..." style="margin-bottom:8px;"></textarea>
+  <textarea class="field" data-field="hw_5" placeholder="٥. ..."></textarea>
+
+  <h1 class="section-h">٨. التوصية للجمعية</h1>
+  <table class="tbl">
+    <tr><td class="label">قرار استكمال البرنامج</td>
+      <td>
+        <div class="choice-group">
+          <label class="choice"><input type="radio" name="recommendation" data-field="recommendation" value="استكمال البرنامج"><span>استكمال البرنامج</span></label>
+          <label class="choice"><input type="radio" name="recommendation" data-field="recommendation" value="استكمال مع متابعة خاصة"><span>استكمال مع متابعة خاصة</span></label>
+          <label class="choice"><input type="radio" name="recommendation" data-field="recommendation" value="إحالة لجهة متخصصة"><span>إحالة لجهة متخصصة</span></label>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <textarea class="field tall" data-field="recommendation_summary" placeholder="ملخص التوصية للجمعية..." style="margin-top:10px;"></textarea>
+
+  <h1 class="section-h">٩. التوقيعات</h1>
+  <div class="sig-grid">
+    <div class="sig-card">
+      <div class="sig-card-title">المستشار المنفّذ</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="consultant_sig_name"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="consultant_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="consultant_sig_date"></div>
+    </div>
+    <div class="sig-card">
+      <div class="sig-card-title">معتمد كاش كلينيك</div>
+      <div class="sig-row"><label>الاسم:</label><input type="text" class="field" data-field="cc_sig_name" value="غالية النويف"></div>
+      <div class="sig-row"><label>التوقيع:</label><input type="text" class="field" data-field="cc_sig"></div>
+      <div class="sig-row"><label>التاريخ:</label><input type="text" class="field" data-field="cc_sig_date"></div>
+    </div>
+  </div>
+
+  <p class="disclaimer">سرّي – لا يُتداول إلا بين كاش كلينيك وجمعية بذل الندى الخيرية</p>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

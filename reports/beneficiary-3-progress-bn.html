@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الثالثة – كم تقدّمت؟ – بذل الندى – كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+</head>
+<body class="report-bg">
+
+<div class="toolbar no-print">
+  <div class="container toolbar-inner">
+    <a href="../dashboard.html" class="btn-back">← لوحة التقارير</a>
+    <div class="toolbar-actions">
+      <span id="save-status" class="save-status saved"><span class="save-dot"></span><span>محفوظ</span></span>
+      <input type="file" id="import-file" accept=".json" style="display:none;">
+      <button id="import-btn" class="btn btn-secondary">استيراد</button>
+      <button id="export-btn" class="btn btn-secondary">تصدير JSON</button>
+      <button id="reset-btn" class="btn btn-danger">مسح</button>
+      <button id="print-btn" class="btn btn-primary">🖨️ طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<main class="document" data-form-id="beneficiary-progress-bn">
+  <div class="doc-header">
+    <div class="doc-brand">
+      <div class="doc-brand-mark">ك</div>
+      <div>
+        <div class="doc-brand-name">كاش كلينيك</div>
+        <div class="doc-brand-en">CASH CLINIC</div>
+      </div>
+    </div>
+    <div class="doc-subtitle">
+      جلستي الثالثة – كم تقدّمت؟<br>
+      <span style="font-family: var(--font-en); font-size: 11px;">Session 3 – Progress Self-Report</span>
+    </div>
+  </div>
+
+  <div class="doc-title-block">
+    <h1 class="doc-title">جلستي الثالثة - كم تقدّمت؟</h1>
+  </div>
+
+  <div class="alert-box" style="background: var(--yellow-soft, #FEF7CC); border-right: 4px solid var(--yellow-deep, #B89A02); padding: 14px 18px; border-radius: 8px; margin-bottom: 22px;">
+    أنت الآن في منتصف الرحلة. هذي الجلسة فرصة لتتوقّف وتقارن: من أين بدأت، وأين أنت الآن. النصف الباقي من الرحلة هو الذي يثبّت التغيير في حياتك.
+  </div>
+
+  <h1 class="section-h">١. تاريخ الجلسة</h1>
+  <table class="tbl">
+    <tr><td class="label">اسمي</td><td><input type="text" class="field" data-field="name"></td></tr>
+    <tr><td class="label">تاريخ الجلسة الثالثة</td><td><input type="text" class="field" data-field="session_date" data-fill-today></td></tr>
+    <tr><td class="label">عدد الأسابيع منذ البداية</td><td><input type="text" class="field field-num" data-field="weeks"> أسبوع</td></tr>
+  </table>
+
+  <h1 class="section-h">٢. مقارنة سريعة – من أين بدأت إلى أين وصلت</h1>
+  <table class="tbl">
+    <thead>
+      <tr><th>المعيار</th><th>قبل البرنامج</th><th>اليوم</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">كم ديوني الإجمالية؟</td><td class="num"><input type="text" class="field field-num" data-field="cmp_debt_before"></td><td class="num"><input type="text" class="field field-num" data-field="cmp_debt_after"></td></tr>
+      <tr><td class="label">كم أقساطي الشهرية؟</td><td class="num"><input type="text" class="field field-num" data-field="cmp_inst_before"></td><td class="num"><input type="text" class="field field-num" data-field="cmp_inst_after"></td></tr>
+      <tr><td class="label">كم مدخراتي؟</td><td class="num"><input type="text" class="field field-num" data-field="cmp_save_before"></td><td class="num"><input type="text" class="field field-num" data-field="cmp_save_after"></td></tr>
+      <tr><td class="label">هل عندي ميزانية مكتوبة؟</td><td><input type="text" class="field" data-field="cmp_budget_before"></td><td><input type="text" class="field" data-field="cmp_budget_after"></td></tr>
+      <tr><td class="label">هل أتابع مصاريفي؟</td><td><input type="text" class="field" data-field="cmp_track_before"></td><td><input type="text" class="field" data-field="cmp_track_after"></td></tr>
+      <tr><td class="label">كم شهر أصمد لو فقدت دخلي؟</td><td class="num"><input type="text" class="field field-num" data-field="cmp_runway_before"></td><td class="num"><input type="text" class="field field-num" data-field="cmp_runway_after"></td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٣. كيف تطوّرت عاداتي المالية؟</h1>
+  <table class="tbl">
+    <thead>
+      <tr><th>العادة</th><th>قبل البرنامج</th><th>اليوم</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">أعدّ ميزانية شهرية</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_budget_b" data-field="h_budget_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_budget_b" data-field="h_budget_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_budget_b" data-field="h_budget_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_budget_a" data-field="h_budget_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_budget_a" data-field="h_budget_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_budget_a" data-field="h_budget_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أتابع مصاريفي اليومية</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_track_b" data-field="h_track_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_track_b" data-field="h_track_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_track_b" data-field="h_track_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_track_a" data-field="h_track_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_track_a" data-field="h_track_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_track_a" data-field="h_track_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أفرّق بين الحاجة والرغبة</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_need_b" data-field="h_need_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_need_b" data-field="h_need_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_need_b" data-field="h_need_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_need_a" data-field="h_need_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_need_a" data-field="h_need_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_need_a" data-field="h_need_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أوفّر جزء من راتبي</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_save_b" data-field="h_save_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_save_b" data-field="h_save_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_save_b" data-field="h_save_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_save_a" data-field="h_save_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_save_a" data-field="h_save_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_save_a" data-field="h_save_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أتجنّب الديون</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_debt_b" data-field="h_debt_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_debt_b" data-field="h_debt_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_debt_b" data-field="h_debt_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_debt_a" data-field="h_debt_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_debt_a" data-field="h_debt_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_debt_a" data-field="h_debt_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أراجع كشف حسابي البنكي</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_bank_b" data-field="h_bank_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_bank_b" data-field="h_bank_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_bank_b" data-field="h_bank_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_bank_a" data-field="h_bank_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_bank_a" data-field="h_bank_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_bank_a" data-field="h_bank_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">أخطّط قبل ما أتسوّق</td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_plan_b" data-field="h_plan_b" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_plan_b" data-field="h_plan_b" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_plan_b" data-field="h_plan_b" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+        <td>
+          <div class="choice-group" style="flex-direction:column; align-items:flex-start; gap:4px;">
+            <label class="choice"><input type="radio" name="h_plan_a" data-field="h_plan_a" value="لا"><span>لا</span></label>
+            <label class="choice"><input type="radio" name="h_plan_a" data-field="h_plan_a" value="أحيانًا"><span>أحيانًا</span></label>
+            <label class="choice"><input type="radio" name="h_plan_a" data-field="h_plan_a" value="دائمًا"><span>دائمًا</span></label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1 class="section-h">٤. أكثر شيء أنا فخور به في رحلتي حتى الآن</h1>
+  <textarea class="field tall" data-field="proud_of"></textarea>
+
+  <h1 class="section-h">٥. خطتي للقادم وأشياء ودي أتعلمها</h1>
+  <textarea class="field tall" data-field="next_plan"></textarea>
+
+  <h1 class="section-h">٦. ما الذي يقلقني بخصوص ما بعد البرنامج؟</h1>
+  <div class="cb-grid">
+    <label class="cb-line"><input type="checkbox" data-field="worry_oldhabits"><span>أخاف أرجع لعاداتي القديمة</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="worry_noguide"><span>أخاف ما ألقى من يوجّهني لو احتجت</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="worry_pressure"><span>أخاف أواجه ضغط مالي مفاجئ</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="worry_family"><span>أخاف ضغط الأهل / المحيط</span></label>
+    <label class="cb-line"><input type="checkbox" data-field="worry_none"><span>ما أخاف، حسّيت أنّي قويت بمعرفتي</span></label>
+  </div>
+  <div style="display:flex; gap:10px; align-items:center; margin-top:8px;">
+    <label class="cb-line" style="margin:0;"><input type="checkbox" data-field="worry_other"><span>شيء آخر:</span></label>
+    <input type="text" class="field" data-field="worry_other_text" style="flex:1;">
+  </div>
+
+  <div class="alert-box" style="background: var(--yellow-soft, #FEF7CC); border-right: 4px solid var(--yellow-deep, #B89A02); padding: 14px 18px; border-radius: 8px; margin-top: 20px;">
+    💛 الجلسة القادمة هي جلستك الختامية. خذ وقتك هذا الأسبوع لتفكّر: ما هي الحياة المالية التي تريد أن تعيشها بعد البرنامج؟
+  </div>
+
+  <p class="disclaimer">سرّي – لا يُتداول إلا بين كاش كلينيك والجهة المرجِعة (جمعية بذل الندى الخيرية)</p>
+</main>
+
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

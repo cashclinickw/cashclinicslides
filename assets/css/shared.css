@@ -465,6 +465,12 @@ textarea.field:focus, textarea.field:hover {
 textarea.field.tall { min-height: 120px; }
 
 /* Checkboxes */
+.cb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px 16px;
+  margin: 8px 0;
+}
 .cb-line {
   display: flex; align-items: flex-start; gap: 10px;
   margin: 6px 0; line-height: 1.7;
