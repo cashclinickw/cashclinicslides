@@ -125,6 +125,7 @@ table.dyn td input:focus{background:#fff;box-shadow:0 0 0 1.5px var(--blue)}
   .mini-metrics,.ratios{grid-template-columns:1fr 1fr}
 }
 .btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+.btn-cloud{background:#1a73e8;color:#fff}
 </style>
 </head>
 <body>
@@ -137,6 +138,7 @@ table.dyn td input:focus{background:#fff;box-shadow:0 0 0 1.5px var(--blue)}
     <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
     <button class="btn btn-ghost" onclick="exportCase()">تصدير ملف الحالة</button>
     <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s2')">⏭ احفظ وانتقل للتالي</button><button class="btn btn-invoice" onclick="CaseChain.generateInvoice()">🧾 إنشاء فاتورة</button>
+    <button class="btn btn-cloud" onclick="cloudSave_s2(this)">☁️ حفظ في Drive (PDF)</button>
     <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
   </div>
 </div>
@@ -713,6 +715,24 @@ function exportCase(){
 }
 loadLocal();recalc();
 </script>
+<script src="case-cloud.js"></script>
 <script src="case-chain.js"></script>
+
+<script>
+async function cloudSave_s2(btn){
+  if(!window.CaseCloud){alert('وحدة الحفظ السحابي غير محمّلة.');return;}
+  var old=btn.textContent; btn.textContent='⏳ جاري الحفظ...'; btn.disabled=true;
+  try{
+    var res=await window.CaseCloud.save('s2');
+    if(res && res.ok){
+      btn.textContent='✓ تم — يُنشأ PDF في مجلد الحالة';
+      setTimeout(function(){btn.textContent=old;btn.disabled=false;},4000);
+    } else {
+      btn.textContent='⚠️ تعذّر الحفظ'; btn.disabled=false;
+      console.error(res && res.error);
+    }
+  }catch(e){ btn.textContent='⚠️ خطأ'; btn.disabled=false; console.error(e); }
+}
+</script>
 </body>
 </html>

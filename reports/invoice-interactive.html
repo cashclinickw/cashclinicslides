@@ -43,6 +43,7 @@ table.set td.lbl{text-align:right;font-weight:700;background:#fdfdfd}
 @media print{body{background:#fff;font-size:12px}.toolbar,.no-print,.field .hint,.imp-banner{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head{border:1px solid #ddd;box-shadow:none}input,select{border:0!important;background:transparent!important;border-bottom:1px solid #ccc!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:14mm}}
 @media(max-width:780px){.grid2,.grid3,.pkg,.sign-grid{grid-template-columns:1fr}}
 .btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+.btn-cloud{background:#1a73e8;color:#fff}
 </style>
 </head>
 <body>
@@ -53,6 +54,7 @@ table.set td.lbl{text-align:right;font-weight:700;background:#fdfdfd}
     <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
     <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
     <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
+    <button class="btn btn-cloud" onclick="cloudSave_invoice(this)">☁️ حفظ في Drive (PDF)</button>
     <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
   </div>
 </div>
@@ -185,6 +187,24 @@ function loadLocal(){try{const raw=localStorage.getItem('cc_inv');if(!raw)return
 function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_inv');}catch(e){}location.reload();}
 loadLocal();recalc();
 </script>
+<script src="case-cloud.js"></script>
 <script src="case-chain.js"></script>
+
+<script>
+async function cloudSave_invoice(btn){
+  if(!window.CaseCloud){alert('وحدة الحفظ السحابي غير محمّلة.');return;}
+  var old=btn.textContent; btn.textContent='⏳ جاري الحفظ...'; btn.disabled=true;
+  try{
+    var res=await window.CaseCloud.save('invoice');
+    if(res && res.ok){
+      btn.textContent='✓ تم — يُنشأ PDF في مجلد الحالة';
+      setTimeout(function(){btn.textContent=old;btn.disabled=false;},4000);
+    } else {
+      btn.textContent='⚠️ تعذّر الحفظ'; btn.disabled=false;
+      console.error(res && res.error);
+    }
+  }catch(e){ btn.textContent='⚠️ خطأ'; btn.disabled=false; console.error(e); }
+}
+</script>
 </body>
 </html>
