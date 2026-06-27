@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التقرير الختامي الشامل — كاش كلينيك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--red:#d23b3b;--soft-yellow:#fdf6e0;--soft-purple:#f4ecf6;--soft-blue:#eaf2fb}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+.wrap{max-width:1020px;margin:0 auto;padding:18px 16px 80px}
+.toolbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 16px;border-radius:0 0 14px 14px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+.toolbar .ttl{font-weight:800;font-size:14px}
+.toolbar .btns{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:9px}
+.btn-print{background:var(--yellow);color:#3a2b00}
+.btn-imp{background:#fff;color:var(--purple)}
+.btn-add{background:var(--blue);color:#fff;font-size:12.5px;padding:6px 12px}.btn-add:hover{filter:brightness(1.07)}
+.btn-ghost{background:rgba(255,255,255,.16);color:#fff}.btn-ghost:hover{background:rgba(255,255,255,.26)}
+.btn-del{background:transparent;color:var(--red);border:1px solid #f0c9c9;font-size:12px;padding:5px 9px;border-radius:8px}
+.report-head{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.logo-grid{display:grid;grid-template-columns:repeat(4,11px);gap:5px}.logo-grid span{width:11px;height:11px;border-radius:50%}
+.head-text{flex:1}.head-text .ar{font-weight:800;color:var(--purple);font-size:20px}.head-text .en{color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:500}
+.head-side{text-align:left;border-right:3px solid var(--yellow);padding-right:14px;font-size:11px;color:var(--muted);line-height:1.5}.head-side b{color:var(--ink);display:block;font-size:12px}
+.banner{background:var(--yellow);border-radius:14px;padding:16px 20px;margin:14px 0 6px;text-align:center}
+.banner h1{margin:0;font-size:22px;color:#3a2b00;font-weight:800}.banner .en{margin:2px 0 0;font-size:12px;color:#6b5500;font-weight:500}
+.intro{background:var(--soft-purple);border:1px solid #e3d3ea;border-radius:14px;padding:14px 20px;margin:12px 0;font-size:13.5px;color:#4a2a55}
+.imp-banner{background:var(--soft-blue);border:1px dashed var(--blue);border-radius:12px;padding:12px 16px;margin:12px 0;font-size:13px;color:#1a4e80;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.scorecard{background:linear-gradient(135deg,#fff,#faf7fc);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.sc-title{font-weight:800;color:var(--purple);font-size:16px;margin:0 0 14px}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gauge-box{border-radius:12px;padding:14px;background:var(--soft-purple);text-align:center}
+.gauge-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.gauge{height:15px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green));box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);margin-bottom:6px}
+.gauge .needle{position:absolute;top:-4px;width:4px;height:23px;background:#23202a;border-radius:3px;transform:translateX(50%);transition:.3s}
+.sev-chip{display:inline-block;margin-top:6px;padding:4px 14px;border-radius:20px;font-weight:800;font-size:13px;color:#fff}
+.rec-card{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.rec-card .cell{text-align:center}.rec-card .lab{font-size:12px;color:var(--muted);font-weight:700}
+.rec-card .big{font-size:34px;font-weight:800;line-height:1}.rec-card .arrow{font-size:24px;color:var(--muted)}.rec-card .delta{font-size:13px;font-weight:800;margin-top:4px}
+.change-card{grid-column:1/-1;background:var(--soft-yellow);border:1px solid #f0e4bf;border-radius:12px;padding:12px 14px}
+.change-card label{font-weight:800;color:#5a4a00;font-size:13px;display:block;margin-bottom:6px}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+.section>h2{margin:0 0 6px;font-size:17px;color:var(--purple);font-weight:800;display:flex;align-items:center;gap:10px}
+.section>h2 .num{background:var(--purple);color:#fff;min-width:28px;height:28px;padding:0 6px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.section>h2 .en{font-size:11px;color:var(--muted);font-weight:500;margin-right:auto}
+.explain{font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.6}
+.explain b{color:var(--ink)}
+.part-tag{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.sub{font-weight:800;color:var(--blue);font-size:14px;margin:16px 0 4px}
+.sub+.explain{margin-top:0}
+.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:12.5px;font-weight:700}.field .hint{font-size:11px;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+input[type=text],input[type=number],input[type=date],textarea,select{font-family:inherit;font-size:14px;color:var(--ink);border:0;border-bottom:1.5px solid var(--line);background:#fbfbfd;padding:7px 8px;border-radius:6px 6px 0 0;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--blue);background:#fff}
+textarea{resize:vertical;min-height:54px;border:1.5px solid var(--line);border-radius:8px}
+table.cmp,table.dyn{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
+table.cmp th,table.dyn th{background:var(--soft-yellow);font-size:11.5px;font-weight:700;color:#5a4a00;padding:7px 6px;border:1px solid #f0e4bf}
+table.cmp td,table.dyn td{border:1px solid var(--line);padding:4px 5px;vertical-align:middle;text-align:center}
+table.cmp td:first-child{text-align:right;font-weight:700}
+table.cmp td input,table.dyn td input,table.dyn td select{border:0;background:transparent;font-size:12.5px;padding:5px;text-align:center;width:100%}
+table.dyn td:first-child input{text-align:right}
+table.cmp td input:focus,table.dyn td input:focus{background:#fff;box-shadow:0 0 0 1.5px var(--blue)}
+.auto{background:#eef6ff;font-weight:700;color:var(--blue)}
+.chg-up{color:var(--green);font-weight:800}.chg-down{color:var(--red);font-weight:800}.chg-flat{color:var(--muted)}
+.tot-row td{background:#f3f1f7;font-weight:800;color:var(--purple)}
+.flag{text-align:center}.flag input{width:16px;height:16px}
+.unk{color:var(--red);font-size:11px;font-weight:700}
+.note{background:var(--soft-yellow);border-right:4px solid var(--yellow);border-radius:8px;padding:10px 14px;font-size:13px;color:#5a4a00;margin-top:10px}
+.note-blue{background:var(--soft-blue);border-right-color:var(--blue);color:#1a4e80}
+.warn{background:#fdecec;border-right:4px solid var(--red);border-radius:8px;padding:10px 14px;font-size:13px;color:#922;margin-top:10px;display:none}.warn.show{display:block}
+.frame-note{border-radius:12px;padding:14px 16px;font-size:13.5px;margin-top:12px;border:1px solid}
+.rec3{display:grid;grid-template-columns:1fr;gap:12px}.rec3 .box{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.rec3 .box .h{font-weight:800;font-size:13px;margin-bottom:6px}.rec3 .sara .h{color:var(--orange)}.rec3 .ghalia .h{color:var(--blue)}.rec3 .cc .h{color:var(--purple)}
+.disclaimer{background:var(--soft-purple);border:1px solid #e3d3ea;border-radius:14px;padding:16px 20px;margin:14px 0;font-size:13.5px;color:#4a2a55}.disclaimer b{color:var(--purple)}
+.sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
+.sign-box{border-top:2px dashed var(--line);padding-top:10px}.sign-box .role{font-weight:800;color:var(--purple);font-size:12.5px;margin-bottom:12px}
+.sign-line{display:flex;gap:6px;align-items:baseline;margin-bottom:12px;font-size:12.5px}.sign-line span{color:var(--muted);font-weight:700;flex:0 0 54px}
+.previews{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.previews .pv{border:1px solid var(--line);border-radius:8px;padding:6px;width:130px;text-align:center;font-size:11px;color:var(--muted)}
+.previews .pv img{max-width:100%;border-radius:5px;display:block;margin-bottom:4px}
+.upload-area{border:2px dashed var(--line);border-radius:12px;padding:14px;text-align:center;background:#fbfbfd;margin-top:6px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.footer .contact{color:var(--purple);font-weight:700;font-size:12.5px}
+.secret{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
+.legend{font-size:11.5px;color:var(--muted);margin-top:6px}
+.color-red{background:var(--red)}.color-orange{background:var(--orange)}.color-yellow{background:var(--yellow);color:#3a2b00!important}.color-green{background:var(--green)}
+.t-red{color:var(--red)}.t-green{color:var(--green)}.t-orange{color:var(--orange)}
+/* debt strategy column visibility */
+#tDebt .col-int,#tDebt .col-end,#tDebt .col-years,#tDebt .col-court,#tDebt .col-order,#tDebt .col-prio,#tDebt .col-notes{display:none}
+#tDebt.mode-simple .col-end{display:table-cell}
+#tDebt.mode-snowball .col-order{display:table-cell}
+#tDebt.mode-avalanche .col-int,#tDebt.mode-avalanche .col-order{display:table-cell}
+#tDebt.mode-complex .col-end,#tDebt.mode-complex .col-years,#tDebt.mode-complex .col-court,#tDebt.mode-complex .col-prio,#tDebt.mode-complex .col-notes{display:table-cell}
+@media print{
+  body{background:#fff;font-size:12px}
+  .toolbar,.btn-add,.btn-del,.no-print,.field .hint,.upload-area,.imp-banner{display:none!important}
+  .wrap{max-width:100%;padding:0}
+  .section,.report-head,.scorecard,.disclaimer,.intro{border:1px solid #ddd;box-shadow:none}
+  input,textarea,select{border:0!important;background:transparent!important;-webkit-appearance:none;appearance:none}
+  input,select{border-bottom:1px solid #ccc!important}
+  table td input{border-bottom:0!important}
+  .section,.scorecard{page-break-inside:avoid}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4 portrait;margin:12mm}
+}
+@media(max-width:800px){.sc-grid,.grid2,.grid3,.sign-grid,.rec-card{grid-template-columns:1fr}}
+.btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+</style>
+</head>
+<body>
+<div class="toolbar no-print">
+  <div class="ttl">كاش كلينيك — التقرير الختامي الشامل (الجلسة 4)</div>
+  <div class="btns">
+    <button class="btn btn-imp" onclick="document.getElementById('caseFile').click()">استيراد ملف الحالة</button>
+    <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
+    <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
+    <button class="btn btn-ghost" onclick="resetAll()">مسح الكل</button>
+    <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s4')">⏭ احفظ وأنشئ الفاتورة</button><button class="btn btn-invoice" onclick="CaseChain.generateInvoice()">🧾 إنشاء فاتورة</button>
+    <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
+  </div>
+</div>
+<div class="wrap">
+
+  <div class="report-head">
+    <div class="logo"><div class="logo-grid">
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--orange)"></span>
+      <span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span>
+      <span style="background:var(--purple)"></span><span style="background:var(--orange)"></span><span style="background:var(--yellow)"></span><span style="background:var(--blue)"></span>
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--yellow)"></span>
+    </div></div>
+    <div class="head-text"><div class="ar">كاش كلينيك</div><div class="en">CASH CLINIC</div></div>
+    <div class="head-side"><b>التقرير الختامي الشامل</b>Session 4 —<br>Final Closing Report</div>
+  </div>
+  <div class="banner"><h1>تقرير الجلسة الرابعة الختامية</h1><div class="en">Session 4 — Final Closing Report</div></div>
+  <div class="intro">هذا التقرير يتضمّن المقارنة الإلزامية «قبل / بعد» المنصوص عليها في العقد، بأبعادها الثلاثة: المالية، والسلوكية، والنفسية، إضافةً إلى الخطة العلاجية المالية الشاملة المصغّرة.</div>
+
+  <div class="imp-banner no-print">
+    <span>💡 ابدأ بالضغط على «استيراد ملف الحالة» لسحب بيانات العميلة وعمود «قبل البرنامج» تلقائياً من الجلسة الثانية، ثم ارفع تقارير الجلسات السابقة (PDF) للإرفاق.</span>
+    <span id="impStatus" style="font-weight:800"></span>
+  </div>
+
+  <!-- HERO scorecard -->
+  <div class="scorecard">
+    <h2 class="sc-title">بطاقة النتيجة</h2>
+    <div class="sc-grid">
+      <div class="gauge-box"><div class="gauge-label">لون شدة الحالة — عند الدخول</div><div class="gauge"><div class="needle" id="needleB" style="right:50%"></div></div><div class="sev-chip color-yellow" id="sevB">—</div></div>
+      <div class="gauge-box"><div class="gauge-label">لون شدة الحالة — عند الختام</div><div class="gauge"><div class="needle" id="needleA" style="right:50%"></div></div><div class="sev-chip color-yellow" id="sevA">—</div></div>
+      <div class="rec-card" style="grid-column:1/-1">
+        <div class="cell"><div class="lab">مؤشر التعافي — قبل</div><div class="big" id="recB">—</div></div>
+        <div class="cell"><div class="arrow">←</div><div class="delta" id="recDelta">—</div></div>
+        <div class="cell"><div class="lab">مؤشر التعافي — بعد</div><div class="big" id="recA">—</div></div>
+      </div>
+      <div class="change-card"><label>أهم تغيير حقّقه العميل</label><input type="text" placeholder="جملة واحدة تلخّص أبرز أثر للبرنامج…"></div>
+    </div>
+    <div class="legend">يُحتسب مؤشر التعافي تلقائياً من المقارنة المالية والسلوكية (60٪ محاسبي + 40٪ سلوكي)، مع الأخذ بعين الاعتبار بيانات الجلسات السابقة المستوردة. لون الشدة = أسوأ مؤشر.</div>
+  </div>
+
+  <!-- base data -->
+  <div class="section">
+    <h2><span class="num">i</span> ملف العميلة الأساسي <span class="en">Client Profile (imported)</span></h2>
+    <p class="explain">بيانات العميلة الأساسية ولقطة الوضع عند الدخول — تُستورد من تقارير الجلسات السابقة، وتُكمَّل يدوياً عند الحاجة.</p>
+    <div class="grid3">
+      <div class="field"><label>رقم الحالة</label><input type="text" id="ce_caseNo"></div>
+      <div class="field"><label>رقم مرجع الجمعية</label><input type="text" id="ce_charityRef"></div>
+      <div class="field"><label>اسم المستفيد <span class="hint">أول + ثاني</span></label><input type="text" id="ce_name"></div>
+      <div class="field"><label>الجمعية المحوِّلة</label><input type="text" id="ce_charity" value="جمعية بذل الندى الخيرية للأعمال الخيرية"></div>
+      <div class="field"><label>تاريخ الجلسة الأولى</label><input type="date" id="ce_d1"></div>
+      <div class="field"><label>تاريخ الجلسة الختامية</label><input type="date" id="ce_d4"></div>
+      <div class="field"><label>إجمالي مدة البرنامج</label><input type="text" placeholder="مثال: 4 أسابيع"></div>
+      <div class="field"><label>المستشار</label><input type="text" placeholder="غالية النويف"></div>
+    </div>
+    <div class="grid3" style="margin-top:10px">
+      <div class="field"><label>العمر</label><input type="text" id="ce_age"></div>
+      <div class="field"><label>الحالة الاجتماعية</label><input type="text" id="ce_marital"></div>
+      <div class="field"><label>عدد الأبناء</label><input type="text" id="ce_kids"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>أعمار الأبناء ومهنهم وحالتهم</label><textarea id="ce_kidsDetails"></textarea></div>
+    <div class="field" style="margin-top:10px"><label>المشكلة</label><textarea id="ce_problem"></textarea></div>
+
+    <div class="sub">لقطة الوضع عند الدخول <span style="color:var(--muted);font-weight:400">(من الجلسة الثانية)</span></div>
+    <table class="cmp"><tbody>
+      <tr><td>الدخل الشهري</td><td class="auto" id="snap_income">—</td><td>المصروفات الثابتة</td><td class="auto" id="snap_fixed">—</td></tr>
+      <tr><td>المصروفات المتغيرة</td><td class="auto" id="snap_var">—</td><td>إجمالي الديون</td><td class="auto" id="snap_debt">—</td></tr>
+      <tr><td>الأقساط الشهرية</td><td class="auto" id="snap_inst">—</td><td>الأصول / السيولة</td><td class="auto" id="snap_assets">—</td></tr>
+      <tr><td>الفائض / العجز</td><td class="auto" id="snap_surplus">—</td><td>نسبة عبء الدين</td><td class="auto" id="snap_dti">—</td></tr>
+    </tbody></table>
+    <div class="warn" id="snapUnk">⚠️ يوجد ضمن بيانات الدخول التزامات/أرقام مجهولة (مستوردة من الجلسة الثانية). يُنوَّه عليها في المقارنة، ولا تُعتمد النتائج المرتبطة بها بشكل قطعي.</div>
+  </div>
+
+  <!-- attach prior reports -->
+  <div class="section">
+    <h2><span class="num">📎</span> إرفاق تقارير الجلسات السابقة <span class="en">Attach Prior Reports</span></h2>
+    <p class="explain">ارفع تقارير الجلسات (١، ٢، ٣) كـPDF أو صور لتوثيق المسار الكامل للحالة أمام اللجنة. الإرفاق للتوثيق فقط؛ سحب الأرقام يتم عبر «استيراد ملف الحالة».</p>
+    <div class="upload-area no-print"><input type="file" id="priorFiles" multiple accept="image/*,application/pdf" onchange="handleFiles(this,'priorPrev')"></div>
+    <div class="previews" id="priorPrev"></div>
+  </div>
+
+  <!-- ====== 12 financial ====== -->
+  <div class="section">
+    <span class="part-tag">الجزء (أ) — النتائج</span>
+    <h2><span class="num">١٢</span> المقارنة المالية <span class="en">Financial Before/After</span></h2>
+    <p class="explain">عمود «قبل البرنامج» يُستورد من الجلسة الثانية، وعمود «بعد البرنامج» يُكتب يدوياً عند الختام. عمود التغيير يُحتسب بالنسبة المئوية.</p>
+    <table class="cmp" id="tFin">
+      <thead><tr><th style="width:30%">المؤشر</th><th style="width:20%">قبل البرنامج</th><th style="width:20%">عند الختام</th><th style="width:15%">التغيير</th><th style="width:15%">التغيير ٪</th></tr></thead>
+      <tbody>
+        <tr data-dir="up"><td>الدخل الشهري (د.ك)</td><td><input type="number" class="b" id="income_b"></td><td><input type="number" class="a" id="income_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="down"><td>المصروفات الثابتة (د.ك)</td><td><input type="number" class="b" id="fexp_b"></td><td><input type="number" class="a" id="fexp_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="down"><td>المصروفات المتغيرة (د.ك)</td><td><input type="number" class="b" id="vexp_b"></td><td><input type="number" class="a" id="vexp_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="down"><td>إجمالي الديون (د.ك) <span class="unk" id="unkDebt"></span></td><td><input type="number" class="b" id="debt_b"></td><td><input type="number" class="a" id="debt_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="down"><td>الأقساط الشهرية (د.ك) <span class="unk" id="unkInst"></span></td><td><input type="number" class="b" id="inst_b"></td><td><input type="number" class="a" id="inst_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="up"><td>المدخرات / السيولة (للأهداف) (د.ك)</td><td><input type="number" class="b" id="sav_b"></td><td><input type="number" class="a" id="sav_a"></td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="up"><td>الفائض / العجز الشهري</td><td class="auto" id="surp_b">—</td><td class="auto" id="surp_a">—</td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="up"><td>عدد أشهر الصمود</td><td class="auto" id="res_b">—</td><td class="auto" id="res_a">—</td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="down"><td>نسبة عبء الدين</td><td class="auto" id="dti_b">—</td><td class="auto" id="dti_a">—</td><td class="chg"></td><td class="chgp"></td></tr>
+        <tr data-dir="up"><td>صحة الميزانية الإجمالية</td><td class="auto" id="health_b">—</td><td class="auto" id="health_a">—</td><td class="chg">—</td><td class="chgp">—</td></tr>
+      </tbody>
+    </table>
+    <div class="grid2" style="margin-top:10px">
+      <div class="field"><label>كم جُمع حتى الآن للهدف الأول؟ (د.ك)</label><input type="number" id="savedGoal1" oninput="recalc()" placeholder="0"></div>
+      <div class="field"><label>نسبته من قيمة الهدف الأول</label><input type="text" id="savedGoal1Pct" readonly style="background:#f3f1f7"></div>
+    </div>
+    <div class="legend">الفائض = الدخل − (الثابتة + المتغيرة) • أشهر الصمود = السيولة ÷ المصروفات • نسبة عبء الدين = الأقساط ÷ الدخل (تُحتسب تلقائياً).</div>
+  </div>
+
+  <!-- 13 behavioral -->
+  <div class="section">
+    <span class="part-tag">الجزء (أ) — النتائج</span>
+    <h2><span class="num">١٣</span> المقارنة السلوكية <span class="en">Behavioral Before/After</span></h2>
+    <p class="explain">المقياس: لا (0) / أحياناً (1) / دائماً (2). عمود «قبل» يُملأ بالرجوع إلى تقرير الجلسة الأولى والثالثة المرفقَين. عمود التغيير يبيّن مقدار التحسّن.</p>
+    <table class="cmp" id="tBehav">
+      <thead><tr><th style="width:40%">العادة المالية</th><th style="width:22%">قبل البرنامج</th><th style="width:22%">عند الختام</th><th style="width:16%">التغيير</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 14 psychological -->
+  <div class="section">
+    <span class="part-tag">الجزء (أ) — النتائج</span>
+    <h2><span class="num">١٤</span> المقارنة النفسية <span class="en">Psychological Before/After</span></h2>
+    <p class="explain">تقييم نوعي لأثر البرنامج على الجانب النفسي للعميلة، بالرجوع إلى ملاحظات المستشار السلوكي (تقريرا الجلسة الأولى والثالثة).</p>
+    <table class="cmp" id="tPsy">
+      <thead><tr><th style="width:30%">البُعد النفسي</th><th style="width:22%">قبل البرنامج</th><th style="width:22%">عند الختام</th><th style="width:26%">ملاحظة</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 15 total scorecard -->
+  <div class="section">
+    <span class="part-tag">الجزء (أ) — النتائج</span>
+    <h2><span class="num">١٥</span> بطاقة النتيجة الكلية قبل/بعد <span class="en">Overall Scorecard</span></h2>
+    <table class="cmp">
+      <thead><tr><th style="width:40%">المؤشر</th><th style="width:30%">قبل البرنامج</th><th style="width:30%">عند الختام</th></tr></thead>
+      <tbody>
+        <tr><td>مؤشر التعافي المالي</td><td class="auto" id="scRecB">—</td><td class="auto" id="scRecA">—</td></tr>
+        <tr><td>لون شدة الحالة</td><td class="auto" id="scSevB">—</td><td class="auto" id="scSevA">—</td></tr>
+        <tr><td>نسبة عبء الدين</td><td class="auto" id="scDtiB">—</td><td class="auto" id="scDtiA">—</td></tr>
+        <tr><td>نسبة الادخار</td><td class="auto" id="scSavB">—</td><td class="auto" id="scSavA">—</td></tr>
+        <tr><td>أشهر الصمود</td><td class="auto" id="scResB">—</td><td class="auto" id="scResA">—</td></tr>
+        <tr><td>النتيجة السلوكية</td><td class="auto" id="scBehB">—</td><td class="auto" id="scBehA">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 16 recovery -->
+  <div class="section">
+    <span class="part-tag">الجزء (أ) — النتائج</span>
+    <h2><span class="num">١٦</span> مؤشر التعافي قبل/بعد البرنامج <span class="en">Recovery Index</span></h2>
+    <p class="explain">يأخذ بعين الاعتبار بيانات الجلسات السابقة (الأولى للتشخيص، الثانية للأرقام، الثالثة للمتابعة السلوكية).</p>
+    <div class="grid2">
+      <div class="note note-blue">مؤشر التعافي قبل: <b id="recB2">—</b> • بعد: <b id="recA2">—</b> • التحسّن: <b id="recDelta2">—</b></div>
+      <div class="note">لون الشدة قبل: <b id="sevB2">—</b> ← بعد: <b id="sevA2">—</b></div>
+    </div>
+  </div>
+
+  <!-- 17 achievements -->
+  <div class="section">
+    <h2><span class="num">١٧</span> أبرز الإنجازات <span class="en">Key Achievements</span></h2>
+    <table class="dyn" id="tAch"><thead><tr><th style="width:92%">الإنجاز</th><th class="no-print" style="width:8%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('ach')">+ إضافة إنجاز</button>
+  </div>
+
+  <!-- ====== 18 plan (Part B) ====== -->
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب) — الخطة العلاجية بعد البرنامج</span>
+    <h2><span class="num">١٨</span> الهوية المالية الاستراتيجية <span class="en">Financial Identity</span></h2>
+    <div class="grid2">
+      <div class="field"><label>الوصف المالي الحالي <span class="hint">اختر أو اكتب وعدّل</span></label>
+        <input type="text" list="descList" placeholder="اكتب أو اختر…">
+        <datalist id="descList">
+          <option value="متعثرة مالياً: ديون شخصية وعائلية متعددة بعضها مجهول، بلا أصول، تعتمد على راتب تقاعدي ودعم الشؤون.">
+          <option value="دخل مستقر بفائض ضعيف، بلا صندوق طوارئ، ومصروفات متغيرة مرتفعة.">
+          <option value="خرجت من العجز إلى فائض شهري بسيط وبدأت ببناء صندوق طوارئ.">
+        </datalist>
+      </div>
+      <div class="field"><label>الهوية المالية المستهدفة <span class="hint">من نوتة كاش كلينيك</span></label>
+        <select><option value="">— اختر —</option>
+          <option>باني الأصول</option><option>المتقاعد الاستراتيجي</option><option>حامي الإرث</option>
+          <option>المتحرر من القيود (صفر ديون)</option><option>المتوازن المرن</option><option>المغامر المحسوب</option>
+          <option>المقتصد الدفاعي</option><option>صاحب السيادة المالي</option><option>المستثمر المؤسسي</option>
+          <option>المتحوّط من الأزمات</option><option>المنمّي السريع</option>
+        </select></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>القيمة المحرّكة</label><input type="text" placeholder="مثال: الأمان…">
+      <span class="hint">القيمة المحرّكة هي القيمة الجوهرية التي تحرّك سلوك العميل المالي وتثبّته على هويته المستهدفة (الـ«لماذا» وراء الخطة). أمثلة: الأمان، الاستقلال المالي، حماية الأبناء، راحة البال، التحرر من الديون.</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>الخطة الاستراتيجية <span class="en">Strategic Plan</span></h2>
+    <p class="explain"><b>الخطة الاستراتيجية</b> = الوجهة الكبرى والاتجاه طويل المدى (لا مبالغ تفصيلية). مثال: «التحرر التام من الديون»، «بناء دخل سلبي يغطي 30٪ من المصاريف». تختلف عن <b>جدول الأهداف</b> (التنفيذي بالمبالغ والمدد).</p>
+    <table class="dyn" id="tStrat"><thead><tr><th style="width:50%">الهدف الكبير</th><th style="width:22%">الأولوية</th><th style="width:22%">الأفق الزمني</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('strat')">+ إضافة</button>
+    <div class="legend">الأفق الزمني: قصير المدى (سنة) / متوسط (5 سنوات) / بعيد (حتى التقاعد).</div>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>جدول الميزانية الصفرية <span class="en">Zero-Based Budget</span></h2>
+    <div class="grid3">
+      <div class="field"><label>الدخل (د.ك)</label><input type="number" id="zIncome" oninput="recalc()"></div>
+      <div class="field"><label>الالتزامات الثابتة + المتغيرة</label><input type="number" id="zFixed" oninput="recalc()"></div>
+      <div class="field"><label>المخصّص للأهداف</label><input type="number" id="zGoals" oninput="recalc()"></div>
+    </div>
+    <div class="note">المعادلة: الدخل − (الالتزامات + المتغيرة + الأهداف) = <b id="zeroResult">0</b> د.ك — الهدف صفر.</div>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>جدول الدخل والمصروفات <span class="en">Income &amp; Expenses</span></h2>
+    <table class="dyn" id="tIE"><thead><tr><th style="width:50%">البند</th><th style="width:25%">المبلغ (د.ك)</th><th style="width:25%">النسبة من الدخل</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('ie')">+ إضافة بند</button>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>جدول إدارة الديون <span class="en">Debt Management</span></h2>
+    <p class="explain">يتبدّل تفصيل الجدول حسب الاستراتيجية المختارة — من جدول بسيط إلى جدول معقّد مفصّل (على نمط ملفات القلاف والعنزي).</p>
+    <div class="field" style="max-width:340px"><label>استراتيجية إدارة الديون</label>
+      <select id="debtMode" onchange="setDebtMode()">
+        <option value="complex">إدارة الديون المعقّدة (مفصّل — مثل القلاف/العنزي)</option>
+        <option value="simple">بسيط</option>
+        <option value="snowball">كرة الثلج (Snowball) — يرتّب من الأصغر</option>
+        <option value="avalanche">الانهيار (Avalanche) — يرتّب من الأعلى فائدة</option>
+      </select>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="dyn mode-complex" id="tDebt">
+      <thead><tr>
+        <th style="width:18%">الجهة / البطاقة</th><th style="width:12%">المتبقي</th><th style="width:12%">القسط الشهري</th>
+        <th class="col-int" style="width:10%">نسبة الفائدة٪</th>
+        <th class="col-end" style="width:12%">تاريخ الانتهاء</th>
+        <th class="col-years" style="width:11%">سنوات للوصول لصفر</th>
+        <th class="col-court" style="width:9%">تعثر/قضية</th>
+        <th class="col-order" style="width:10%">ترتيب السداد</th>
+        <th class="col-prio" style="width:10%">أولوية</th>
+        <th class="col-notes" style="width:14%">ملاحظات</th>
+        <th class="no-print" style="width:6%"></th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <button class="btn btn-add no-print" onclick="addRow('debt')">+ إضافة دين</button>
+    <div class="legend" id="debtModeHint"></div>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>جدول الأهداف <span class="en">Goals</span></h2>
+    <p class="explain"><b>جدول الأهداف</b> = الترجمة التنفيذية القابلة للقياس بمبالغ ومدد ومصدر تمويل. مثال: «صندوق طوارئ 600 د.ك خلال 6 أشهر من الراتب». يجيب على «كم بالضبط ومتى وبأي تمويل».</p>
+    <table class="dyn" id="tGoal"><thead><tr><th style="width:12%">الأولوية</th><th style="width:28%">الهدف</th><th style="width:16%">المبلغ</th><th style="width:14%">المدة</th><th style="width:24%">مصدر التمويل</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('goal')">+ إضافة هدف</button>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>الخطة التنفيذية والتشغيلية <span class="en">Execution &amp; Operations</span></h2>
+    <div class="field"><label>كم يُدّخر شهرياً + تخصيص كل هدف</label><textarea></textarea></div>
+    <div class="field" style="margin-top:10px"><label>الخطة التشغيلية: توقيت الصرف خلال الشهر + التعامل مع المواسم (رمضان/المدارس/الأعياد)</label><textarea></textarea></div>
+  </div>
+
+  <div class="section">
+    <span class="part-tag" style="background:var(--purple)">الجزء (ب)</span>
+    <h2>الخطة الزمنية <span class="en">Timeline</span></h2>
+    <table class="dyn" id="tTime"><thead><tr><th style="width:30%">المرحلة</th><th style="width:18%">التكلفة</th><th style="width:18%">القسط الشهري</th><th style="width:28%">مصدر التمويل</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('time')">+ إضافة مرحلة</button>
+    <div class="legend">مصدر التمويل: R راتب • PI دخل سلبي • PR أرباح مشروع • LN قرض.</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">!</span> تدرّج عمق الخطة حسب لون الشدة <span class="en">Plan Depth by Severity</span></h2>
+    <div class="frame-note" id="frameNote">—</div>
+    <div class="note">القاعدة: أحمر = الميزانية الصفرية + إدارة الديون + بناء طوارئ فقط (بلا استثمار). أصفر/برتقالي = أضِف الخطة الاستراتيجية + الأهداف + التنفيذية. أخضر = الخطة كاملة + أول خطوة استثمارية آمنة.</div>
+  </div>
+
+  <!-- 19 steps -->
+  <div class="section">
+    <h2><span class="num">١٩</span> الخطوات والمهام العملية <span class="en">Action Steps</span></h2>
+    <p class="explain">خطوات عملية يمشي عليها كل طرف، مع موعد ومسؤول وحالة — لتتابع اللجنة التقدّم الفعلي.</p>
+    <div class="sub">مهام العميل</div>
+    <table class="dyn" id="tTaskC"><thead><tr><th style="width:46%">المهمة</th><th style="width:26%">الموعد / التكرار</th><th style="width:22%">الحالة</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('taskC')">+ إضافة مهمة للعميل</button>
+    <div class="sub">مهام اللجنة</div>
+    <table class="dyn" id="tTaskL"><thead><tr><th style="width:46%">المهمة</th><th style="width:26%">الموعد / المسؤول</th><th style="width:22%">الحالة</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('taskL')">+ إضافة مهمة للجنة</button>
+  </div>
+
+  <!-- 20 charity recommendation -->
+  <div class="section">
+    <h2><span class="num">٢٠</span> التوصية بالدعم من الجمعية + التوصية النهائية <span class="en">Charity Recommendation</span></h2>
+    <div class="sub">التوصية بالدعم من الجمعية</div>
+    <div class="grid2">
+      <div class="field"><label>نوع الدعم المقترح</label><select><option value="">— اختر —</option><option>سداد الديون بالكامل</option><option>سداد جزئي</option><option>دعم شهري</option><option>لا يوجد دعم مالي مباشر</option></select></div>
+      <div class="field"><label>المبلغ المقترح (د.ك)</label><input type="text" placeholder="0"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>الجهة / القرض الموجَّه له الدعم</label><input type="text"></div>
+    <div class="field" style="margin-top:10px"><label>الأثر المتوقع على الموقف المالي بعد الدعم</label><textarea></textarea></div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="field"><label>الفائض الشهري المتوقع بعد التدخل (د.ك)</label><input type="text" placeholder="0"></div>
+      <div class="field"><label>هل سيُغلق ملف الحالة بعد هذا الدعم؟</label><select><option value="">— اختر —</option><option>نعم</option><option>لا — مع متابعة</option></select></div>
+    </div>
+    <div class="sub">التوصية النهائية للجمعية بعد الجلسة الرابعة</div>
+    <div class="field"><label>قرار استكمال البرنامج</label><select><option value="">— اختر —</option><option>إغلاق الملف بنجاح</option><option>إغلاق مع متابعة دورية</option><option>تمديد بمتابعة خاصة</option><option>إحالة لجهة متخصصة</option></select></div>
+    <div class="field" style="margin-top:10px"><label>ملخص التوصية النهائية للجمعية</label><textarea style="min-height:80px"></textarea></div>
+  </div>
+
+  <!-- triple recommendations -->
+  <div class="section">
+    <h2><span class="num">٥</span> التوصيات الثلاثية <span class="en">Triple Recommendations</span></h2>
+    <div class="rec3">
+      <div class="box sara"><div class="h">توصيات سارة (السلوكي) — من تقرير الجلسة الثالثة</div><textarea id="saraRecBox" placeholder="تُنقل توصية سارة من تقرير الجلسة الثالثة المرفق…"></textarea></div>
+      <div class="box ghalia"><div class="h">توصيات غالية (المحاسبي)</div><textarea></textarea></div>
+      <div class="box cc"><div class="h">توصيات كاش كلينيك (الإطار العام حسب لون الشدة)</div><textarea id="ccRec"></textarea></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="num">✓</span> الخاتمة <span class="en">Closing</span></h2>
+    <div class="field"><label>خاتمة التقرير</label><textarea style="min-height:80px"></textarea></div>
+  </div>
+
+  <div class="disclaimer"><b>تنويه:</b> مسؤولية تطبيق الخطة العلاجية المالية تقع على عاتق العميل وحده. نجاح الخطة أو إخفاقها مرهون بمدى التزام العميل بتطبيقها خطوة بخطوة. دور كاش كلينيك هو التشخيص والتوجيه وتصميم الخطة المناسبة، أمّا التنفيذ والاستمرار فمسؤولية العميل — حتى لا يتحوّل الأمر إلى اعتماد دائم على الجمعية لإنقاذه عند كل تعثّر مالي.</div>
+
+  <div class="section">
+    <h2><span class="num">٢١</span> التوقيعات <span class="en">Signatures</span></h2>
+    <div class="sign-grid">
+      <div class="sign-box"><div class="role">المستشار المحاسبي (غالية)</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+      <div class="sign-box"><div class="role">معتمد كاش كلينيك</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+    </div>
+  </div>
+
+  <div class="secret">سرّي — لا يُتداول إلا بين كاش كلينيك وجمعية بذل الندى المحوِّلة.</div>
+  <div class="footer"><div class="contact">@cash.clinic &nbsp;•&nbsp; contact@cashclinic.net &nbsp;•&nbsp; +965 22260820 &nbsp;•&nbsp; www.cashclinic.net</div><div style="margin-top:6px">نشخّص. نعالج. نطوّر حياتك المالية.</div></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const num=el=>{if(!el)return 0;const v=parseFloat(el.value);return isNaN(v)?0:v;};
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+
+/* behavioral + psychological rows */
+const HABITS=['إعداد ميزانية شهرية مكتوبة','متابعة المصاريف اليومية','التمييز بين الحاجة والرغبة','الادخار التلقائي','تجنّب القروض الجديدة','مراجعة كشف الحساب البنكي','التخطيط قبل الشراء','التفاوض على المصاريف الثابتة','وجود صندوق طوارئ','الاعتماد على النفس قبل المساعدات'];
+const opt='<option value="">—</option><option value="0">لا</option><option value="1">أحياناً</option><option value="2">دائماً</option>';
+(function(){const tb=document.querySelector('#tBehav tbody');HABITS.forEach(h=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${h}</td><td><select class="bh-b">${opt}</select></td><td><select class="bh-a">${opt}</select></td><td class="auto bchg">—</td>`;tb.appendChild(tr);});})();
+const PSY=['علاقة العميل بالمال','القلق المالي','الثقة بالقدرة على الإدارة','الشعور بالسيطرة','الاعتماد على الذات'];
+const popt='<option value="">—</option><option>منخفض</option><option>متوسط</option><option>مرتفع</option>';
+(function(){const tb=document.querySelector('#tPsy tbody');PSY.forEach(p=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${p}</td><td><select class="psy-b">${popt}</select></td><td><select class="psy-a">${popt}</select></td><td><input type="text"></td>`;tb.appendChild(tr);});})();
+
+/* dynamic tables */
+function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove();recalc()">حذف</button></td>`}
+const statusSel='<select><option>لم تبدأ</option><option>قيد التنفيذ</option><option>منجزة</option></select>';
+const ROWS={
+  ach:()=>`<td><input type="text"></td>${del()}`,
+  strat:()=>`<td><input type="text"></td><td><input type="text"></td><td><select><option value="">—</option><option>قصير المدى (سنة)</option><option>متوسط (5 سنوات)</option><option>بعيد (حتى التقاعد)</option></select></td>${del()}`,
+  ie:()=>`<td><input type="text"></td><td><input type="number" class="ieAmt"></td><td class="iePct auto">—</td>${del()}`,
+  debt:()=>`<td><input type="text"></td><td><input type="number" class="dRemain"></td><td><input type="number" class="dInst"></td><td class="col-int"><input type="number" class="dInt" placeholder="٪"></td><td class="col-end"><input type="text"></td><td class="col-years auto dY">—</td><td class="col-court flag"><input type="checkbox" class="dCourt"></td><td class="col-order auto dO">—</td><td class="col-prio"><input type="text"></td><td class="col-notes"><input type="text"></td>${del()}`,
+  goal:()=>`<td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><select><option value="">—</option><option>الراتب</option><option>زيادة الدخل</option><option>قرض</option></select></td>${del()}`,
+  time:()=>`<td><input type="text"></td><td><input type="number"></td><td><input type="number"></td><td><select><option value="">—</option><option>R — راتب</option><option>PI — دخل سلبي</option><option>PR — أرباح مشروع</option><option>LN — قرض</option></select></td>${del()}`,
+  taskC:()=>`<td><input type="text"></td><td><input type="text"></td><td>${statusSel}</td>${del()}`,
+  taskL:()=>`<td><input type="text"></td><td><input type="text"></td><td>${statusSel}</td>${del()}`
+};
+const TBL={ach:'tAch',strat:'tStrat',ie:'tIE',debt:'tDebt',goal:'tGoal',time:'tTime',taskC:'tTaskC',taskL:'tTaskL'};
+function addRow(k,data){const tb=document.querySelector('#'+TBL[k]+' tbody');const tr=document.createElement('tr');tr.innerHTML=ROWS[k]();tb.appendChild(tr);tr.querySelectorAll('input,select').forEach(i=>{i.addEventListener('input',recalc);i.addEventListener('change',recalc);});if(data)fillRow(k,tr,data);recalc();return tr;}
+function fillRow(k,tr,d){const ins=tr.querySelectorAll('input');const sel=tr.querySelector('select');
+  if(k==='debt'){ins[0].value=d.entity||'';tr.querySelector('.dRemain').value=d.remaining||'';tr.querySelector('.dInst').value=d.installment||'';const endc=tr.querySelector('.col-end input');if(endc)endc.value=d.endDate||'';tr.querySelector('.dCourt').checked=!!d.court;const prio=tr.querySelector('.col-prio input');if(prio)prio.value=d.priority||'';const nt=tr.querySelector('.col-notes input');if(nt)nt.value=d.notes||'';}
+  else if(k==='goal'){ins[0].value=d.priority||'';ins[1].value=d.goal||'';ins[2].value=(d.amount||'');ins[3].value=d.desiredMonths?d.desiredMonths+' شهر':'';if(sel&&d.fundSource)sel.value=d.fundSource;}
+  else if(k==='ie'){ins[0].value=d.item||'';tr.querySelector('.ieAmt').value=d.amount||'';}
+}
+
+/* debt mode */
+function setDebtMode(){const m=$('debtMode').value;const t=$('tDebt');t.className='dyn mode-'+m;
+  const hints={complex:'الجدول المعقّد: يعرض التعثّر/القضية، سنوات الوصول لصفر، الأولوية والملاحظات — للحالات المتشعّبة.',simple:'الجدول البسيط: الجهة والمتبقي والقسط وتاريخ الانتهاء فقط.',snowball:'كرة الثلج: يرتّب السداد من أصغر دين إلى أكبر لبناء الزخم.',avalanche:'الانهيار: يرتّب السداد من أعلى نسبة فائدة لتقليل التكلفة الإجمالية.'};
+  $('debtModeHint').textContent=hints[m];recalc();}
+
+const SEV=[{t:'أخضر — مستقرة',c:'color-green',pos:88},{t:'أصفر — متوسطة',c:'color-yellow',pos:62},{t:'برتقالي — متوسطة/عالية',c:'color-orange',pos:35},{t:'أحمر — حرجة',c:'color-red',pos:10}];
+function healthLabel(income,surplus){if(income<=0)return['—',''];const r=surplus/income;if(surplus<0)return['عجز','t-red'];if(r>=0.15)return['جيد','t-green'];if(r>=0.05)return['مقبول','t-orange'];return['ضعيف','t-orange'];}
+function sevRank(dti,surplus,income,resil,behPts,behMax){const r=[];if(dti!==null)r.push(dti<25?0:dti<=40?2:3);if(income>0){const x=surplus/income;r.push(surplus<0?3:x>=0.15?0:x>=0.05?1:2);}if(resil!==null)r.push(resil>3?0:resil>=1?1:3);if(behMax>0){const p=behPts/behMax;r.push(p>=0.75?0:p>=0.5?1:p>=0.3?2:3);}return r.length?Math.max(...r):0;}
+function recov(dti,surplus,income,resil,behPts,behMax){const c=[];if(dti!==null)c.push(dti<25?100:dti<=40?55:25);if(income>0){const x=surplus/income;c.push(surplus<0?20:x>=0.15?100:x>=0.05?70:45);}if(resil!==null)c.push(resil>3?100:resil>=1?60:25);const acc=c.length?c.reduce((a,b)=>a+b,0)/c.length:0;const beh=behMax>0?behPts/behMax*100:0;return {val:Math.round(0.6*acc+0.4*beh),has:c.length>0||behMax>0,acc:Math.round(acc),beh:Math.round(beh)};}
+
+function side(s){
+  const income=num($('income_'+s)),fexp=num($('fexp_'+s)),vexp=num($('vexp_'+s)),inst=num($('inst_'+s)),sav=num($('sav_'+s));
+  const exp=fexp+vexp,surplus=income-exp,resil=exp>0?sav/exp:null,dti=income>0&&inst>0?inst/income*100:null;
+  let pts=0,mx=0;document.querySelectorAll('.bh-'+s).forEach(x=>{if(x.value!==''){pts+=parseInt(x.value);}mx+=2;});
+  $('surp_'+s).textContent=(income||exp)?fmt(surplus):'—';$('surp_'+s).className='auto '+(surplus<0?'t-red':surplus>0?'t-green':'');
+  $('res_'+s).textContent=resil!==null?resil.toFixed(1):'—';
+  $('dti_'+s).textContent=dti!==null?dti.toFixed(1)+'٪':'—';$('dti_'+s).className='auto '+(dti!==null?(dti>40?'t-red':dti>=25?'t-orange':'t-green'):'');
+  const hl=healthLabel(income,surplus);$('health_'+s).textContent=hl[0];$('health_'+s).className='auto '+hl[1];
+  const saveRatio=income>0?surplus/income*100:null;
+  return {income,surplus,exp,inst,sav,dti,resil,saveRatio,pts,mx,rec:recov(dti,surplus,income,resil,pts,mx),rank:sevRank(dti,surplus,income,resil,pts,mx)};
+}
+
+function recalc(){
+  const B=side('b'),A=side('a');
+
+  // financial change cols
+  document.querySelectorAll('#tFin tbody tr').forEach(tr=>{
+    const chg=tr.querySelector('.chg'),chgp=tr.querySelector('.chgp');if(!chg||chg.textContent==='—')return;
+    const dir=tr.dataset.dir;const b=tr.querySelector('.b'),a=tr.querySelector('.a');
+    let bv,av;
+    if(b&&a){bv=num(b);av=num(a);} else{const ac=tr.querySelectorAll('.auto');if(ac.length<2){return;}bv=parseFloat(ac[0].textContent);av=parseFloat(ac[1].textContent);if(isNaN(bv)||isNaN(av)){if(chg)chg.textContent='—';if(chgp)chgp.textContent='—';return;}}
+    const d=av-bv;const good=dir==='down'?d<0:d>0;const cls=d===0?'chg-flat':(good?'chg-up':'chg-down');
+    chg.innerHTML=`<span class="${cls}">${d>0?'+':''}${fmt(d)}</span>`;
+    let pct= bv!==0 ? (d/Math.abs(bv)*100) : (av!==0?100:0);
+    chgp.innerHTML=`<span class="${cls}">${d>0?'+':''}${pct.toFixed(0)}٪</span>`;
+  });
+
+  // behavioral change
+  document.querySelectorAll('#tBehav tbody tr').forEach(tr=>{
+    const bb=tr.querySelector('.bh-b').value,aa=tr.querySelector('.bh-a').value,c=tr.querySelector('.bchg');
+    if(bb===''||aa===''){c.textContent='—';c.className='auto bchg';return;}
+    const d=parseInt(aa)-parseInt(bb);c.textContent=(d>0?'+':'')+d;c.className='auto bchg '+(d>0?'t-green':d<0?'t-red':'');
+  });
+
+  // scorecard
+  $('recB').textContent=B.rec.has?B.rec.val:'—';$('recA').textContent=A.rec.has?A.rec.val:'—';
+  $('recB').className='big '+(B.rec.val<55?'t-red':B.rec.val<70?'t-orange':'t-green');
+  $('recA').className='big '+(A.rec.val<55?'t-red':A.rec.val<70?'t-orange':'t-green');
+  const delta=A.rec.val-B.rec.val;
+  $('recDelta').innerHTML=(A.rec.has&&B.rec.has)?`<span class="${delta>=0?'chg-up':'chg-down'}">${delta>=0?'+':''}${delta} نقطة</span>`:'—';
+  const sb=SEV[B.rank],sa=SEV[A.rank];
+  $('sevB').textContent=B.rec.has?sb.t:'—';$('sevB').className='sev-chip '+(B.rec.has?sb.c:'color-yellow');$('needleB').style.right=sb.pos+'%';
+  $('sevA').textContent=A.rec.has?sa.t:'—';$('sevA').className='sev-chip '+(A.rec.has?sa.c:'color-yellow');$('needleA').style.right=sa.pos+'%';
+
+  // section 15 + 16
+  $('scRecB').textContent=B.rec.has?B.rec.val:'—';$('scRecA').textContent=A.rec.has?A.rec.val:'—';
+  $('scSevB').textContent=B.rec.has?sb.t:'—';$('scSevA').textContent=A.rec.has?sa.t:'—';
+  $('scDtiB').textContent=B.dti!==null?B.dti.toFixed(1)+'٪':'—';$('scDtiA').textContent=A.dti!==null?A.dti.toFixed(1)+'٪':'—';
+  $('scSavB').textContent=B.saveRatio!==null?B.saveRatio.toFixed(1)+'٪':'—';$('scSavA').textContent=A.saveRatio!==null?A.saveRatio.toFixed(1)+'٪':'—';
+  $('scResB').textContent=B.resil!==null?B.resil.toFixed(1)+' شهر':'—';$('scResA').textContent=A.resil!==null?A.resil.toFixed(1)+' شهر':'—';
+  $('scBehB').textContent=B.mx>0?B.pts+' / '+B.mx:'—';$('scBehA').textContent=A.mx>0?A.pts+' / '+A.mx:'—';
+  $('recB2').textContent=B.rec.has?B.rec.val:'—';$('recA2').textContent=A.rec.has?A.rec.val:'—';
+  $('recDelta2').textContent=(A.rec.has&&B.rec.has)?((delta>=0?'+':'')+delta+' نقطة'):'—';
+  $('sevB2').textContent=B.rec.has?sb.t:'—';$('sevA2').textContent=A.rec.has?sa.t:'—';
+
+  // saved toward goal 1
+  const sg=num($('savedGoal1'));const firstGoalAmt=(()=>{const r=document.querySelector('#tGoal tbody tr');if(!r)return 0;const c=r.querySelectorAll('input');return parseFloat(c[2]&&c[2].value)||0;})();
+  $('savedGoal1Pct').value=(sg>0&&firstGoalAmt>0)?((sg/firstGoalAmt*100).toFixed(0)+'٪ من الهدف'):'';
+
+  // zero based
+  const z=num($('zIncome'))-(num($('zFixed'))+num($('zGoals')));$('zeroResult').textContent=fmt(z);$('zeroResult').className=z===0?'t-green':'t-red';
+  const zinc=num($('zIncome'));
+  document.querySelectorAll('#tIE tbody tr').forEach(tr=>{const amt=num(tr.querySelector('.ieAmt'));tr.querySelector('.iePct').textContent=zinc>0?((amt/zinc*100).toFixed(1)+'٪'):'—';});
+
+  // debt table: years + order
+  const rows=Array.from(document.querySelectorAll('#tDebt tbody tr'));
+  rows.forEach(tr=>{const r=num(tr.querySelector('.dRemain')),i=num(tr.querySelector('.dInst'));const y=tr.querySelector('.dY');if(y)y.textContent=(i>0&&r>0)?(r/(i*12)).toFixed(1)+' سنة':'—';});
+  const mode=$('debtMode').value;
+  if(mode==='snowball'||mode==='avalanche'){
+    const idx=rows.map((tr,k)=>({k,r:num(tr.querySelector('.dRemain')),f:num(tr.querySelector('.dInt'))}));
+    idx.sort((p,q)=>mode==='snowball'?p.r-q.r:q.f-p.f);
+    idx.forEach((o,rank)=>{const c=rows[o.k].querySelector('.dO');if(c)c.textContent=(rank+1);});
+  }
+
+  // framework note + cc rec by AFTER severity
+  const frames=[
+    {bg:'#eaf7ee',bd:'#bfe3c9',c:'#1c6b39',title:'الحالة الخضراء عند الختام: تشخيص → علاج → تطوير',body:'الخطة كاملة + أول خطوة استثمارية آمنة مبسّطة.',cc:'الإطار: تطوير — تنظيم مستقر + أول خطوة استثمارية آمنة، مع الاستقلال التدريجي عن الدعم.'},
+    {bg:'#fdf6e0',bd:'#f0e4bf',c:'#7a5e00',title:'الحالة الصفراء عند الختام: تنظيم → تخطيط',body:'ميزانية واضحة + بناء أهداف + بداية صندوق طوارئ.',cc:'الإطار: تنظيم وتخطيط — ميزانية واضحة + بناء أهداف + بداية صندوق طوارئ قبل أي توسّع.'},
+    {bg:'#fdf0e3',bd:'#f3d6b5',c:'#8a4b12',title:'الحالة البرتقالية عند الختام: تنظيم → تخطيط مع حماية',body:'ميزانية صارمة + أولوية صندوق الطوارئ + جدولة الديون. تأجيل الاستثمار.',cc:'الإطار: حماية وتنظيم — ميزانية صارمة + بناء طوارئ + جدولة ديون بأولويات، وتأجيل الاستثمار.'},
+    {bg:'#fdecec',bd:'#f3c9c9',c:'#922',title:'الحالة الحرجة عند الختام: تثبيت → حماية → إعادة هيكلة',body:'الميزانية الصفرية + جدول إدارة الديون بأولويات + بناء صندوق طوارئ. لا استثمار.',cc:'الإطار: تثبيت — إيقاف النزيف أولاً عبر الميزانية الصفرية وجدول الديون بالأولويات وبناء الطوارئ، بلا استثمار.'}
+  ];
+  const f=frames[A.rec.has?A.rank:1];const fn=$('frameNote');fn.style.background=f.bg;fn.style.borderColor=f.bd;fn.style.color=f.c;fn.innerHTML=`<b>${f.title}</b><br>${f.body}`;
+  const cc=$('ccRec');if(cc&&!cc.value)cc.placeholder=f.cc;
+}
+
+/* import case file (additive — supports session 1, 2, 3) */
+function importCase(input){
+  const file=input.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{const d=JSON.parse(e.target.result);applyCase(d);const s=d.sourceSession||'';$('impStatus').textContent='✓ تم استيراد ملف الجلسة '+s;$('impStatus').style.color='#1c6b39';}
+    catch(err){$('impStatus').textContent='تعذّر قراءة الملف';$('impStatus').style.color='#922';}
+  };
+  r.readAsText(file);
+  input.value='';
+}
+function setVal(id,val){const el=$(id);if(el&&val!==undefined&&val!==null&&val!=='')el.value=val;}
+function applyCase(d){
+  window.loadedCase=d;
+  const b=d.base||{},fin=d.finance,t=d.tables;
+  // base (merge — fill only what is present)
+  setVal('ce_caseNo',b.caseNo);setVal('ce_charityRef',b.charityRef);setVal('ce_name',b.name);
+  setVal('ce_age',b.age);setVal('ce_marital',b.marital);setVal('ce_kids',b.kids);setVal('ce_kidsDetails',b.kidsDetails);setVal('ce_problem',b.problem);
+  setVal('ce_d1',b.d1);
+  // finance (from session 2)
+  if(fin){
+    $('snap_income').textContent=fmt(fin.income||0);$('snap_fixed').textContent=fmt(fin.fixedTotal||0);
+    $('snap_var').textContent=fmt(fin.varExp||0);$('snap_debt').textContent=fmt(fin.debtRemain||0);
+    $('snap_inst').textContent=fmt(fin.installSum||0);$('snap_assets').textContent=fmt(fin.assets||0);
+    $('snap_surplus').textContent=fmt(fin.surplus||0);$('snap_dti').textContent=fin.dti!=null?fin.dti+'٪':'—';
+    $('snapUnk').classList.toggle('show',!!fin.hasUnknown);
+    setVal('income_b',fin.income);setVal('fexp_b',fin.fixedTotal);setVal('vexp_b',fin.varExp);
+    setVal('debt_b',fin.debtRemain);setVal('inst_b',fin.installSum);setVal('sav_b',fin.assets);
+    if(fin.hasUnknown){$('unkDebt').textContent='(مجهول جزئياً)';$('unkInst').textContent='(مجهول جزئياً)';}
+    setVal('zIncome',fin.income);setVal('zFixed',(fin.fixedTotal||0)+(fin.varExp||0));
+  }
+  // part B tables (from session 2)
+  if(t){
+    clearTbody('tDebt');(t.debts||[]).forEach(x=>addRow('debt',x));if(!(t.debts||[]).length)addRow('debt');
+    clearTbody('tGoal');(t.goals||[]).forEach(x=>addRow('goal',x));if(!(t.goals||[]).length)addRow('goal');
+    clearTbody('tIE');
+    (t.income||[]).forEach(x=>addRow('ie',{item:'دخل: '+(x.source||''),amount:x.amount}));
+    (t.fixed||[]).forEach(x=>addRow('ie',{item:'ثابت: '+(x.item||''),amount:x.amount}));
+    (t.variable||[]).forEach(x=>addRow('ie',{item:'متغير: '+(x.item||''),amount:x.amount}));
+    if(!document.querySelector('#tIE tbody tr'))addRow('ie');
+    setDebtMode();
+  }
+  // behavioral BEFORE (from session 1 baseline or session 3)
+  if(d.behavioral&&d.behavioral.habits){
+    const rows=document.querySelectorAll('#tBehav tbody tr');
+    d.behavioral.habits.forEach((h,i)=>{if(rows[i]&&h&&h.before!==null&&h.before!==undefined){const s=rows[i].querySelector('.bh-b');if(s)s.value=h.before;}});
+  }
+  // psychological BEFORE (from session 1 or 3)
+  if(d.psychological&&d.psychological.dims){
+    const rows=document.querySelectorAll('#tPsy tbody tr');
+    d.psychological.dims.forEach((p,i)=>{if(rows[i]&&p&&p.before){const s=rows[i].querySelector('.psy-b');if(s)s.value=p.before;}});
+  }
+  // Sara recommendation (from session 3)
+  if(d.saraRecommendation){const sr=$('saraRecBox');if(sr&&!sr.value)sr.value=d.saraRecommendation;}
+  // ===== compatibility with sessions 1/2/3 cumulative schema =====
+  // behavioral BEFORE from session 3 habit ratings (first 7 habits map by order)
+  if(d.session3&&d.session3.habitsBefore){
+    const bb=document.querySelectorAll('#tBehav .bh-b');
+    d.session3.habitsBefore.forEach((val,i)=>{if(bb[i]&&val!==''&&val!=null)bb[i].value=val;});
+  }
+  // entry severity reference from session 1
+  if(d.session1){
+    const s1=d.session1;
+    if(s1.entryBehav!=null){const note=$('snapUnk');/* keep */}
+  }
+  recalc();
+}
+function clearTbody(id){const tb=document.querySelector('#'+id+' tbody');while(tb.firstChild)tb.removeChild(tb.firstChild);}
+
+
+/* file preview */
+function handleFiles(input,box){const c=$(box);Array.from(input.files).forEach(file=>{const pv=document.createElement('div');pv.className='pv';if(file.type.startsWith('image/')){const img=document.createElement('img');const r=new FileReader();r.onload=e=>img.src=e.target.result;r.readAsDataURL(file);pv.appendChild(img);}else{pv.innerHTML='📄 ';}const cap=document.createElement('div');cap.textContent=file.name;pv.appendChild(cap);c.appendChild(pv);});}
+
+document.querySelectorAll('#tFin input, .bh-b, .bh-a, #zIncome, #zFixed, #zGoals, #savedGoal1').forEach(e=>{e.addEventListener('input',recalc);e.addEventListener('change',recalc);});
+
+function saveLocal(){try{const d={};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{d['f'+i]=el.type==='checkbox'?el.checked:el.value;});localStorage.setItem('cc_s4',JSON.stringify(d));alert('تم الحفظ المؤقت.');}catch(e){alert('تعذّر الحفظ — استخدم طباعة/تصدير PDF.');}}
+function loadLocal(){try{const raw=localStorage.getItem('cc_s4');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,textarea,select').forEach((el,i)=>{if(d['f'+i]!==undefined){if(el.type==='checkbox')el.checked=d['f'+i];else el.value=d['f'+i];}});recalc();}catch(e){}}
+function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_s4');}catch(e){}location.reload();}
+
+['ach','ach','strat','strat','ie','debt','debt','goal','goal','time','time','taskC','taskC','taskL','taskL'].forEach(k=>addRow(k));
+setDebtMode();loadLocal();recalc();
+</script>
+<script src="case-chain.js"></script>
+</body>
+</html>

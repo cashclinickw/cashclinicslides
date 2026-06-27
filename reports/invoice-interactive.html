@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فاتورة تسوية — كاش كلينيك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--red:#d23b3b;--soft-yellow:#fdf6e0;--soft-purple:#f4ecf6;--soft-blue:#eaf2fb}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+.wrap{max-width:880px;margin:0 auto;padding:18px 16px 80px}
+.toolbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 16px;border-radius:0 0 14px 14px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+.toolbar .ttl{font-weight:800;font-size:14px}.toolbar .btns{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:9px}
+.btn-print{background:var(--yellow);color:#3a2b00}.btn-imp{background:#fff;color:var(--purple)}.btn-ghost{background:rgba(255,255,255,.16);color:#fff}
+.report-head{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.logo-grid{display:grid;grid-template-columns:repeat(4,11px);gap:5px}.logo-grid span{width:11px;height:11px;border-radius:50%}
+.head-text{flex:1}.head-text .ar{font-weight:800;color:var(--purple);font-size:20px}.head-text .en{color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:500}
+.head-side{text-align:left;border-right:3px solid var(--yellow);padding-right:14px;font-size:11px;color:var(--muted);line-height:1.5}.head-side b{color:var(--ink);display:block;font-size:12px}
+.banner{background:var(--yellow);border-radius:14px;padding:16px 20px;margin:14px 0 6px;text-align:center}
+.banner h1{margin:0;font-size:22px;color:#3a2b00;font-weight:800}.banner .en{margin:2px 0 0;font-size:12px;color:#6b5500;font-weight:500}
+.imp-banner{background:var(--soft-blue);border:1px dashed var(--blue);border-radius:12px;padding:10px 16px;margin:12px 0;font-size:12.5px;color:#1a4e80;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+.section>h2{margin:0 0 14px;font-size:16px;color:var(--purple);font-weight:800;display:flex;align-items:center;gap:10px}
+.section>h2 .num{background:var(--purple);color:#fff;min-width:26px;height:26px;padding:0 6px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:12.5px;font-weight:700}.field .hint{font-size:11px;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+input[type=text],input[type=number],input[type=date],input[type=time],select{font-family:inherit;font-size:14px;color:var(--ink);border:0;border-bottom:1.5px solid var(--line);background:#fbfbfd;padding:7px 8px;border-radius:6px 6px 0 0;width:100%}
+input:focus,select:focus{outline:none;border-bottom-color:var(--blue);background:#fff}
+.pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.pkg .card{background:var(--soft-purple);border:1px solid #e3d3ea;border-radius:12px;padding:12px;text-align:center}
+.pkg .card .k{font-size:12px;color:var(--muted);font-weight:700}.pkg .card .v{font-size:20px;font-weight:800;color:var(--purple);margin-top:4px}
+table.set{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+table.set th{background:var(--soft-yellow);font-weight:700;color:#5a4a00;padding:9px;border:1px solid #f0e4bf}
+table.set td{border:1px solid var(--line);padding:9px;text-align:center}
+table.set td.lbl{text-align:right;font-weight:700;background:#fdfdfd}
+.big{font-size:18px;font-weight:800;color:var(--purple)}
+.note{background:var(--soft-yellow);border-right:4px solid var(--yellow);border-radius:8px;padding:10px 14px;font-size:13px;color:#5a4a00;margin-top:10px}
+.sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
+.sign-box{border-top:2px dashed var(--line);padding-top:10px}.sign-box .role{font-weight:800;color:var(--purple);font-size:12.5px;margin-bottom:12px}
+.sign-line{display:flex;gap:6px;align-items:baseline;margin-bottom:12px;font-size:12.5px}.sign-line span{color:var(--muted);font-weight:700;flex:0 0 54px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.footer .contact{color:var(--purple);font-weight:700;font-size:12.5px}
+@media print{body{background:#fff;font-size:12px}.toolbar,.no-print,.field .hint,.imp-banner{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head{border:1px solid #ddd;box-shadow:none}input,select{border:0!important;background:transparent!important;border-bottom:1px solid #ccc!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:14mm}}
+@media(max-width:780px){.grid2,.grid3,.pkg,.sign-grid{grid-template-columns:1fr}}
+.btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+</style>
+</head>
+<body>
+<div class="toolbar no-print">
+  <div class="ttl">كاش كلينيك — فاتورة التسوية (تفاعلية)</div>
+  <div class="btns">
+    <button class="btn btn-imp" onclick="document.getElementById('caseFile').click()">استيراد ملف الحالة</button>
+    <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
+    <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
+    <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
+    <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
+  </div>
+</div>
+<div class="wrap">
+  <div class="report-head">
+    <div class="logo"><div class="logo-grid">
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--orange)"></span>
+      <span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span>
+      <span style="background:var(--purple)"></span><span style="background:var(--orange)"></span><span style="background:var(--yellow)"></span><span style="background:var(--blue)"></span>
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--yellow)"></span>
+    </div></div>
+    <div class="head-text"><div class="ar">كاش كلينيك</div><div class="en">CASH CLINIC</div></div>
+    <div class="head-side"><b>فاتورة تسوية</b>Settlement Invoice —<br>Per Session</div>
+  </div>
+  <div class="banner"><h1>فاتورة تسوية — بعد كل جلسة</h1><div class="en">Settlement Invoice — Per Session</div></div>
+  <div class="imp-banner no-print"><span>💡 «استيراد ملف الحالة» يجلب اسم العميلة وأرقام الحالة تلقائياً. (الرقم المدني يُدخل يدوياً كوثيقة مالية.)</span><span id="impStatus" style="font-weight:800"></span></div>
+
+  <!-- 1 invoice info -->
+  <div class="section">
+    <h2><span class="num">١</span> معلومات الفاتورة</h2>
+    <div class="grid3">
+      <div class="field"><label>رقم الفاتورة (Invoice No.)</label><input type="text" placeholder="INV-03-2"></div>
+      <div class="field"><label>تاريخ إصدار الفاتورة</label><input type="date"></div>
+      <div class="field"><label>الجلسة المرتبطة بالفاتورة</label>
+        <select id="sessionSel" onchange="recalc()">
+          <option value="1">الأولى (تشخيصية)</option>
+          <option value="2">الثانية (متابعة 1)</option>
+          <option value="3">الثالثة (متابعة 2)</option>
+          <option value="4">الرابعة (ختامية)</option>
+        </select></div>
+      <div class="field"><label>تاريخ الجلسة (السبت)</label><input type="date"></div>
+      <div class="field"><label>وقت الجلسة (مساءً)</label><input type="time"></div>
+    </div>
+  </div>
+
+  <!-- 2 charity -->
+  <div class="section">
+    <h2><span class="num">٢</span> الجهة المُحوِّلة (الجمعية)</h2>
+    <div class="grid2">
+      <div class="field"><label>اسم الجمعية</label><input type="text" value="جمعية بذل الندى الخيرية للأعمال الخيرية"></div>
+      <div class="field"><label>الجهة المشرفة</label><input type="text" value="وزارة الشؤون الاجتماعية – دولة الكويت"></div>
+      <div class="field"><label>رقم مرجع الجمعية للحالة</label><input type="text" id="ce_charityRef"></div>
+      <div class="field"><label>اسم منسّق الحالة لدى الجمعية</label><input type="text"></div>
+    </div>
+  </div>
+
+  <!-- 3 client -->
+  <div class="section">
+    <h2><span class="num">٣</span> معلومات العميل (المستفيد)</h2>
+    <p class="hint" style="margin:0 0 8px;color:var(--muted)">الفاتورة وثيقة مالية رسمية، فتحمل البيانات الكاملة بخلاف التقارير التحليلية.</p>
+    <div class="grid2">
+      <div class="field"><label>الاسم الكامل</label><input type="text" id="ce_fullName"></div>
+      <div class="field"><label>الرقم المدني</label><input type="text"></div>
+      <div class="field"><label>رقم ملف الحالة الداخلي لدى كاش كلينيك</label><input type="text" id="ce_caseNo"></div>
+      <div class="field"><label>رقم التواصل</label><input type="text"></div>
+    </div>
+  </div>
+
+  <!-- 4 package + settlement -->
+  <div class="section">
+    <h2><span class="num">٤</span> ملخّص الباقة + جدول التسوية</h2>
+    <div class="pkg">
+      <div class="card"><div class="k">سعر الجلسة</div><div class="v">٣٥ د.ك</div></div>
+      <div class="card"><div class="k">قيمة الباقة (٤ جلسات)</div><div class="v">١٤٠ د.ك</div></div>
+      <div class="card"><div class="k">طريقة الدفع</div><div class="v" style="font-size:15px">١٠٠٪ مقدّم للباقة</div></div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="field"><label>عدد الجلسات المحضورة لتاريخه</label>
+        <select id="attended" onchange="recalc()"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+      <div class="field"><label>ملاحظات على الحضور / الإلغاء</label><input type="text"></div>
+    </div>
+    <table class="set">
+      <thead><tr><th>البند</th><th>القيمة</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">الجلسات المحضورة لتاريخه</td><td id="sAtt" class="big">—</td></tr>
+        <tr><td class="lbl">المبلغ المخصوم من الرصيد (المحضورة × ٣٥)</td><td id="sDed" class="big">—</td></tr>
+        <tr><td class="lbl">الرصيد المتبقي من الباقة</td><td id="sRem" class="big">—</td></tr>
+        <tr><td class="lbl">الجلسات غير المحضورة</td><td id="sNot" class="big">—</td></tr>
+      </tbody>
+    </table>
+    <div class="note">الدفع ١٠٠٪ مقدّم للباقة (بدون قبل/بعد الخصم). ما يترتب على الجلسات غير المحضورة يخضع لسياسة الحضور / الإلغاء المتفق عليها مع الجمعية.</div>
+  </div>
+
+  <!-- 5 signatures -->
+  <div class="section">
+    <h2><span class="num">٥</span> التواقيع</h2>
+    <div class="sign-grid">
+      <div class="sign-box"><div class="role">صاحب شركة كاش كلينيك</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+      <div class="sign-box"><div class="role">العميل (المستفيد)</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+    </div>
+  </div>
+
+  <div class="footer"><div class="contact">@cash.clinic &nbsp;•&nbsp; contact@cashclinic.net &nbsp;•&nbsp; +965 22260820 &nbsp;•&nbsp; www.cashclinic.net</div><div style="margin-top:6px">نشخّص. نعالج. نطوّر حياتك المالية.</div></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function recalc(){
+  const att=parseInt($('attended').value)||0;
+  const ded=att*35,rem=140-ded,not=4-att;
+  $('sAtt').textContent=att;
+  $('sDed').textContent=ded+' د.ك';
+  $('sRem').textContent=rem+' د.ك';
+  $('sNot').textContent=not;
+}
+function importCase(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);applyCase(d);$('impStatus').textContent='✓ تم الاستيراد';$('impStatus').style.color='#1c6b39';}catch(err){$('impStatus').textContent='تعذّر القراءة';$('impStatus').style.color='#922';}};r.readAsText(f);}
+// Auto-aggregate from the shared live case (used by case-chain hydrate)
+function applyCase(d){
+  if(!d)return;
+  const b=d.base||{};
+  if(b.name&&$('ce_fullName'))$('ce_fullName').value=b.name;
+  if(b.caseNo&&$('ce_caseNo'))$('ce_caseNo').value=b.caseNo;
+  if(b.charityRef&&$('ce_charityRef'))$('ce_charityRef').value=b.charityRef;
+  // Count how many sessions were completed across the program
+  let done=0;
+  if(d.session1)done=Math.max(done,1);
+  if(d.finance||d.session2||d.tables)done=Math.max(done,2);
+  if(d.session3)done=Math.max(done,3);
+  if(d.session4||d.final||d.lastSession===4)done=Math.max(done,4);
+  if(d.lastSession&&d.lastSession>done)done=d.lastSession;
+  if(done>0){
+    if($('attended'))$('attended').value=String(Math.min(done,4));
+    if($('sessionSel'))$('sessionSel').value=String(Math.min(done,4));
+  }
+  recalc();
+}
+function saveLocal(){try{const d={};document.querySelectorAll('input,select').forEach((el,i)=>{d['f'+i]=el.value;});localStorage.setItem('cc_inv',JSON.stringify(d));alert('تم الحفظ المؤقت.');}catch(e){alert('تعذّر الحفظ.');}}
+function loadLocal(){try{const raw=localStorage.getItem('cc_inv');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,select').forEach((el,i)=>{if(d['f'+i]!==undefined)el.value=d['f'+i];});recalc();}catch(e){}}
+function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_inv');}catch(e){}location.reload();}
+loadLocal();recalc();
+</script>
+<script src="case-chain.js"></script>
+</body>
+</html>

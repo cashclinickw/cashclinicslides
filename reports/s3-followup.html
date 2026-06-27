@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جلستي الثالثة — كم تقدّمت؟ — كاش كلينيك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--red:#d23b3b;--soft-yellow:#fdf6e0;--soft-purple:#f4ecf6;--soft-blue:#eaf2fb}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 80px}
+.toolbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 16px;border-radius:0 0 14px 14px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+.toolbar .ttl{font-weight:800;font-size:14px}.toolbar .btns{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:9px}
+.btn-print{background:var(--yellow);color:#3a2b00}.btn-imp{background:#fff;color:var(--purple)}
+.btn-ghost{background:rgba(255,255,255,.16);color:#fff}
+.report-head{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.logo-grid{display:grid;grid-template-columns:repeat(4,11px);gap:5px}.logo-grid span{width:11px;height:11px;border-radius:50%}
+.head-text{flex:1}.head-text .ar{font-weight:800;color:var(--purple);font-size:20px}.head-text .en{color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:500}
+.head-side{text-align:left;border-right:3px solid var(--yellow);padding-right:14px;font-size:11px;color:var(--muted);line-height:1.5}.head-side b{color:var(--ink);display:block;font-size:12px}
+.banner{background:var(--yellow);border-radius:14px;padding:16px 20px;margin:14px 0 6px;text-align:center}
+.banner h1{margin:0;font-size:22px;color:#3a2b00;font-weight:800}.banner .en{margin:2px 0 0;font-size:12px;color:#6b5500;font-weight:500}
+.intro{background:var(--soft-yellow);border-right:4px solid var(--yellow);border-radius:12px;padding:12px 18px;margin:12px 0;font-size:13.5px;color:#5a4a00}
+.imp-banner{background:var(--soft-blue);border:1px dashed var(--blue);border-radius:12px;padding:10px 16px;margin:12px 0;font-size:12.5px;color:#1a4e80;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.live{background:linear-gradient(135deg,#fff,#faf7fc);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.metric .mk{font-size:11px;color:var(--muted);font-weight:700;min-height:28px}.metric .mv{font-size:22px;font-weight:800;margin-top:2px}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+.section>h2{margin:0 0 14px;font-size:17px;color:var(--purple);font-weight:800;display:flex;align-items:center;gap:10px}
+.section>h2 .num{background:var(--purple);color:#fff;min-width:28px;height:28px;padding:0 6px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.section>h2 .en{font-size:11px;color:var(--muted);font-weight:500;margin-right:auto}
+.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:12.5px;font-weight:700}.field .hint{font-size:11px;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=text],input[type=number],input[type=date],textarea,select{font-family:inherit;font-size:14px;color:var(--ink);border:0;border-bottom:1.5px solid var(--line);background:#fbfbfd;padding:7px 8px;border-radius:6px 6px 0 0;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--blue);background:#fff}
+textarea{resize:vertical;min-height:54px;border:1.5px solid var(--line);border-radius:8px}
+table.cmp{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
+table.cmp th{background:var(--soft-yellow);font-size:12px;font-weight:700;color:#5a4a00;padding:8px 6px;border:1px solid #f0e4bf}
+table.cmp td{border:1px solid var(--line);padding:5px 6px;text-align:center}
+table.cmp td:first-child{text-align:right;font-weight:700}
+table.cmp select{border:0;background:transparent;font-size:12.5px;width:100%}
+.auto{background:#eef6ff;font-weight:700;color:var(--blue)}
+.t-red{color:var(--red)}.t-green{color:var(--green)}.t-orange{color:var(--orange)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.checks label{display:flex;gap:9px;align-items:flex-start;background:#fbfbfd;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13px;cursor:pointer}
+.checks input{margin-top:3px;width:17px;height:17px;flex:0 0 auto}
+.note{background:var(--soft-yellow);border-right:4px solid var(--yellow);border-radius:8px;padding:10px 14px;font-size:13px;color:#5a4a00;margin-top:10px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.footer .contact{color:var(--purple);font-weight:700;font-size:12.5px}
+.secret{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
+@media print{body{background:#fff;font-size:12px}.toolbar,.no-print,.field .hint,.imp-banner{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head,.live{border:1px solid #ddd;box-shadow:none}input,textarea,select{border:0!important;background:transparent!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:12mm}}
+@media(max-width:780px){.live{grid-template-columns:1fr}.grid2,.checks{grid-template-columns:1fr}}
+.btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+</style>
+</head>
+<body>
+<div class="toolbar no-print">
+  <div class="ttl">كاش كلينيك — جلستي الثالثة (تفاعلي)</div>
+  <div class="btns">
+    <button class="btn btn-imp" onclick="document.getElementById('caseFile').click()">استيراد ملف الحالة</button>
+    <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
+    <button class="btn btn-ghost" onclick="exportCase()">تصدير ملف الحالة</button>
+    <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
+    <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
+    <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s3')">⏭ احفظ وانتقل للتالي</button><button class="btn btn-invoice" onclick="CaseChain.generateInvoice()">🧾 إنشاء فاتورة</button>
+    <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
+  </div>
+</div>
+<div class="wrap">
+  <div class="report-head">
+    <div class="logo"><div class="logo-grid">
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--orange)"></span>
+      <span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span>
+      <span style="background:var(--purple)"></span><span style="background:var(--orange)"></span><span style="background:var(--yellow)"></span><span style="background:var(--blue)"></span>
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--yellow)"></span>
+    </div></div>
+    <div class="head-text"><div class="ar">كاش كلينيك</div><div class="en">CASH CLINIC</div></div>
+    <div class="head-side"><b>جلستي الثالثة</b>Session 3 —<br>Mid-Program Review</div>
+  </div>
+  <div class="banner"><h1>جلستي الثالثة — كم تقدّمتُ؟</h1><div class="en">Session 3 — Progress Review</div></div>
+  <div class="intro">أنا الآن في منتصف الرحلة. هذه الجلسة فرصة لأتوقّف وأقارن: من أين بدأتُ، وأين وصلتُ الآن. النصف الباقي من الرحلة هو الذي يُثبّت التغيير في حياتي.</div>
+
+  <div class="imp-banner no-print"><span>💡 اضغط «استيراد ملف الحالة» لجلب بياناتي وعمود «قبل البرنامج» تلقائياً من الجلسات السابقة.</span><span id="impStatus" style="font-weight:800"></span></div>
+
+  <div class="live">
+    <div class="metric"><div class="mk">نسبة تقدّم العادات</div><div class="mv" id="mProg">—</div></div>
+    <div class="metric"><div class="mk">عادات تحسّنت</div><div class="mv" id="mImproved">— / 7</div></div>
+    <div class="metric"><div class="mk">النتيجة السلوكية الحالية</div><div class="mv" id="mScore">—</div></div>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2><span class="num">١</span> تاريخ الجلسة <span class="en">Session Date</span></h2>
+    <div class="grid2">
+      <div class="field"><label>اسمي <span class="hint">أول + ثاني</span></label><input type="text" id="ce_name"></div>
+      <div class="field"><label>تاريخ الجلسة الثالثة</label><input type="date"></div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="field"><label>رقم الحالة</label><input type="text" id="ce_caseNo"></div>
+      <div class="field"><label>رقم مرجع الجمعية</label><input type="text" id="ce_charityRef"></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2><span class="num">٢</span> مقارنة سريعة — من أين بدأتُ إلى أين وصلتُ <span class="en">Quick Comparison</span></h2>
+    <div class="field"><label>بصيغة المتكلّم التأمّلية</label><textarea style="min-height:90px" placeholder="أصف رحلتي حتى الآن…"></textarea></div>
+  </div>
+
+  <!-- 3 habits -->
+  <div class="section">
+    <h2><span class="num">٣</span> كيف تطوّرت عاداتي المالية؟ <span class="en">Habit Progress</span></h2>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">المقياس: لا / أحياناً / دائماً. عمود «قبل البرنامج» يُستورد من الجلسات السابقة إن توفّر.</p>
+    <table class="cmp" id="tHab"><thead><tr><th style="width:46%">العادة</th><th style="width:27%">قبل البرنامج</th><th style="width:27%">اليوم</th></tr></thead><tbody></tbody></table>
+    <div class="note">نسبة تقدّم العادات تُحتسب تلقائياً: عدد العادات التي تحسّنت من «قبل» إلى «اليوم» ÷ إجمالي العادات.</div>
+  </div>
+
+  <!-- 4 proud -->
+  <div class="section">
+    <h2><span class="num">٤</span> أكثر ما أفخر به في رحلتي حتى الآن <span class="en">Proudest Of</span></h2>
+    <div class="field"><textarea style="min-height:80px"></textarea></div>
+  </div>
+
+  <!-- 5 future -->
+  <div class="section">
+    <h2><span class="num">٥</span> خطّتي للقادم وما أرغب في تعلّمه <span class="en">Next Plan</span></h2>
+    <div class="field"><textarea style="min-height:80px"></textarea></div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="field"><label>الشعور</label><textarea></textarea></div>
+      <div class="field"><label>التفكير</label><textarea></textarea></div>
+    </div>
+  </div>
+
+  <!-- 6 worries -->
+  <div class="section">
+    <h2><span class="num">٦</span> ما الذي يقلقني بخصوص ما بعد البرنامج؟ <span class="en">Post-Program Worries</span></h2>
+    <div class="checks">
+      <label><input type="checkbox" class="worry"> أخاف أن أعود إلى عاداتي القديمة</label>
+      <label><input type="checkbox" class="worry"> أخاف ألّا أجد من يوجّهني لو احتجت</label>
+      <label><input type="checkbox" class="worry"> أخاف أن أواجه ضغطاً مالياً مفاجئاً</label>
+      <label><input type="checkbox" class="worry"> أخاف ضغط الأهل / المحيط</label>
+      <label><input type="checkbox" class="worry"> لا أخاف، شعرتُ أنّي قويتُ بمعرفتي</label>
+      <label><input type="checkbox" class="worry"> شيء آخر</label>
+    </div>
+    <div class="field" style="margin-top:10px"><label>تفصيل (إن وُجد)</label><input type="text"></div>
+  </div>
+
+  <!-- 7 recommendation (Sara) -->
+  <div class="section">
+    <h2><span class="num">٧</span> توصية المستشار السلوكي (سارة) <span class="en">Behavioral Recommendation</span></h2>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">تُنقل هذه التوصية لاحقاً إلى التقرير الختامي ضمن التوصيات الثلاثية.</p>
+    <div class="field"><textarea id="saraRec" style="min-height:80px"></textarea></div>
+  </div>
+
+  <div class="secret">سرّي — لا يُتداول إلا بين كاش كلينيك والجهة المرجِعة.</div>
+  <div class="footer"><div class="contact">@cash.clinic &nbsp;•&nbsp; contact@cashclinic.net &nbsp;•&nbsp; +965 22260820 &nbsp;•&nbsp; www.cashclinic.net</div><div style="margin-top:6px">نشخّص. نعالج. نطوّر حياتك المالية.</div></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const HAB=['أعدُّ ميزانية شهرية','أتابع مصاريفي اليومية','أُفرّق بين الحاجة والرغبة','أوفّر جزءاً من راتبي','أتجنّب الديون','أراجع كشف حسابي البنكي','أخطّط قبل أن أتسوّق'];
+const opt='<option value="">—</option><option value="0">لا</option><option value="1">أحياناً</option><option value="2">دائماً</option>';
+(function(){const tb=document.querySelector('#tHab tbody');HAB.forEach((h,i)=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${h}</td><td><select class="hb" data-i="${i}">${opt}</select></td><td><select class="ha" data-i="${i}">${opt}</select></td>`;tb.appendChild(tr);});})();
+
+function recalc(){
+  let improved=0,answered=0,todaySum=0,todayCnt=0;
+  HAB.forEach((h,i)=>{
+    const b=document.querySelector(`.hb[data-i="${i}"]`).value,a=document.querySelector(`.ha[data-i="${i}"]`).value;
+    if(b!==''&&a!==''){answered++;if(parseInt(a)>parseInt(b))improved++;}
+    if(a!==''){todaySum+=parseInt(a);todayCnt++;}
+  });
+  $('mProg').textContent=answered?Math.round(improved/answered*100)+'٪':'—';
+  $('mProg').className='mv '+(answered?(improved/answered>=0.6?'t-green':improved/answered>=0.3?'t-orange':'t-red'):'');
+  $('mImproved').textContent=improved+' / '+HAB.length;
+  const score=todayCnt?Math.round(todaySum/(todayCnt*2)*100):null;
+  $('mScore').textContent=score!==null?score+'٪':'—';
+  $('mScore').className='mv '+(score===null?'':score>=66?'t-green':score>=40?'t-orange':'t-red');
+}
+document.addEventListener('change',recalc);
+document.addEventListener('input',recalc);
+
+/* import */
+function importCase(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);window.loadedCase=d;applyCase(d);$('impStatus').textContent='✓ تم الاستيراد';$('impStatus').style.color='#1c6b39';}catch(err){$('impStatus').textContent='تعذّر القراءة';$('impStatus').style.color='#922';}};r.readAsText(f);}
+function applyCase(d){const b=d.base||{};if(b.caseNo)$('ce_caseNo').value=b.caseNo;if(b.charityRef)$('ce_charityRef').value=b.charityRef;if(b.name)$('ce_name').value=b.name;
+  // if a prior session3 exists, restore 'before' habits
+  const prev=(d.session3&&d.session3.habitsBefore)||null;
+  if(prev){HAB.forEach((h,i)=>{const s=document.querySelector(`.hb[data-i="${i}"]`);if(prev[i]!=null&&prev[i]!=='')s.value=prev[i];});}
+  recalc();
+}
+
+function collectCase(){
+  const before=[],today=[];
+  HAB.forEach((h,i)=>{before.push(document.querySelector(`.hb[data-i="${i}"]`).value);today.push(document.querySelector(`.ha[data-i="${i}"]`).value);});
+  let improved=0,answered=0;HAB.forEach((h,i)=>{if(before[i]!==''&&today[i]!==''){answered++;if(+today[i]>+before[i])improved++;}});
+  const out=window.loadedCase?JSON.parse(JSON.stringify(window.loadedCase)):{};
+  out.schema='cashclinic-case';out.version=3;out.lastSession=3;
+  out.base=Object.assign({},out.base,{caseNo:$('ce_caseNo').value,charityRef:$('ce_charityRef').value,name:$('ce_name').value});
+  out.session3={habitNames:HAB,habitsBefore:before,habitsToday:today,progressPct:answered?Math.round(improved/answered*100):null,worries:Array.from(document.querySelectorAll('.worry:checked')).map(c=>c.parentNode.textContent.trim()),recommendation:($('saraRec')?$('saraRec').value:'')};
+  out.saraRecommendation=($('saraRec')?$('saraRec').value:'')||out.saraRecommendation;
+  return out;
+}
+function exportCase(){const d=collectCase();const cn=(d.base.caseNo||'00').replace(/[^0-9A-Za-z]/g,'');const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='case-'+cn+'-session3.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+
+function saveLocal(){try{const d={};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{d['f'+i]=el.type==='checkbox'?el.checked:el.value;});localStorage.setItem('cc_s3',JSON.stringify(d));alert('تم الحفظ المؤقت.');}catch(e){alert('تعذّر الحفظ.');}}
+function loadLocal(){try{const raw=localStorage.getItem('cc_s3');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,textarea,select').forEach((el,i)=>{if(d['f'+i]!==undefined){if(el.type==='checkbox')el.checked=d['f'+i];else el.value=d['f'+i];}});recalc();}catch(e){}}
+function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_s3');}catch(e){}location.reload();}
+loadLocal();recalc();
+</script>
+<script src="case-chain.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير الجلسة الأولى التشخيصي — كاش كلينيك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--red:#d23b3b;--soft-yellow:#fdf6e0;--soft-purple:#f4ecf6;--soft-blue:#eaf2fb}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+.wrap{max-width:1000px;margin:0 auto;padding:18px 16px 80px}
+.toolbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 16px;border-radius:0 0 14px 14px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+.toolbar .ttl{font-weight:800;font-size:14px}.toolbar .btns{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:9px}
+.btn-print{background:var(--yellow);color:#3a2b00}.btn-imp{background:#fff;color:var(--purple)}
+.btn-add{background:var(--blue);color:#fff;font-size:12.5px;padding:6px 12px}.btn-ghost{background:rgba(255,255,255,.16);color:#fff}
+.btn-del{background:transparent;color:var(--red);border:1px solid #f0c9c9;font-size:12px;padding:5px 9px;border-radius:8px}
+.report-head{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;display:flex;align-items:center;gap:16px}
+.logo-grid{display:grid;grid-template-columns:repeat(4,11px);gap:5px}.logo-grid span{width:11px;height:11px;border-radius:50%}
+.head-text{flex:1}.head-text .ar{font-weight:800;color:var(--purple);font-size:20px}.head-text .en{color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:500}
+.head-side{text-align:left;border-right:3px solid var(--yellow);padding-right:14px;font-size:11px;color:var(--muted);line-height:1.5}.head-side b{color:var(--ink);display:block;font-size:12px}
+.banner{background:var(--yellow);border-radius:14px;padding:16px 20px;margin:14px 0 6px;text-align:center}
+.banner h1{margin:0;font-size:22px;color:#3a2b00;font-weight:800}.banner .en{margin:2px 0 0;font-size:12px;color:#6b5500;font-weight:500}
+.secret-top{background:var(--soft-purple);border:1px solid #e3d3ea;border-radius:12px;padding:10px 16px;margin:12px 0;font-size:12.5px;color:#4a2a55;font-weight:700;text-align:center}
+.live{background:linear-gradient(135deg,#fff,#faf7fc);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.metric .mk{font-size:11px;color:var(--muted);font-weight:700;min-height:28px}.metric .mv{font-size:20px;font-weight:800;margin-top:2px}
+.section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0}
+.section>h2{margin:0 0 14px;font-size:17px;color:var(--purple);font-weight:800;display:flex;align-items:center;gap:10px}
+.section>h2 .num{background:var(--purple);color:#fff;min-width:28px;height:28px;padding:0 6px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.section>h2 .en{font-size:11px;color:var(--muted);font-weight:500;margin-right:auto}
+.sub{font-weight:800;color:var(--blue);font-size:14px;margin:16px 0 8px}
+.field{display:flex;flex-direction:column;gap:4px}.field label{font-size:12.5px;font-weight:700}.field .hint{font-size:11px;color:var(--muted);font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+input[type=text],input[type=number],input[type=date],textarea,select{font-family:inherit;font-size:14px;color:var(--ink);border:0;border-bottom:1.5px solid var(--line);background:#fbfbfd;padding:7px 8px;border-radius:6px 6px 0 0;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--blue);background:#fff}
+textarea{resize:vertical;min-height:54px;border:1.5px solid var(--line);border-radius:8px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.checks label{display:flex;gap:9px;align-items:flex-start;background:#fbfbfd;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13px;cursor:pointer}
+.checks input{margin-top:3px;width:17px;height:17px;flex:0 0 auto}
+.checks.danger input{accent-color:var(--red)}
+table.dyn{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
+table.dyn th{background:var(--soft-yellow);font-size:11.5px;font-weight:700;color:#5a4a00;padding:7px 6px;border:1px solid #f0e4bf}
+table.dyn td{border:1px solid var(--line);padding:4px 5px;text-align:center}
+table.dyn td input,table.dyn td select{border:0;background:transparent;font-size:12.5px;padding:5px;width:100%}
+table.dyn td:first-child input{text-align:right}
+.awtable{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
+.awtable th{background:var(--soft-yellow);font-size:12px;font-weight:700;color:#5a4a00;padding:8px;border:1px solid #f0e4bf}
+.awtable td{border:1px solid var(--line);padding:6px 8px}
+.awtable td:first-child{font-weight:700;background:#fdfdfd}
+.lvl{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.lvl label{display:flex;gap:4px;align-items:center;font-size:12px;cursor:pointer;background:#fbfbfd;border:1px solid var(--line);border-radius:16px;padding:3px 10px}
+.lvl input{accent-color:var(--blue)}
+.radios{display:flex;gap:8px;flex-wrap:wrap}
+.radios label{display:flex;gap:6px;align-items:center;font-size:13px;cursor:pointer;background:#fbfbfd;border:1px solid var(--line);border-radius:16px;padding:6px 14px}
+.note{background:var(--soft-yellow);border-right:4px solid var(--yellow);border-radius:8px;padding:10px 14px;font-size:13px;color:#5a4a00;margin-top:10px}
+.warn{background:#fdecec;border-right:4px solid var(--red);border-radius:8px;padding:10px 14px;font-size:13px;color:#922;margin-top:10px;display:none}.warn.show{display:block}
+.sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:10px}
+.sign-box{border-top:2px dashed var(--line);padding-top:10px}.sign-box .role{font-weight:800;color:var(--purple);font-size:12.5px;margin-bottom:12px}
+.sign-line{display:flex;gap:6px;align-items:baseline;margin-bottom:12px;font-size:12.5px}.sign-line span{color:var(--muted);font-weight:700;flex:0 0 54px}
+.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.footer .contact{color:var(--purple);font-weight:700;font-size:12.5px}
+.secret{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-style:italic}
+.color-red{background:var(--red);color:#fff}.color-orange{background:var(--orange);color:#fff}.color-yellow{background:var(--yellow);color:#3a2b00}.color-green{background:var(--green);color:#fff}
+.chip{display:inline-block;padding:3px 12px;border-radius:16px;font-weight:800;font-size:13px}
+.t-red{color:var(--red)}.t-green{color:var(--green)}.t-orange{color:var(--orange)}
+@media print{body{background:#fff;font-size:12px}.toolbar,.btn-add,.btn-del,.no-print,.field .hint{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head,.live{border:1px solid #ddd;box-shadow:none}input,textarea,select{border:0!important;background:transparent!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:12mm}}
+@media(max-width:780px){.live{grid-template-columns:1fr 1fr}.grid2,.grid3,.checks,.sign-grid{grid-template-columns:1fr}}
+.btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
+</style>
+</head>
+<body>
+<div class="toolbar no-print">
+  <div class="ttl">كاش كلينيك — تقرير الجلسة الأولى التشخيصي (تفاعلي)</div>
+  <div class="btns">
+    <button class="btn btn-ghost" onclick="exportCase()">تصدير ملف الحالة</button>
+    <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
+    <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
+    <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s1')">⏭ احفظ وانتقل للتالي</button><button class="btn btn-invoice" onclick="CaseChain.generateInvoice()">🧾 إنشاء فاتورة</button>
+    <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
+  </div>
+</div>
+<div class="wrap">
+  <div class="report-head">
+    <div class="logo"><div class="logo-grid">
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--orange)"></span>
+      <span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span>
+      <span style="background:var(--purple)"></span><span style="background:var(--orange)"></span><span style="background:var(--yellow)"></span><span style="background:var(--blue)"></span>
+      <span style="background:var(--blue)"></span><span style="background:var(--yellow)"></span><span style="background:var(--purple)"></span><span style="background:var(--yellow)"></span>
+    </div></div>
+    <div class="head-text"><div class="ar">كاش كلينيك</div><div class="en">CASH CLINIC</div></div>
+    <div class="head-side"><b>تقرير الجلسة الأولى التشخيصية</b>Session 1 —<br>Diagnostic Report</div>
+  </div>
+  <div class="banner"><h1>تقرير الجلسة الأولى التشخيصية</h1><div class="en">Session 1 — Diagnostic Report</div></div>
+  <div class="secret-top">ملاحظات المستشار سرية — لكاش كلينيك وجمعية بذل الندى فقط.</div>
+
+  <!-- LIVE indicators -->
+  <div class="live">
+    <div class="metric"><div class="mk">مؤشر الوعي المالي</div><div class="mv" id="mAware">—</div></div>
+    <div class="metric"><div class="mk">علامات الخطر السلوكي</div><div class="mv" id="mBehav">0 / 8</div></div>
+    <div class="metric"><div class="mk">تصنيف شدة الحالة</div><div class="mv"><span class="chip color-yellow" id="mSev">—</span></div></div>
+    <div class="metric"><div class="mk">المكوّن السلوكي للتعافي</div><div class="mv" id="mEntry">—</div></div>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <h2><span class="num">١</span> معلومات الجلسة والحالة <span class="en">Session &amp; Case Info</span></h2>
+    <div class="grid3">
+      <div class="field"><label>رقم الحالة <span class="hint">مرجع كاش كلينيك</span></label><input type="text" id="ce_caseNo" placeholder="03"></div>
+      <div class="field"><label>رقم مرجع الجمعية</label><input type="text" id="ce_charityRef" placeholder="544"></div>
+      <div class="field"><label>اسم المستفيد <span class="hint">أول + ثاني</span></label><input type="text" id="ce_name"></div>
+      <div class="field"><label>الجمعية المحوِّلة</label><input type="text" id="ce_charity" value="جمعية بذل الندى الخيرية للأعمال الخيرية"></div>
+      <div class="field"><label>تاريخ الجلسة</label><input type="date" id="ce_date"></div>
+      <div class="field"><label>مدة الجلسة الفعلية</label><input type="text" placeholder="60 دقيقة"></div>
+      <div class="field"><label>المستشار المنفِّذ</label><input type="text" placeholder="سارة الهندي"></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <h2><span class="num">٢</span> ملاحظات المستشار <span class="en">Consultant Notes</span></h2>
+    <div class="sub">٢-١ الانطباع العام والربط الإنساني</div>
+    <div class="field"><label>كيف بدأت الجلسة؟ هل كان المستفيد مرتاحاً؟ متعاوناً؟ متحفظاً؟ ما الذي كسر الجليد؟</label><textarea></textarea></div>
+
+    <div class="sub">٢-٢ المستفيد بكلماته (اقتباسات حرفية)</div>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">سجّل ٣–٥ جمل قالها المستفيد بحرفيتها — تكشف الكثير لاحقاً.</p>
+    <table class="dyn" id="tQuotes"><thead><tr><th>الاقتباس</th><th class="no-print" style="width:8%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('quote')">+ إضافة اقتباس</button>
+
+    <div class="sub">٢-٣ جذور المشكلة كما يراها المستفيد</div>
+    <div class="checks" id="rootsBox">
+      <label><input type="checkbox" class="root"> ضعف الدخل / عدم كفايته</label>
+      <label><input type="checkbox" class="root"> حدث طارئ (مرض، طلاق، وفاة)</label>
+      <label><input type="checkbox" class="root"> ضغط من الأسرة</label>
+      <label><input type="checkbox" class="root"> ثقافة استهلاكية / مظاهر اجتماعية</label>
+      <label><input type="checkbox" class="root"> سهولة الحصول على القروض والبطاقات</label>
+      <label><input type="checkbox" class="root"> نقص في الثقافة المالية</label>
+    </div>
+    <div class="field" style="margin-top:10px"><label>أخرى</label><input type="text"></div>
+
+    <div class="sub">٢-٤ الأنماط المتكررة في حديثه</div>
+    <div class="field"><label>مثال: لوم الآخرين، نفي المسؤولية، التبرير المستمر، التهوين، المثالية…</label><textarea></textarea></div>
+
+    <div class="sub">٢-٥ المحفّزات للسلوك المالي السلبي</div>
+    <div class="field"><label>ما الذي يدفعه للصرف الانفعالي؟ التسوق العاطفي؟ القروض؟</label><textarea></textarea></div>
+
+    <div class="sub">٢-٦ المؤشرات النفسية</div>
+    <div class="checks" id="psyBox">
+      <label><input type="checkbox" class="psy"> علامات قلق واضحة (توتر صوت، حركة يد، تنفّس)</label>
+      <label><input type="checkbox" class="psy"> علامات اكتئاب / فقدان أمل</label>
+      <label><input type="checkbox" class="psy"> إنكار حجم المشكلة</label>
+      <label><input type="checkbox" class="psy"> خجل واضح من حالته</label>
+      <label><input type="checkbox" class="psy"> اعتماد متكرر على المساعدات الخارجية</label>
+      <label><input type="checkbox" class="psy"> ارتياح وانفتاح بمجرد فتح الموضوع</label>
+      <label><input type="checkbox" class="psy"> مقاومة للمواجهة بالأرقام</label>
+    </div>
+
+    <div class="sub">٢-٧ علامات تحذيرية (Red Flags)</div>
+    <p class="hint" style="margin:0 0 6px;color:var(--red)">انتبه لهذي العلامات — تستدعي تقييماً إضافياً أو إحالة.</p>
+    <div class="checks danger" id="redBox">
+      <label><input type="checkbox" class="red"> إشارات إلى رهانات أو قمار</label>
+      <label><input type="checkbox" class="red"> علامات أو ذكر إدمان مواد</label>
+      <label><input type="checkbox" class="red"> علامات إساءة منزلية أو عنف أسري</label>
+      <label><input type="checkbox" class="red"> اضطرابات نفسية تحتاج تدخلاً متخصصاً</label>
+      <label><input type="checkbox" class="red"> احتيال مالي عليه أو منه</label>
+      <label><input type="checkbox" class="red"> قضايا قانونية مالية مفتوحة</label>
+      <label><input type="checkbox" class="red"> إشارات لإيذاء النفس</label>
+      <label><input type="checkbox" class="redNone" id="redNone"> لا توجد علامات تحذيرية</label>
+    </div>
+    <div class="field" style="margin-top:10px"><label>ملاحظات إضافية على العلامات التحذيرية</label><textarea></textarea></div>
+    <div class="warn" id="redWarn">🚩 تنبيه: تم رصد علامة تحذيرية واحدة أو أكثر — تستدعي تقييماً إضافياً أو إحالة لجهة متخصصة، وتُذكر صراحةً في التوصية.</div>
+  </div>
+
+  <!-- 4 behavioral diagnosis -->
+  <div class="section">
+    <h2><span class="num">٤</span> التشخيص السلوكي <span class="en">Behavioral Diagnosis</span></h2>
+    <div class="sub">٤-١ تقييم الوعي المالي</div>
+    <table class="awtable" id="tAware"><thead><tr><th style="width:40%">المهارة</th><th>المستوى</th></tr></thead><tbody></tbody></table>
+    <div class="note">مؤشر الوعي المالي يُحتسب تلقائياً: ضعيف=0، متوسط=1، جيد=2، ممتاز=3 → النسبة من الإجمالي.</div>
+
+    <div class="sub">٤-٢ السلوكيات الإشكالية الملاحظة</div>
+    <div class="checks danger" id="behBox">
+      <label><input type="checkbox" class="beh"> صرف انفعالي / اندفاعي</label>
+      <label><input type="checkbox" class="beh"> الاعتماد المزمن على القروض</label>
+      <label><input type="checkbox" class="beh"> أخذ قرض جديد لسداد قرض قديم</label>
+      <label><input type="checkbox" class="beh"> تجنّب مواجهة الأرقام</label>
+      <label><input type="checkbox" class="beh"> نمط حياة فوق المستوى المالي</label>
+      <label><input type="checkbox" class="beh"> إقراض الآخرين فوق طاقته</label>
+      <label><input type="checkbox" class="beh"> غياب أي تخطيط مسبق</label>
+      <label><input type="checkbox" class="beh"> اعتماد سلبي على المساعدات</label>
+    </div>
+
+    <div class="sub">٤-٣ نقاط القوة في الحالة</div>
+    <div class="field"><label>ما الذي تستطيع البناء عليه في خطة العلاج؟</label><textarea></textarea></div>
+  </div>
+
+  <!-- 5 classification -->
+  <div class="section">
+    <h2><span class="num">٥</span> تصنيف الحالة الأولي <span class="en">Initial Classification</span></h2>
+    <div class="sub">شدة الحالة</div>
+    <div class="radios" id="sevRadios">
+      <label><input type="radio" name="sev" value="0"> بسيطة</label>
+      <label><input type="radio" name="sev" value="1"> متوسطة</label>
+      <label><input type="radio" name="sev" value="2"> معقّدة</label>
+      <label><input type="radio" name="sev" value="3"> حرجة</label>
+    </div>
+    <div class="sub">احتمالية التحسّن مع البرنامج</div>
+    <div class="radios">
+      <label><input type="radio" name="prob" value="عالية"> عالية</label>
+      <label><input type="radio" name="prob" value="متوسطة"> متوسطة</label>
+      <label><input type="radio" name="prob" value="ضعيفة"> ضعيفة</label>
+    </div>
+    <div class="sub">يحتاج تدخلاً خارجياً إضافياً؟</div>
+    <div class="radios">
+      <label><input type="radio" name="ext" value="لا"> لا</label>
+      <label><input type="radio" name="ext" value="دعم نفسي"> دعم نفسي</label>
+      <label><input type="radio" name="ext" value="قانوني"> قانوني</label>
+      <label><input type="radio" name="ext" value="بنكي/إعادة جدولة"> بنكي / إعادة جدولة</label>
+    </div>
+  </div>
+
+  <!-- 6 SMART goals -->
+  <div class="section">
+    <h2><span class="num">٦</span> الأهداف المحددة للحالة <span class="en">SMART Goals</span></h2>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">أهداف ذكية (SMART): محددة، قابلة للقياس، قابلة للتحقيق، واقعية، محددة بوقت.</p>
+    <table class="dyn" id="tSmart"><thead><tr><th style="width:22%">المدى</th><th style="width:48%">الهدف</th><th style="width:24%">معيار النجاح</th><th class="no-print" style="width:6%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('smart')">+ إضافة هدف</button>
+  </div>
+
+  <!-- 7 week plan -->
+  <div class="section">
+    <h2><span class="num">٧</span> خطة العمل للأسبوع القادم <span class="en">Action Plan</span></h2>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">واجبات محددة للمستفيد بين الجلستين.</p>
+    <table class="dyn" id="tWeek"><thead><tr><th style="width:92%">الواجب</th><th class="no-print" style="width:8%"></th></tr></thead><tbody></tbody></table>
+    <button class="btn btn-add no-print" onclick="addRow('week')">+ إضافة واجب</button>
+  </div>
+
+  <!-- 8 recommendation -->
+  <div class="section">
+    <h2><span class="num">٨</span> التوصية للجمعية <span class="en">Recommendation</span></h2>
+    <div class="sub">قرار استكمال البرنامج</div>
+    <div class="radios">
+      <label><input type="radio" name="dec" value="استكمال البرنامج"> استكمال البرنامج</label>
+      <label><input type="radio" name="dec" value="استكمال مع متابعة خاصة"> استكمال مع متابعة خاصة</label>
+      <label><input type="radio" name="dec" value="إحالة لجهة متخصصة"> إحالة لجهة متخصصة</label>
+    </div>
+    <div class="field" style="margin-top:10px"><label>ملخص التوصية للجمعية</label><textarea style="min-height:80px"></textarea></div>
+  </div>
+
+  <!-- 9 signatures -->
+  <div class="section">
+    <h2><span class="num">٩</span> التوقيعات <span class="en">Signatures</span></h2>
+    <div class="sign-grid">
+      <div class="sign-box"><div class="role">المستشار المنفِّذ (سارة)</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+      <div class="sign-box"><div class="role">معتمد كاش كلينيك</div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
+    </div>
+  </div>
+
+  <div class="secret">سرّي — لا يُتداول إلا بين كاش كلينيك وجمعية بذل الندى المحوِّلة.</div>
+  <div class="footer"><div class="contact">@cash.clinic &nbsp;•&nbsp; contact@cashclinic.net &nbsp;•&nbsp; +965 22260820 &nbsp;•&nbsp; www.cashclinic.net</div><div style="margin-top:6px">نشخّص. نعالج. نطوّر حياتك المالية.</div></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const AWARE=['إعداد ميزانية شهرية','متابعة المصاريف','التمييز بين الحاجة والرغبة','عادة الادخار','الوعي بحجم الديون','التخطيط المالي طويل المدى'];
+const LV=[['ضعيف','0'],['متوسط','1'],['جيد','2'],['ممتاز','3']];
+(function(){const tb=document.querySelector('#tAware tbody');AWARE.forEach((s,i)=>{const tr=document.createElement('tr');let lv='<div class="lvl">';LV.forEach(l=>lv+=`<label><input type="radio" name="aw${i}" class="aw" value="${l[1]}"> ${l[0]}</label>`);lv+='</div>';tr.innerHTML=`<td>${s}</td><td>${lv}</td>`;tb.appendChild(tr);});})();
+
+function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove()">حذف</button></td>`}
+const ROWS={
+  quote:()=>`<td><input type="text" placeholder="«...»"></td>${del()}`,
+  smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><input type="text"></td><td><input type="text" placeholder="مثال: 90%"></td>${del()}`,
+  week:()=>`<td><input type="text"></td>${del()}`
+};
+const TBL={quote:'tQuotes',smart:'tSmart',week:'tWeek'};
+function addRow(k,val){const tb=document.querySelector('#'+TBL[k]+' tbody');const tr=document.createElement('tr');tr.innerHTML=ROWS[k]();tb.appendChild(tr);if(val){const i=tr.querySelector('input');if(i)i.value=val;}recalc();return tr;}
+
+function recalc(){
+  // awareness index
+  let sum=0,max=AWARE.length*3,answered=0;
+  AWARE.forEach((s,i)=>{const c=document.querySelector(`input[name="aw${i}"]:checked`);if(c){sum+=parseInt(c.value);answered++;}});
+  const awarePct=answered?Math.round(sum/(answered*3)*100):null;
+  $('mAware').textContent=awarePct!==null?awarePct+'٪':'—';
+  $('mAware').className='mv '+(awarePct===null?'':awarePct>=66?'t-green':awarePct>=40?'t-orange':'t-red');
+  // behavioral risk flags
+  const beh=document.querySelectorAll('.beh:checked').length;
+  $('mBehav').textContent=beh+' / 8';
+  $('mBehav').className='mv '+(beh<=2?'t-green':beh<=4?'t-orange':'t-red');
+  // entry behavioral component (for recovery): blend awareness + inverse risk
+  const awareScore=answered?sum/(answered*3)*100:0;
+  const riskScore=(8-beh)/8*100;
+  const entry=Math.round((awareScore+riskScore)/2);
+  $('mEntry').textContent=(answered||beh)?entry:'—';
+  $('mEntry').className='mv '+(entry<55?'t-red':entry<70?'t-orange':'t-green');
+  // severity chip from radio
+  const sv=document.querySelector('input[name="sev"]:checked');
+  const map=[['بسيطة','color-green'],['متوسطة','color-yellow'],['معقّدة','color-orange'],['حرجة','color-red']];
+  if(sv){const m=map[parseInt(sv.value)];$('mSev').textContent=m[0];$('mSev').className='chip '+m[1];}
+  else{$('mSev').textContent='—';$('mSev').className='chip color-yellow';}
+  // red flag warning
+  const anyRed=document.querySelectorAll('.red:checked').length>0;
+  $('redWarn').classList.toggle('show',anyRed);
+  if(anyRed&&$('redNone').checked)$('redNone').checked=false;
+}
+document.addEventListener('change',recalc);
+document.addEventListener('input',recalc);
+
+function chk(sel){return Array.from(document.querySelectorAll(sel)).map(c=>c.parentNode.textContent.trim());}
+function rget(name){const c=document.querySelector(`input[name="${name}"]:checked`);return c?c.value:'';}
+function collectCase(){
+  const base={caseNo:$('ce_caseNo').value,charityRef:$('ce_charityRef').value,name:$('ce_name').value,charity:$('ce_charity').value};
+  let sum=0,answered=0;AWARE.forEach((s,i)=>{const c=document.querySelector(`input[name="aw${i}"]:checked`);if(c){sum+=parseInt(c.value);answered++;}});
+  const awarePct=answered?Math.round(sum/(answered*3)*100):null;
+  const beh=document.querySelectorAll('.beh:checked').length;
+  const entryBehav=Math.round(((answered?sum/(answered*3)*100:0)+(8-beh)/8*100)/2);
+  const out=window.loadedCase?JSON.parse(JSON.stringify(window.loadedCase)):{};
+  out.schema='cashclinic-case';out.version=3;out.lastSession=1;
+  out.base=Object.assign({},out.base,base);
+  out.session1={
+    roots:chk('.root:checked'),psychFlags:chk('.psy:checked'),redFlags:chk('.red:checked'),
+    awareIndex:awarePct,problemBehaviors:chk('.beh:checked'),behavRisk:beh,entryBehav,
+    severity:rget('sev'),improveProb:rget('prob'),extNeed:rget('ext'),decision:rget('dec')
+  };
+  return out;
+}
+function exportCase(){const d=collectCase();const cn=(d.base.caseNo||'00').replace(/[^0-9A-Za-z]/g,'');const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='case-'+cn+'-session1.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+
+function saveLocal(){try{const d={};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{d['f'+i]=(el.type==='checkbox'||el.type==='radio')?el.checked:el.value;});localStorage.setItem('cc_s1',JSON.stringify(d));alert('تم الحفظ المؤقت.');}catch(e){alert('تعذّر الحفظ.');}}
+function loadLocal(){try{const raw=localStorage.getItem('cc_s1');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,textarea,select').forEach((el,i)=>{if(d['f'+i]!==undefined){if(el.type==='checkbox'||el.type==='radio')el.checked=d['f'+i];else el.value=d['f'+i];}});recalc();}catch(e){}}
+function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_s1');}catch(e){}location.reload();}
+
+['quote','quote','quote','smart','smart','week','week'].forEach(addRow);
+loadLocal();recalc();
+</script>
+<script src="case-chain.js"></script>
+</body>
+</html>
