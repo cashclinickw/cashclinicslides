@@ -75,6 +75,9 @@
           if (o.selected) o.setAttribute("selected", "selected");
           else o.removeAttribute("selected");
         });
+      } else if (el.tagName === "TEXTAREA") {
+        // Textarea content lives between the tags, not in a value attribute.
+        el.textContent = el.value || "";
       } else {
         el.setAttribute("value", el.value || "");
       }

@@ -43,6 +43,7 @@ table.dyn{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
 table.dyn th{background:var(--soft-yellow);font-size:11.5px;font-weight:700;color:#5a4a00;padding:7px 6px;border:1px solid #f0e4bf}
 table.dyn td{border:1px solid var(--line);padding:4px 5px;text-align:center}
 table.dyn td input,table.dyn td select{border:0;background:transparent;font-size:12.5px;padding:5px;width:100%}
+table.dyn td textarea{border:0;background:transparent;font-size:12.5px;padding:5px;width:100%;min-height:38px;resize:vertical;font-family:inherit;line-height:1.5}
 table.dyn td:first-child input{text-align:right}
 .awtable{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}
 .awtable th{background:var(--soft-yellow);font-size:12px;font-weight:700;color:#5a4a00;padding:8px;border:1px solid #f0e4bf}
@@ -63,7 +64,7 @@ table.dyn td:first-child input{text-align:right}
 .color-red{background:var(--red);color:#fff}.color-orange{background:var(--orange);color:#fff}.color-yellow{background:var(--yellow);color:#3a2b00}.color-green{background:var(--green);color:#fff}
 .chip{display:inline-block;padding:3px 12px;border-radius:16px;font-weight:800;font-size:13px}
 .t-red{color:var(--red)}.t-green{color:var(--green)}.t-orange{color:var(--orange)}
-@media print{body{background:#fff;font-size:12px}.toolbar,.btn-add,.btn-del,.no-print,.field .hint{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head,.live{border:1px solid #ddd;box-shadow:none}input,textarea,select{border:0!important;background:transparent!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:12mm}}
+@media print{body{background:#fff;font-size:12px}.toolbar,.btn-add,.btn-del,.no-print,.field .hint{display:none!important}.wrap{max-width:100%;padding:0}.section,.report-head,.live{border:1px solid #ddd;box-shadow:none}input,textarea,select{border:0!important;background:transparent!important}textarea{height:auto!important;min-height:0!important;overflow:visible!important;resize:none!important;white-space:pre-wrap!important}.section{page-break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{size:A4 portrait;margin:12mm}}
 @media(max-width:780px){.live{grid-template-columns:1fr 1fr}.grid2,.grid3,.checks,.sign-grid{grid-template-columns:1fr}}
 .btn-chain{background:var(--green,#2e9e5b);color:#fff}.btn-invoice{background:var(--orange,#F3AF2F);color:#3a2b00}
 .btn-cloud{background:#1a73e8;color:#fff}
@@ -274,12 +275,12 @@ const LV=[['ضعيف','0'],['متوسط','1'],['جيد','2'],['ممتاز','3']]
 
 function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove()">حذف</button></td>`}
 const ROWS={
-  quote:()=>`<td><input type="text" placeholder="«...»"></td>${del()}`,
-  smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><input type="text"></td><td><input type="text" placeholder="مثال: 90%"></td>${del()}`,
-  week:()=>`<td><input type="text"></td>${del()}`
+  quote:()=>`<td><textarea placeholder="«...»" rows="2"></textarea></td>${del()}`,
+  smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><textarea rows="2"></textarea></td><td><input type="text" placeholder="مثال: 90%"></td>${del()}`,
+  week:()=>`<td><textarea rows="2"></textarea></td>${del()}`
 };
 const TBL={quote:'tQuotes',smart:'tSmart',week:'tWeek'};
-function addRow(k,val){const tb=document.querySelector('#'+TBL[k]+' tbody');const tr=document.createElement('tr');tr.innerHTML=ROWS[k]();tb.appendChild(tr);if(val){const i=tr.querySelector('input');if(i)i.value=val;}recalc();return tr;}
+function addRow(k,val){const tb=document.querySelector('#'+TBL[k]+' tbody');const tr=document.createElement('tr');tr.innerHTML=ROWS[k]();tb.appendChild(tr);if(val){const i=tr.querySelector('input,textarea');if(i)i.value=val;}recalc();return tr;}
 
 function recalc(){
   // awareness index
