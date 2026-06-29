@@ -348,7 +348,7 @@ async function cloudSave_s1(btn){
   try{
     var res=await window.CaseCloud.save('s1');
     if(res && res.ok){
-      btn.textContent='✓ تم — يُنشأ PDF في مجلد الحالة';
+      btn.textContent='✓ حُفظت — انتقلت لقائمة «المحاسبة»';
       setTimeout(function(){btn.textContent=old;btn.disabled=false;},4000);
     } else {
       btn.textContent='⚠️ تعذّر الحفظ'; btn.disabled=false;

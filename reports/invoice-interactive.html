@@ -197,7 +197,7 @@ async function cloudSave_invoice(btn){
   try{
     var res=await window.CaseCloud.save('invoice');
     if(res && res.ok){
-      btn.textContent='✓ تم — يُنشأ PDF في مجلد الحالة';
+      btn.textContent='✓ حُفظت الفاتورة — الحالة مكتملة';
       setTimeout(function(){btn.textContent=old;btn.disabled=false;},4000);
     } else {
       btn.textContent='⚠️ تعذّر الحفظ'; btn.disabled=false;

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة الحالات — كاش كلينيك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--soft-purple:#f4ecf6}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+.topbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+.topbar .ttl{font-weight:800;font-size:18px}
+.topbar .sub{font-size:12px;opacity:.85;font-weight:500}
+.topbar .actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-y{background:var(--yellow);color:#3a2b00}.btn-ghost{background:rgba(255,255,255,.16);color:#fff}
+.wrap{max-width:1400px;margin:0 auto;padding:20px 16px 80px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:center}
+.stat .n{font-size:26px;font-weight:800;color:var(--purple)}
+.stat .l{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+.board{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:start}
+@media(max-width:1100px){.board{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.board{grid-template-columns:1fr}}
+.col{background:#eef0f5;border-radius:14px;padding:12px;min-height:120px}
+.col-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 4px}
+.col-title{font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px}
+.col-dot{width:10px;height:10px;border-radius:50%}
+.col-count{background:#fff;border:1px solid var(--line);border-radius:20px;font-size:12px;font-weight:700;padding:1px 9px;color:var(--muted)}
+.case{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px;cursor:pointer;transition:.15s;border-right:4px solid var(--line)}
+.case:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
+.case .nm{font-weight:800;font-size:14px}
+.case .meta{font-size:11.5px;color:var(--muted);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.case .pills{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;background:#eef0f5;color:var(--muted)}
+.pill.done{background:#e3f5ea;color:var(--green)}
+.case .cta{margin-top:9px;font-size:12px;font-weight:700;color:var(--blue)}
+.empty{color:var(--muted);font-size:12.5px;text-align:center;padding:18px 6px}
+.loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.spinner{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{background:#fdecec;border:1px solid #f5c2c2;color:#a11;border-radius:12px;padding:14px 16px;margin:14px 0;font-size:13.5px}
+.done-col{background:#e8f5ec}
+.refresh-note{font-size:11.5px;color:var(--muted);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div>
+    <div class="ttl">لوحة الحالات — كاش كلينيك</div>
+    <div class="sub">سير الحالات عبر التقارير الخمسة · بذل الندى</div>
+  </div>
+  <div class="actions">
+    <a href="../dashboard.html" class="btn btn-ghost">← لوحة التقارير</a>
+    <button class="btn btn-y" onclick="loadBoard()">🔄 تحديث</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div id="stats" class="stats" style="display:none"></div>
+  <div id="board-area">
+    <div class="loading"><div class="spinner"></div>جاري تحميل الحالات من السحابة...</div>
+  </div>
+</div>
+
+<script src="case-cloud.js"></script>
+<script>
+// Stage definitions (enforced order)
+var STAGES = [
+  { key:"s1",      file:"s1-diagnostic.html",      title:"بانتظار التشخيص",     color:"#2578C4", label:"تشخيصية" },
+  { key:"s2",      file:"s2-accounting.html",      title:"بانتظار المحاسبة",    color:"#F3AF2F", label:"محاسبية" },
+  { key:"s3",      file:"s3-followup.html",        title:"بانتظار المتابعة",    color:"#702084", label:"متابعة" },
+  { key:"s4",      file:"s4-final.html",           title:"بانتظار الختامي",     color:"#9b3fb5", label:"ختامي" },
+  { key:"invoice", file:"invoice-interactive.html",title:"بانتظار الفاتورة",    color:"#2e9e5b", label:"فاتورة" },
+];
+var STAGE_LABELS = { s1:"تشخيصية", s2:"محاسبية", s3:"متابعة", s4:"ختامي", invoice:"فاتورة" };
+
+function esc(s){ return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+async function loadBoard(){
+  var area = document.getElementById("board-area");
+  area.innerHTML = '<div class="loading"><div class="spinner"></div>جاري تحميل الحالات من السحابة...</div>';
+  document.getElementById("stats").style.display = "none";
+
+  if(!window.CaseCloud || !CaseCloud.listCases){
+    area.innerHTML = '<div class="err">تعذّر تحميل وحدة السحابة. تأكد من اتصال الإنترنت.</div>';
+    return;
+  }
+
+  var cases = await CaseCloud.listCases();
+  if(cases === null){
+    area.innerHTML = '<div class="err">تعذّر جلب الحالات. قد تحتاج لتسجيل الدخول أو التحقق من إعداد Firebase.</div>';
+    return;
+  }
+
+  // Bucket cases by their nextStage (null = done)
+  var buckets = { s1:[], s2:[], s3:[], s4:[], invoice:[], done:[] };
+  cases.forEach(function(c){
+    if(c.nextStage === null) buckets.done.push(c);
+    else if(buckets[c.nextStage]) buckets[c.nextStage].push(c);
+  });
+
+  // Stats
+  var statsEl = document.getElementById("stats");
+  statsEl.style.display = "grid";
+  statsEl.innerHTML =
+    statCard(cases.length, "إجمالي الحالات") +
+    STAGES.map(function(s){ return statCard(buckets[s.key].length, s.title.replace("بانتظار ","")); }).join("") +
+    statCard(buckets.done.length, "مكتملة");
+
+  // Board columns
+  var html = '<div class="board">';
+  STAGES.forEach(function(s){
+    html += renderCol(s.title, s.color, buckets[s.key], s, false);
+  });
+  // Done column
+  html += renderCol("مكتملة ✓", "#2e9e5b", buckets.done, null, true);
+  html += '</div>';
+  area.innerHTML = html;
+}
+
+function statCard(n, l){
+  return '<div class="stat"><div class="n">'+n+'</div><div class="l">'+esc(l)+'</div></div>';
+}
+
+function renderCol(title, color, list, stage, isDone){
+  var h = '<div class="col'+(isDone?' done-col':'')+'">';
+  h += '<div class="col-head"><div class="col-title"><span class="col-dot" style="background:'+color+'"></span>'+esc(title)+'</div>'+
+       '<span class="col-count">'+list.length+'</span></div>';
+  if(list.length === 0){
+    h += '<div class="empty">لا توجد حالات</div>';
+  } else {
+    list.forEach(function(c){
+      h += renderCase(c, stage, isDone);
+    });
+  }
+  h += '</div>';
+  return h;
+}
+
+function renderCase(c, stage, isDone){
+  var b = c.base || {};
+  var name = b.name || "(بدون اسم)";
+  var num = b.caseNo || c.caseId.replace("case-","");
+  var charityRef = b.charityRef || "";
+
+  // progress pills
+  var order = ["s1","s2","s3","s4","invoice"];
+  var pills = order.map(function(k){
+    var done = c.stages[k];
+    return '<span class="pill'+(done?' done':'')+'">'+STAGE_LABELS[k]+(done?' ✓':'')+'</span>';
+  }).join("");
+
+  var onclick, cta;
+  if(isDone){
+    // Link to Drive folder if available
+    if(c.driveFolderId){
+      onclick = "window.open('https://drive.google.com/drive/folders/"+c.driveFolderId+"','_blank')";
+      cta = "📂 فتح مجلد Drive";
+    } else {
+      onclick = "openReport('invoice-interactive.html','"+c.caseId+"')";
+      cta = "عرض الفاتورة";
+    }
+  } else {
+    onclick = "openReport('"+stage.file+"','"+c.caseId+"')";
+    cta = "▶ بدء "+stage.label;
+  }
+
+  return '<div class="case" style="border-right-color:'+(isDone?"#2e9e5b":stage.color)+'" onclick="'+onclick+'">'+
+    '<div class="nm">'+esc(name)+'</div>'+
+    '<div class="meta"><span># '+esc(num)+'</span>'+(charityRef?'<span>مرجع: '+esc(charityRef)+'</span>':'')+'</div>'+
+    '<div class="pills">'+pills+'</div>'+
+    '<div class="cta">'+cta+'</div>'+
+  '</div>';
+}
+
+function openReport(file, caseId){
+  window.location.href = file + "?case=" + encodeURIComponent(caseId);
+}
+
+// initial load
+loadBoard();
+</script>
+</body>
+</html>

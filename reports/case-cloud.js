@@ -155,7 +155,140 @@
         return null;
       }
     },
+
+    /**
+     * List every case with its completed-stage info, for the pipeline board.
+     * Returns an array of:
+     *   { caseId, base, stages:{s1,s2,s3,s4,invoice}, nextStage, updatedAt }
+     * where stages.* is true when that report is complete.
+     */
+    listCases: async function () {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+
+        var ORDER = ["s1", "s2", "s3", "s4", "invoice"];
+        var casesSnap = await ctx.fs.getDocs(ctx.fs.collection(ctx.db, "cases"));
+
+        var results = [];
+        // For each case, read its sessions subcollection to see what's complete.
+        var caseDocs = [];
+        casesSnap.forEach(function (d) { caseDocs.push(d); });
+
+        for (var i = 0; i < caseDocs.length; i++) {
+          var cdoc = caseDocs[i];
+          var croot = cdoc.data() || {};
+          var caseId = cdoc.id;
+
+          var sessSnap = await ctx.fs.getDocs(
+            ctx.fs.collection(ctx.db, "cases", caseId, "sessions")
+          );
+
+          var stages = { s1: false, s2: false, s3: false, s4: false, invoice: false };
+          var base = croot.base || {};
+          var latest = null;
+          sessSnap.forEach(function (sd) {
+            var v = sd.data() || {};
+            var rt = v.reportType || sd.id;
+            if (v.status === "complete") stages[rt] = true;
+            if (v.base) base = Object.assign({}, base, v.base);
+            if (v.pdfDriveLink) {
+              stages[rt + "_pdf"] = v.pdfDriveLink;
+            }
+          });
+
+          // Determine the next stage that still needs doing (enforced order).
+          var nextStage = null;
+          for (var k = 0; k < ORDER.length; k++) {
+            if (!stages[ORDER[k]]) { nextStage = ORDER[k]; break; }
+          }
+
+          results.push({
+            caseId: caseId,
+            base: base,
+            stages: stages,
+            nextStage: nextStage,                  // null means fully done
+            driveFolderId: croot.driveFolderId || null,
+            lastUpdated: croot.lastUpdated || null,
+          });
+        }
+
+        return results;
+      } catch (e) {
+        console.error("CaseCloud.listCases failed", e);
+        return null;
+      }
+    },
   };
 
   window.CaseCloud = CaseCloud;
+
+  // ---- Auto-load a case from the cloud when opened via ?case=case-XX ----
+  // Base-field aliases (same idea as case-chain), so we can fill any report.
+  var BASE_IDS = {
+    caseNo:      ["ce_caseNo", "cd_caseNo"],
+    charityRef:  ["ce_charityRef", "cd_charityRef"],
+    name:        ["ce_name", "cd_name", "ce_fullName"],
+    charity:     ["ce_charity"],
+    age:         ["ce_age", "cd_age"],
+    marital:     ["ce_marital", "cd_marital"],
+    kids:        ["ce_kids", "cd_kids"],
+    kidsDetails: ["ce_kidsDetails", "cd_kidsDetails"],
+    problem:     ["ce_problem", "cd_problem"],
+  };
+
+  function fillBase(base) {
+    if (!base) return;
+    Object.keys(BASE_IDS).forEach(function (key) {
+      if (base[key] == null || base[key] === "") return;
+      var ids = BASE_IDS[key];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el && !el.value) {
+          el.value = base[key];
+          try { el.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {}
+          try { el.dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {}
+          break;
+        }
+      }
+    });
+  }
+
+  async function autoLoadFromUrl() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var caseId = params.get("case");
+      if (!caseId) return;
+
+      var merged = await CaseCloud.load(caseId);
+      if (!merged) return;
+
+      // Let the report restore its own rich data if it can.
+      window.loadedCase = merged;
+      try {
+        if (typeof window.applyCase === "function") window.applyCase(merged);
+      } catch (e) { console.warn("applyCase failed", e); }
+
+      // Always ensure base identity fields are filled.
+      fillBase(merged.base);
+
+      // Small banner so the consultant knows which case is loaded.
+      var name = (merged.base && merged.base.name) || caseId;
+      var bar = document.createElement("div");
+      bar.textContent = "تم تحميل الحالة: " + name + " (" + caseId + ")";
+      bar.style.cssText =
+        "position:sticky;top:0;z-index:60;background:#2e9e5b;color:#fff;" +
+        "padding:8px 14px;font-family:Tajawal,sans-serif;font-weight:700;" +
+        "font-size:13px;text-align:center;border-radius:0 0 10px 10px;";
+      if (document.body) document.body.insertBefore(bar, document.body.firstChild);
+    } catch (e) {
+      console.error("autoLoadFromUrl failed", e);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(autoLoadFromUrl, 200); });
+  } else {
+    setTimeout(autoLoadFromUrl, 200);
+  }
 })();
