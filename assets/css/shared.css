@@ -1,38 +1,46 @@
 /* ================================================================
-   Cash Clinic - Shared Styles
+   Cash Clinic - Shared Styles  ·  النقش الراقي
+   Rebranded to the Cash Clinic Design System:
+   deep aubergine purple primary, teal + gold accents,
+   IBM Plex Sans Arabic. Old token NAMES are kept so all
+   existing markup re-skins automatically.
    ================================================================ */
 
-:root {
-  /* Brand colors - official palette from Cash Clinic logo */
-  --yellow: #F2C402;
-  --yellow-soft: #FEF7CC;
-  --yellow-section: #FEF3C7;
-  --dark: #1F2937;
-  --gray-900: #111827;
-  --gray-700: #374151;
-  --gray-600: #6B7280;
-  --gray-500: #9CA3AF;
-  --gray-300: #D1D5DB;
-  --gray-200: #E5E7EB;
-  --gray-100: #F3F4F6;
-  --gray-50: #F9FAFB;
-  --accent: #F3AF2F;
-  --accent-deep: #C28617;
-  --orange: #F3AF2F;
-  --orange-soft: #FEF1D5;
-  --purple: #702084;
-  --purple-soft: #F3E7F5;
-  --success: #047857;
-  --success-light: #D1FAE5;
-  --danger: #B91C1C;
-  --danger-light: #FEE2E2;
-  --blue: #2578C4;
-  --blue-soft: #E0EEFC;
-  --blue-light: #DBEAFE;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
 
-  /* Typography */
-  --font-ar: 'Tajawal', 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, sans-serif;
-  --font-en: 'Inter', system-ui, sans-serif;
+:root {
+  /* Brand colors - Cash Clinic Design System */
+  --yellow: #D5A347;          /* gold — premium accent (headers, tables, buttons) */
+  --yellow-soft: #F7ECD3;     /* gold-100 — soft fills, callouts */
+  --yellow-section: #FBF4E2;
+  --dark: #2F1748;            /* deep aubergine purple — headings, dark surfaces */
+  --gray-900: #1B1226;        /* ink */
+  --gray-700: #4A4356;
+  --gray-600: #756E80;
+  --gray-500: #9C95A6;
+  --gray-300: #C7C2CF;
+  --gray-200: #E4E1EA;
+  --gray-100: #F1EFF4;
+  --gray-50: #FAF9FB;
+  --accent: #AD8132;          /* gold-700 — accent text on light */
+  --accent-deep: #8A6627;
+  --orange: #D5A347;
+  --orange-soft: #F7ECD3;
+  --purple: #2F1748;
+  --purple-soft: #F3F0F8;
+  --teal: #2A898C;            /* signature secondary — clarity / stability */
+  --teal-deep: #1F696B;
+  --success: #2A898C;
+  --success-light: #D9ECEC;
+  --danger: #962D38;          /* burgundy */
+  --danger-light: #F6E3E5;
+  --blue: #2D4A6B;
+  --blue-soft: #DCE6F1;
+  --blue-light: #D6ECF7;
+
+  /* Typography — one family does it all (Latin + Arabic) */
+  --font-ar: 'IBM Plex Sans Arabic', 'Segoe UI', system-ui, sans-serif;
+  --font-en: 'IBM Plex Sans Arabic', system-ui, sans-serif;
 
   /* Spacing & Radius */
   --radius-sm: 6px;
@@ -1352,3 +1360,63 @@ textarea.field.tall { min-height: 120px; }
   .landing-footer .footer-col a { color: var(--gray-700); }
   body { background: white !important; }
 }
+
+/* ================================================================
+   Cash Clinic brand overrides  \u00b7  logo mark + accent fixes
+   ================================================================ */
+
+/* Swap the old "\u0643" letter mark for the real Cash Clinic mark */
+.brand-logo {
+  background-color: var(--dark) !important;
+  background-image: url('../brand/mark-cream.png') !important;
+  background-size: 70% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  overflow: hidden;
+}
+.brand-logo img { display: none !important; }
+
+/* ---- Branded report masthead (committee / beneficiary docs) ---- */
+.doc-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: var(--dark) !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  padding: 22px 28px !important;
+  margin-bottom: 32px !important;
+  box-shadow: 0 8px 24px rgba(47,23,72,0.20) !important;
+}
+.doc-brand { gap: 14px !important; }
+.doc-brand-mark {
+  width: 50px !important; height: 50px !important;
+  background: transparent !important;
+  background-image: url('../brand/mark-cream.png') !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 0 !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  overflow: hidden;
+}
+.doc-brand-name { color: var(--cream, #FFE7BC) !important; font-weight: 600 !important; font-size: 21px !important; letter-spacing: -0.01em; }
+.doc-brand-en { color: var(--yellow) !important; font-size: 11px !important; letter-spacing: 0.18em !important; text-transform: uppercase; }
+.doc-subtitle { color: rgba(255,231,188,0.82) !important; align-self: center !important; font-size: 13px !important; line-height: 1.5; }
+.doc-subtitle span { color: var(--yellow) !important; }
+
+/* Primary buttons \u2014 brand gold, purple text, purple-tinted shadow */
+.btn-primary {
+  box-shadow: 0 2px 6px rgba(47,23,72,0.18) !important;
+}
+.btn-primary:hover {
+  background: var(--accent-deep) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 10px rgba(47,23,72,0.24) !important;
+}
+
+/* Brand wordmark refinement */
+.brand-name { letter-spacing: -0.01em; }

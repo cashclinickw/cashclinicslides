@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة الحالات — كاش كلينيك</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--soft-purple:#f4ecf6}
+:root{--purple:#2F1748;--yellow:#D5A347;--blue:#2A898C;--orange:#C9912F;--ink:#1B1226;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--soft-purple:#F3F0F8}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
-body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
-.topbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
+body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+.topbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;box-shadow:0 6px 18px rgba(47,23,72,.18)}
 .topbar .ttl{font-weight:800;font-size:18px}
 .topbar .sub{font-size:12px;opacity:.85;font-weight:500}
 .topbar .actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -68,10 +68,10 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);font
 <script>
 // Stage definitions (enforced order)
 var STAGES = [
-  { key:"s1",      file:"s1-diagnostic.html",      title:"بانتظار التشخيص",     color:"#2578C4", label:"تشخيصية" },
-  { key:"s2",      file:"s2-accounting.html",      title:"بانتظار المحاسبة",    color:"#F3AF2F", label:"محاسبية" },
-  { key:"s3",      file:"s3-followup.html",        title:"بانتظار المتابعة",    color:"#702084", label:"متابعة" },
-  { key:"s4",      file:"s4-final.html",           title:"بانتظار الختامي",     color:"#9b3fb5", label:"ختامي" },
+  { key:"s1",      file:"s1-diagnostic.html",      title:"بانتظار التشخيص",     color:"#2A898C", label:"تشخيصية" },
+  { key:"s2",      file:"s2-accounting.html",      title:"بانتظار المحاسبة",    color:"#C9912F", label:"محاسبية" },
+  { key:"s3",      file:"s3-followup.html",        title:"بانتظار المتابعة",    color:"#2F1748", label:"متابعة" },
+  { key:"s4",      file:"s4-final.html",           title:"بانتظار الختامي",     color:"#6E4A8E", label:"ختامي" },
   { key:"invoice", file:"invoice-interactive.html",title:"بانتظار الفاتورة",    color:"#2e9e5b", label:"فاتورة" },
 ];
 var STAGE_LABELS = { s1:"تشخيصية", s2:"محاسبية", s3:"متابعة", s4:"ختامي", invoice:"فاتورة" };

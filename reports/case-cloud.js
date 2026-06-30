@@ -280,8 +280,8 @@
       var bar = document.createElement("div");
       bar.textContent = "تم تحميل الحالة: " + name + " (" + caseId + ")";
       bar.style.cssText =
-        "position:sticky;top:0;z-index:60;background:#2e9e5b;color:#fff;" +
-        "padding:8px 14px;font-family:Tajawal,sans-serif;font-weight:700;" +
+        "position:sticky;top:0;z-index:60;background:#2A898C;color:#fff;" +
+        "padding:8px 14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;" +
         "font-size:13px;text-align:center;border-radius:0 0 10px 10px;";
       if (document.body) document.body.insertBefore(bar, document.body.firstChild);
     } catch (e) {
