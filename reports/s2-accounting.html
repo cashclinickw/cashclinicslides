@@ -238,6 +238,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
       <div class="field"><label>العمر</label><input type="text" id="cd_age"></div>
       <div class="field"><label>الحالة الاجتماعية</label><input type="text" id="cd_marital"></div>
       <div class="field"><label>عدد الأبناء</label><input type="text" id="cd_kids"></div>
+      <div class="field"><label>الحالة الوظيفية</label><input type="text" id="cd_employment" placeholder="موظف / متقاعد / عاطل / أعمال حرة…"></div>
     </div>
     <div class="field" style="margin-top:12px"><label>أعمار الأبناء ومهنهم وحالتهم الاجتماعية</label><textarea id="cd_kidsDetails" placeholder="لكل ابن: العمر — الحالة الاجتماعية — المهنة"></textarea></div>
     <div class="field" style="margin-top:12px"><label>المشكلة التي يعاني منها المستفيد</label><textarea id="cd_problem"></textarea></div>
@@ -247,10 +248,13 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
   <div class="section">
     <h2><span class="num">٣</span> مصادر الدخل الشهرية <span class="en">Monthly Income</span></h2>
     <table class="dyn" id="tIncome">
-      <thead><tr><th style="width:24%">المصدر</th><th style="width:22%">جهة العمل</th><th style="width:22%">تاريخ نزوله</th><th style="width:22%">المبلغ (د.ك)</th><th class="no-print" style="width:10%"></th></tr></thead>
+      <thead><tr><th style="width:18%">المصدر</th><th style="width:15%">جهة العمل</th><th style="width:12%">تاريخ نزوله</th><th style="width:15%">المبلغ الثابت (د.ك)</th><th style="width:15%">مبلغ غير ثابت / متقطع (د.ك)</th><th style="width:17%">ملاحظات</th><th class="no-print" style="width:8%"></th></tr></thead>
       <tbody></tbody>
-      <tfoot><tr class="tot-row"><td colspan="3">إجمالي الدخل الشهري</td><td id="incomeTotal">0</td><td class="no-print"></td></tr></tfoot>
+      <tfoot>
+        <tr class="tot-row"><td colspan="3">إجمالي الدخل الشهري (الثابت)</td><td id="incomeTotal">0</td><td colspan="2" id="incomeIntermittentNote" style="text-align:right;font-weight:400;color:var(--cc-grey-500)">—</td><td class="no-print"></td></tr>
+      </tfoot>
     </table>
+    <div class="note" id="intermittentHint" style="display:none">💡 المبلغ المتقطع (غير الثابت) لا يُحتسب ضمن إجمالي الدخل الشهري الثابت. احتمالية زيادة الدخل تكون أكثر إذا تم تحصيل هذا المبلغ المتقطع.</div>
     <button class="btn btn-add no-print" onclick="addRow('income')">+ إضافة مصدر دخل</button>
   </div>
 
@@ -263,7 +267,8 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
       <tfoot><tr class="tot-row"><td colspan="2">إجمالي الأصول</td><td id="assetsTotal">0</td><td class="no-print"></td></tr></tfoot>
     </table>
     <button class="btn btn-add no-print" onclick="addRow('assets')">+ إضافة أصل</button>
-    <div class="note">إن لم تكن هناك أصول، اكتب «لا يوجد أصول» في أول صف.</div>
+    <button class="btn btn-add no-print" onclick="toggleNone('assets')" id="noAssetsBtn" style="background:var(--cc-grey-100);color:var(--cc-grey-700);border-color:var(--cc-grey-300)">☐ عدم وجود أي أصل يذكر</button>
+    <div class="note">إن لم تكن هناك أصول، اكتب «لا يوجد أصول» في أول صف، أو اضغط زر «عدم وجود أي أصل يذكر».</div>
   </div>
 
   <!-- 5 -->
@@ -291,6 +296,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
     </table>
     </div>
     <button class="btn btn-add no-print" onclick="addRow('debts')">+ إضافة دين</button>
+    <button class="btn btn-add no-print" onclick="toggleNone('debts')" id="noDebtsBtn" style="background:var(--cc-grey-100);color:var(--cc-grey-700);border-color:var(--cc-grey-300)">☐ لا يوجد ديون</button>
     <div class="note">«سنوات للوصول لصفر» تُحتسب تلقائياً = المتبقي ÷ (القسط الشهري × 12). الأقساط غير الثابتة أو المجهولة تُستبعد من نسبة عبء الدين الثابتة ومن المصروفات الثابتة.</div>
     <div class="warn" id="courtWarn">⚖️ تنبيه: يوجد التزام واحد أو أكثر عليه قضية قانونية. يُعالَج كأولوية وفق وضعه القانوني (تنفيذ / رفض دعوى / تسوية)، ويُوضَّح في الملاحظات.</div>
     <div class="warn" id="unstableWarn">↔️ تنبيه: يوجد دين يُدفع بشكل غير ثابت حسب المقدرة والوفرة الشهرية. لم يُحتسب ضمن نسبة عبء الدين الثابتة، لكنه يمثّل عجزاً كامناً يظهر في الأشهر الضعيفة.</div>
@@ -298,11 +304,11 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
 
     <div class="sub">٥-٢ الجمعيات / القطيات <span style="color:var(--muted);font-weight:400">(Savings Circles)</span></div>
     <table class="dyn" id="tCircles">
-      <thead><tr><th style="width:22%">اسم الجمعية</th><th style="width:14%">القسط الشهري</th><th style="width:14%">مبلغ الاستلام</th><th style="width:16%">تاريخ الاستلام المتوقع</th><th style="width:12%">تاريخ الانتهاء</th><th style="width:14%">تم الاستلام؟</th><th class="no-print" style="width:8%"></th></tr></thead>
+      <thead><tr><th style="width:16%">اسم الجمعية</th><th style="width:11%">القسط الشهري</th><th style="width:11%">مبلغ الاستلام</th><th style="width:13%">تاريخ بداية القسط</th><th style="width:13%">تاريخ الاستلام المتوقع</th><th style="width:10%">تاريخ الانتهاء</th><th style="width:10%">تم الاستلام؟</th><th style="width:12%">ملاحظات</th><th class="no-print" style="width:6%"></th></tr></thead>
       <tbody></tbody>
     </table>
     <button class="btn btn-add no-print" onclick="addRow('circles')">+ إضافة جمعية</button>
-    <div class="note">إن لم تُستلَم الجمعية بعد، يُحتسب قسطها تلقائياً ضمن المصروفات الشهرية. وعند الاستلام يُعدّ دفعة كبيرة قابلة للتوجيه نحو إدارة الديون أو أهداف الميزانية.</div>
+    <div class="note">إن لم تُستلَم الجمعية بعد، يُحتسب قسطها تلقائياً ضمن المصروفات الشهرية. أمّا إذا كان تاريخ بداية القسط مستقبلياً (لم يبدأ السداد بعد) فلا يُحتسب قسطها ضمن مجموع الأقساط والالتزامات الشهرية الكلية حتى يبدأ. وعند الاستلام تُعدّ دفعة كبيرة قابلة للتوجيه نحو إدارة الديون أو أهداف الميزانية.</div>
 
     <div class="sub">٥-٣ المصروفات الثابتة الشهرية الأخرى <span style="color:var(--muted);font-weight:400">(Fixed Monthly Expenses)</span></div>
     <table class="dyn" id="tFixed">
@@ -346,7 +352,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
           <option value="season">تجميد المصاريف الموسمية (رمضان/مدارس/أعياد)</option>
         </select>
       </div>
-      <div class="field"><label>الفائض الشهري («مسرح اللعب المالي» بعد الثابتة)</label><input type="text" id="playMoney" readonly style="background:#f3f1f7"></div>
+      <div class="field"><label>الفائض الشهري («مسرح اللعب المالي» بعد الثابتة)</label><input type="text" id="playMoney" readonly style="background:#f3f1f7"><div class="note" id="surplusFormula" style="margin-top:6px;line-height:1.9">المعادلة: <b>الفائض = إجمالي الدخل الثابت − (المصروفات الثابتة + المصروفات المتغيرة)</b></div></div>
     </div>
     <div class="guide" id="budgetGuide"></div>
 
@@ -364,7 +370,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
     <div class="previews" id="stmtPreviews"></div>
     <div class="field" style="margin-top:10px"><label>تعليق المستشار على كشف الحساب</label><textarea placeholder="أنماط الصرف المتغير، أبرز التسريبات المالية، البنود القابلة للتقليص…"></textarea></div>
 
-    <div class="sub">جدول البنود المتغيرة</div>
+    <div class="sub">جدول المصروفات المتغيرة</div>
     <table class="dyn" id="tBudget">
       <thead><tr><th style="width:46%">البند</th><th style="width:24%">المبلغ المخصص (د.ك)</th><th style="width:22%">نسبته من الدخل</th><th class="no-print" style="width:8%"></th></tr></thead>
       <tbody></tbody>
@@ -494,12 +500,12 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
 
 <script>
 const ROWS={
-  income:()=>`<td><input type="text" placeholder="الراتب التقاعدي…"></td><td><input type="text"></td><td><input type="text" placeholder="9 الشهر"></td><td><input type="number" class="num" data-k="income" placeholder="0"></td>${del()}`,
+  income:()=>`<td><input type="text" placeholder="الراتب التقاعدي…"></td><td><input type="text"></td><td><input type="text" placeholder="9 الشهر"></td><td><input type="number" class="num" data-k="income" placeholder="0"></td><td><input type="number" class="incInterm" placeholder="0"></td><td><input type="text" placeholder="ملاحظة…"></td>${del()}`,
   assets:()=>`<td><input type="text"></td><td><input type="text"></td><td><input type="number" class="num" data-k="assets" placeholder="0"></td>${del()}`,
   debts:()=>`<td><input type="text"></td><td><input type="number" class="dRemain" placeholder="0"></td><td><input type="number" class="dInst" placeholder="0"></td><td><input type="text" placeholder="—"></td><td class="auto-cell dYears">—</td><td><input type="text" placeholder="1،2،3"></td><td class="flag-cell"><input type="checkbox" class="dCourt"></td><td class="flag-cell"><input type="checkbox" class="dUnstable"></td><td class="flag-cell"><input type="checkbox" class="dUnknown"></td><td><input type="text"></td>${del()}`,
-  circles:()=>`<td><input type="text"></td><td><input type="number" class="cMonthly" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><input type="text"></td><td><input type="text"></td><td class="flag-cell"><input type="checkbox" class="cReceived"></td>${del()}`,
+  circles:()=>`<td><input type="text"></td><td><input type="number" class="cMonthly" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><input type="date" class="cStart"></td><td><input type="text"></td><td><input type="text"></td><td class="flag-cell"><input type="checkbox" class="cReceived"></td><td><input type="text" placeholder="ملاحظة…"></td>${del()}`,
   fixed:()=>`<td><input type="text"></td><td><input type="number" class="num" data-k="fixed" placeholder="0"></td><td><input type="text"></td>${del()}`,
-  goals:()=>`<td><input type="text"></td><td><input type="number" class="gAmount" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><select><option value="">—</option><option>الراتب</option><option>زيادة الدخل</option><option>قرض</option></select></td><td><input type="number" class="gReal" placeholder="0"></td><td class="auto-cell gMonthly">—</td>${del()}`,
+  goals:()=>`<td><input type="text"></td><td><input type="number" class="gAmount" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><select class="gFund" onchange="toggleGoalOther(this)"><option value="">—</option><option>الراتب</option><option>زيادة الدخل</option><option>قرض</option><option>أخرى</option></select><input type="text" class="gFundOther" placeholder="اكتب المصدر..." style="display:none;margin-top:5px"></td><td><input type="number" class="gReal" placeholder="0"></td><td class="auto-cell gMonthly">—</td>${del()}`,
   budget:()=>`<td><input type="text"></td><td><input type="number" class="num" data-k="var" placeholder="0"></td><td class="pctCell">—</td>${del()}`
 };
 function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove();recalc()">حذف</button></td>`}
@@ -509,6 +515,29 @@ function addRow(kind){
   const tr=document.createElement('tr');tr.innerHTML=ROWS[kind]();tb.appendChild(tr);
   tr.querySelectorAll('input,select').forEach(i=>{i.addEventListener('input',recalc);i.addEventListener('change',recalc);});
   recalc();
+}
+// "لا يوجد" toggle for assets / debts
+const NONE_STATE={assets:false,debts:false};
+function toggleNone(kind){
+  NONE_STATE[kind]=!NONE_STATE[kind];
+  const on=NONE_STATE[kind];
+  const tbl=document.getElementById(kind==='assets'?'tAssets':'tDebts');
+  const btn=document.getElementById(kind==='assets'?'noAssetsBtn':'noDebtsBtn');
+  const label=kind==='assets'?'عدم وجود أي أصل يذكر':'لا يوجد ديون';
+  if(on){
+    tbl.style.opacity='.4'; tbl.style.pointerEvents='none';
+    tbl.querySelectorAll('input').forEach(i=>{if(i.type!=='checkbox')i.value='';else i.checked=false;});
+    btn.innerHTML='☑ '+label; btn.style.background='var(--cc-teal-100)'; btn.style.color='var(--cc-teal-700)'; btn.style.borderColor='var(--cc-teal-300)';
+  } else {
+    tbl.style.opacity=''; tbl.style.pointerEvents='';
+    btn.innerHTML='☐ '+label; btn.style.background='var(--cc-grey-100)'; btn.style.color='var(--cc-grey-700)'; btn.style.borderColor='var(--cc-grey-300)';
+  }
+  recalc();
+}
+// "أخرى" funding source note in goals
+function toggleGoalOther(sel){
+  const other=sel.parentNode.querySelector('.gFundOther');
+  if(other) other.style.display=(sel.value==='أخرى')?'block':'none';
 }
 const num=el=>{if(!el)return 0;const v=parseFloat(el.value);return isNaN(v)?0:v;};
 const fmt=n=>Math.round(n).toLocaleString('en-US');
@@ -537,7 +566,17 @@ function recalc(){
 
   document.querySelectorAll('#tCircles tbody tr').forEach(tr=>{
     const m=num(tr.querySelector('.cMonthly'));
-    if(!tr.querySelector('.cReceived').checked) circleUnreceived+=m;
+    const startEl=tr.querySelector('.cStart');
+    const startVal=startEl?startEl.value:'';
+    let futureStart=false;
+    if(startVal){
+      const today=new Date(); today.setHours(0,0,0,0);
+      const sd=new Date(startVal);
+      if(!isNaN(sd)&&sd>today) futureStart=true;
+    }
+    // count installment only if not yet received AND its payment has actually started
+    if(!tr.querySelector('.cReceived').checked && !futureStart) circleUnreceived+=m;
+    if(startEl){ startEl.style.borderColor=futureStart?'var(--cc-gold)':''; }
   });
 
   document.querySelectorAll('#tGoals tbody tr').forEach(tr=>{
@@ -547,6 +586,17 @@ function recalc(){
 
   const fixedTotal=fixedOther+installSum+circleUnreceived;
   $('incomeTotal').textContent=fmt(income);
+  // intermittent (non-fixed) income — shown separately, NOT added to the fixed total
+  let intermittent=0;
+  document.querySelectorAll('#tIncome .incInterm').forEach(e=>intermittent+=num(e));
+  const intEl=$('incomeIntermittentNote'); const intHint=$('intermittentHint');
+  if(intermittent>0){
+    intEl.innerHTML='+ مبلغ متقطع (غير ثابت): <b style="color:var(--cc-gold-700)">'+fmt(intermittent)+' د.ك</b>';
+    if(intHint) intHint.style.display='block';
+  } else {
+    intEl.textContent='—';
+    if(intHint) intHint.style.display='none';
+  }
   $('assetsTotal').textContent=fmt(assets);
   $('debtRemainTotal').textContent=fmt(debtRemain);
   $('debtInstallTotal').textContent=fmt(installSum);
@@ -565,6 +615,12 @@ function recalc(){
   $('surplusOut').className='mv '+(surplus<0?'t-red':surplus>0?'t-green':'');
   $('mSurplus').textContent=fmt(surplus);$('mSurplus').className='mv '+(surplus<0?'t-red':surplus>0?'t-green':'');
   $('playMoney').value=fmt(surplus)+' د.ك';
+  const sf=$('surplusFormula');
+  if(sf){
+    sf.innerHTML='المعادلة: <b>الفائض = الدخل الثابت − (المصروفات الثابتة + المصروفات المتغيرة)</b><br>'+
+      '<span style="color:var(--cc-purple-700)">= '+fmt(income)+' − ('+fmt(fixedTotal)+' + '+fmt(varExp)+') = '+
+      '<b style="color:'+(surplus<0?'var(--cc-burgundy)':'var(--cc-teal-700)')+'">'+fmt(surplus)+' د.ك</b></span>';
+  }
 
   let dti=null,dtiTxt='—';
   if(income>0&&installSum>0){dti=installSum/income*100;dtiTxt=dti.toFixed(1)+'٪';}
@@ -708,7 +764,12 @@ function collectCaseData(){
   document.querySelectorAll('#tFixed .num').forEach(e=>fixedOther+=nv(e));
   document.querySelectorAll('#tBudget .num').forEach(e=>varExp+=nv(e));
   document.querySelectorAll('#tDebts tbody tr').forEach(tr=>{const r=nv(tr.querySelector('.dRemain')),i=nv(tr.querySelector('.dInst')),u=tr.querySelector('.dUnknown').checked,s=tr.querySelector('.dUnstable').checked;debtRemain+=r;if(u)hasUnknown=true;if(!u&&!s)installSum+=i;});
-  document.querySelectorAll('#tCircles tbody tr').forEach(tr=>{if(!tr.querySelector('.cReceived').checked)circleUnreceived+=nv(tr.querySelector('.cMonthly'));});
+  document.querySelectorAll('#tCircles tbody tr').forEach(tr=>{
+    const startEl=tr.querySelector('.cStart');const startVal=startEl?startEl.value:'';
+    let futureStart=false;
+    if(startVal){const t=new Date();t.setHours(0,0,0,0);const sd=new Date(startVal);if(!isNaN(sd)&&sd>t)futureStart=true;}
+    if(!tr.querySelector('.cReceived').checked && !futureStart)circleUnreceived+=nv(tr.querySelector('.cMonthly'));
+  });
   const fixedTotal=fixedOther+installSum+circleUnreceived;
   const surplus=income-(fixedTotal+varExp);
   const monthlyExp=fixedTotal+varExp;
@@ -719,17 +780,17 @@ function collectCaseData(){
     schema:'cashclinic-case', version:3, lastSession:2,
     base:Object.assign({}, (window.loadedCase&&window.loadedCase.base)||{}, {
       caseNo:v($('cd_caseNo')),charityRef:v($('cd_charityRef')),name:v($('cd_name')),
-      age:v($('cd_age')),marital:v($('cd_marital')),kids:v($('cd_kids')),
+      age:v($('cd_age')),marital:v($('cd_marital')),kids:v($('cd_kids')),employment:v($('cd_employment')),
       kidsDetails:v($('cd_kidsDetails')),problem:v($('cd_problem'))
     }),
     finance:{income,fixedTotal,varExp,debtRemain,installSum,assets,surplus,dti,resilience:resil,hasUnknown,behavFlags:flags},
     tables:{
-      income:rowsOf('#tIncome',tr=>{const i=tr.querySelectorAll('input');return i.length?{source:v(i[0]),job:v(i[1]),date:v(i[2]),amount:nv(i[3])}:null;}),
+      income:rowsOf('#tIncome',tr=>{const i=tr.querySelectorAll('input');return i.length?{source:v(i[0]),job:v(i[1]),date:v(i[2]),amount:nv(tr.querySelector('.num')),intermittent:nv(tr.querySelector('.incInterm')),notes:v(i[i.length-1])}:null;}),
       assets:rowsOf('#tAssets',tr=>{const i=tr.querySelectorAll('input');return i.length?{type:v(i[0]),notes:v(i[1]),value:nv(i[2])}:null;}),
       debts:rowsOf('#tDebts',tr=>{const i=tr.querySelectorAll('input');return {entity:v(i[0]),remaining:nv(tr.querySelector('.dRemain')),installment:nv(tr.querySelector('.dInst')),endDate:v(i[3]),priority:v(i[4]),court:tr.querySelector('.dCourt').checked,unstable:tr.querySelector('.dUnstable').checked,unknown:tr.querySelector('.dUnknown').checked,notes:v(i[i.length-1])};}),
-      circles:rowsOf('#tCircles',tr=>{const i=tr.querySelectorAll('input');return {name:v(i[0]),monthly:nv(tr.querySelector('.cMonthly')),receipt:nv(i[2]),receiptDate:v(i[3]),endDate:v(i[4]),received:tr.querySelector('.cReceived').checked};}),
+      circles:rowsOf('#tCircles',tr=>{const i=tr.querySelectorAll('input');return {name:v(i[0]),monthly:nv(tr.querySelector('.cMonthly')),receipt:nv(i[2]),startDate:v(tr.querySelector('.cStart')),receiptDate:v(i[4]),endDate:v(i[5]),received:tr.querySelector('.cReceived').checked,notes:v(i[i.length-1])};}),
       fixed:rowsOf('#tFixed',tr=>{const i=tr.querySelectorAll('input');return {item:v(i[0]),amount:nv(i[1]),notes:v(i[2])};}),
-      goals:rowsOf('#tGoals',tr=>{const i=tr.querySelectorAll('input');return {goal:v(i[0]),amount:nv(i[1]),desiredMonths:nv(i[2]),fundSource:v(tr.querySelector('select')),realMonths:nv(tr.querySelector('.gReal'))};}),
+      goals:rowsOf('#tGoals',tr=>{const i=tr.querySelectorAll('input');const fs=v(tr.querySelector('.gFund'));const fo=v(tr.querySelector('.gFundOther'));return {goal:v(i[0]),amount:nv(i[1]),desiredMonths:nv(i[2]),fundSource:fs==='أخرى'&&fo?('أخرى: '+fo):fs,realMonths:nv(tr.querySelector('.gReal'))};}),
       variable:rowsOf('#tBudget',tr=>{const i=tr.querySelectorAll('input');return {item:v(i[0]),amount:nv(i[1])};})
     }
   });
@@ -739,7 +800,7 @@ function importCase(input){
   r.onload=e=>{try{const d=JSON.parse(e.target.result);window.loadedCase=d;const b=d.base||{};
     const set=(id,val)=>{const el=$(id);if(el&&val)el.value=val;};
     set('cd_caseNo',b.caseNo);set('cd_charityRef',b.charityRef);set('cd_name',b.name);
-    set('cd_age',b.age);set('cd_marital',b.marital);set('cd_kids',b.kids);set('cd_kidsDetails',b.kidsDetails);set('cd_problem',b.problem);
+    set('cd_age',b.age);set('cd_marital',b.marital);set('cd_kids',b.kids);set('cd_employment',b.employment);set('cd_kidsDetails',b.kidsDetails);set('cd_problem',b.problem);
     recalc();alert('تم استيراد بيانات العميلة من الجلسة السابقة.');
   }catch(err){alert('تعذّر قراءة الملف.');}};
   r.readAsText(file);

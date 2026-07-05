@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة الحالات — كاش كلينيك</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--purple:#2F1748;--yellow:#D5A347;--blue:#2A898C;--orange:#C9912F;--ink:#1B1226;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--soft-purple:#F3F0F8}
+:root{--purple:#702084;--yellow:#F2C402;--blue:#2578C4;--orange:#F3AF2F;--ink:#1f2430;--muted:#6b7280;--line:#e6e8ee;--bg:#f4f5f8;--card:#fff;--green:#2e9e5b;--soft-purple:#f4ecf6}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
-body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
-.topbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;box-shadow:0 6px 18px rgba(47,23,72,.18)}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);font-size:15px}
+.topbar{position:sticky;top:0;z-index:50;background:var(--purple);color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;box-shadow:0 6px 18px rgba(112,32,132,.18)}
 .topbar .ttl{font-weight:800;font-size:18px}
 .topbar .sub{font-size:12px;opacity:.85;font-weight:500}
 .topbar .actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -36,6 +36,19 @@ body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:va
 .pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;background:#eef0f5;color:var(--muted)}
 .pill.done{background:#e3f5ea;color:var(--green)}
 .case .cta{margin-top:9px;font-size:12px;font-weight:700;color:var(--blue)}
+.case .acts{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:9px}
+.case .acts button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;transition:.12s}
+.case .acts button:hover{transform:translateY(-1px)}
+.case .acts .a-edit{color:var(--blue);border-color:#bfe0e0}
+.case .acts .a-edit:hover{background:#e6f4f4}
+.case .acts .a-move{color:#8a6a15;border-color:#ecd9a8}
+.case .acts .a-move:hover{background:#fbf3df}
+.case .acts .a-del{color:var(--red);border-color:#e6bcc0}
+.case .acts .a-del:hover{background:#fbe9eb}
+.movebar{display:none;gap:4px;margin-top:8px;flex-wrap:wrap}
+.movebar.show{display:flex}
+.movebar button{border:1px dashed var(--line);background:#fafafc;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--muted)}
+.movebar button:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
 .empty{color:var(--muted);font-size:12.5px;text-align:center;padding:18px 6px}
 .loading{text-align:center;padding:60px 20px;color:var(--muted)}
 .spinner{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
@@ -68,10 +81,10 @@ body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:va
 <script>
 // Stage definitions (enforced order)
 var STAGES = [
-  { key:"s1",      file:"s1-diagnostic.html",      title:"بانتظار التشخيص",     color:"#2A898C", label:"تشخيصية" },
-  { key:"s2",      file:"s2-accounting.html",      title:"بانتظار المحاسبة",    color:"#C9912F", label:"محاسبية" },
-  { key:"s3",      file:"s3-followup.html",        title:"بانتظار المتابعة",    color:"#2F1748", label:"متابعة" },
-  { key:"s4",      file:"s4-final.html",           title:"بانتظار الختامي",     color:"#6E4A8E", label:"ختامي" },
+  { key:"s1",      file:"s1-diagnostic.html",      title:"بانتظار التشخيص",     color:"#2578C4", label:"تشخيصية" },
+  { key:"s2",      file:"s2-accounting.html",      title:"بانتظار المحاسبة",    color:"#F3AF2F", label:"محاسبية" },
+  { key:"s3",      file:"s3-followup.html",        title:"بانتظار المتابعة",    color:"#702084", label:"متابعة" },
+  { key:"s4",      file:"s4-final.html",           title:"بانتظار الختامي",     color:"#9b3fb5", label:"ختامي" },
   { key:"invoice", file:"invoice-interactive.html",title:"بانتظار الفاتورة",    color:"#2e9e5b", label:"فاتورة" },
 ];
 var STAGE_LABELS = { s1:"تشخيصية", s2:"محاسبية", s3:"متابعة", s4:"ختامي", invoice:"فاتورة" };
@@ -167,12 +180,57 @@ function renderCase(c, stage, isDone){
     cta = "▶ بدء "+stage.label;
   }
 
+  // which stage to open for editing: the last completed stage, else the next stage
+  var editStage = null;
+  for(var ei=order.length-1; ei>=0; ei--){ if(c.stages[order[ei]]){ editStage = order[ei]; break; } }
+  var editFile = editStage ? (STAGE_FILES[editStage]) : stage.file;
+  var editCaseId = c.caseId;
+
+  // move targets = all stages (move case back/forward to any stage)
+  var moveBtns = order.map(function(k){
+    return '<button onclick="doMove(event,\''+c.caseId+'\',\''+k+'\')">'+STAGE_LABELS[k]+'</button>';
+  }).join("");
+
+  var acts =
+    '<div class="acts" onclick="event.stopPropagation()">'+
+      '<button class="a-edit" onclick="openReport(\''+editFile+'\',\''+editCaseId+'\')">✎ فتح للتعديل</button>'+
+      '<button class="a-move" onclick="toggleMove(event,this)">⇄ نقل</button>'+
+      '<button class="a-del" onclick="doDelete(event,\''+c.caseId+'\',\''+esc(name).replace(/'/g,"")+'\')">🗑 حذف</button>'+
+    '</div>'+
+    '<div class="movebar" onclick="event.stopPropagation()"><span style="font-size:11px;color:var(--muted);align-self:center">انقل إلى:</span>'+moveBtns+'</div>';
+
   return '<div class="case" style="border-right-color:'+(isDone?"#2e9e5b":stage.color)+'" onclick="'+onclick+'">'+
     '<div class="nm">'+esc(name)+'</div>'+
     '<div class="meta"><span># '+esc(num)+'</span>'+(charityRef?'<span>مرجع: '+esc(charityRef)+'</span>':'')+'</div>'+
     '<div class="pills">'+pills+'</div>'+
     '<div class="cta">'+cta+'</div>'+
+    acts+
   '</div>';
+}
+
+// stage -> report file (for edit-open)
+var STAGE_FILES = { s1:"s1-diagnostic.html", s2:"s2-accounting.html", s3:"s3-followup.html", s4:"s4-final.html", invoice:"invoice-interactive.html" };
+
+function toggleMove(ev, btn){
+  ev.stopPropagation();
+  var bar = btn.closest(".case").querySelector(".movebar");
+  bar.classList.toggle("show");
+}
+
+async function doMove(ev, caseId, targetStage){
+  ev.stopPropagation();
+  if(!confirm("نقل الحالة إلى مرحلة «"+STAGE_LABELS[targetStage]+"»؟\nسيتم حذف بيانات هذه المرحلة وما بعدها لإعادة الحالة إليها."))return;
+  var res = await CaseCloud.moveToStage(caseId, targetStage);
+  if(res && res.ok){ loadBoard(); }
+  else { alert("تعذّر النقل: "+(res&&res.error||"خطأ غير معروف")); }
+}
+
+async function doDelete(ev, caseId, name){
+  ev.stopPropagation();
+  if(!confirm("حذف الحالة «"+name+"» نهائياً من اللوحة؟\n(ملفات Drive/PDF المحفوظة سابقاً تبقى، لكن تختفي الحالة من اللوحة.)"))return;
+  var res = await CaseCloud.deleteCase(caseId);
+  if(res && res.ok){ loadBoard(); }
+  else { alert("تعذّر الحذف: "+(res&&res.error||"خطأ غير معروف")); }
 }
 
 function openReport(file, caseId){

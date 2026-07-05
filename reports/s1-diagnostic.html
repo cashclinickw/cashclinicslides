@@ -30,6 +30,7 @@ table.awtable td{border:1px solid var(--cc-grey-200);padding:7px 9px}
 table.awtable td:first-child{font-weight:500;color:var(--cc-grey-900)}
 table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
 .sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
+.sign-grid.one{grid-template-columns:1fr;max-width:360px}
 @media(max-width:680px){.sign-grid{grid-template-columns:1fr}}
 .sign-box .role{font-size:13px;font-weight:600;color:var(--cc-purple);margin-bottom:12px}
 .sign-line{display:flex;align-items:center;gap:8px;margin-bottom:9px}
@@ -40,6 +41,8 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
 <div class="toolbar no-print">
   <span class="sp">الجلسة الأولى — التشخيصية</span>
   <button class="btn btn-ghost" onclick="exportCase()">تصدير ملف</button>
+  <button class="btn btn-ghost" onclick="document.getElementById('caseFile').click()">📂 استيراد ملف</button>
+  <input type="file" id="caseFile" accept="application/json" style="display:none" onchange="importCase(this)">
   <button class="btn btn-ghost" onclick="saveLocal()">حفظ مؤقت</button>
   <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
   <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s1')">⏭ احفظ وانتقل للتالي</button>
@@ -125,6 +128,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
       <label><input type="checkbox" class="psy"> <span>ارتياح وانفتاح بمجرد فتح الموضوع</span></label>
       <label><input type="checkbox" class="psy"> <span>مقاومة للمواجهة بالأرقام</span></label>
     </div>
+    <div class="field" style="margin-top:10px"><label>أخرى</label><textarea rows="2" placeholder="اكتب مؤشراً آخر..."></textarea></div>
 
     <div class="sub">٢-٧ علامات تحذيرية (Red Flags)</div>
     <p class="hint" style="margin:0 0 6px;color:var(--cc-burgundy)">انتبه لهذي العلامات — تستدعي تقييماً إضافياً أو إحالة.</p>
@@ -159,6 +163,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
       <label><input type="checkbox" class="beh"> <span>غياب أي تخطيط مسبق</span></label>
       <label><input type="checkbox" class="beh"> <span>اعتماد سلبي على المساعدات</span></label>
     </div>
+    <div class="field" style="margin-top:10px"><label>أخرى</label><textarea rows="2" placeholder="اكتب سلوكاً آخر..."></textarea></div>
 
     <div class="sub">٤-٣ نقاط القوة في الحالة</div>
     <div class="field"><label>ما الذي تستطيع البناء عليه في خطة العلاج؟</label><textarea></textarea></div>
@@ -196,14 +201,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
   </div>
 
   <div class="section">
-    <div class="sec-head"><div class="sec-num">٧</div><div class="sec-titles"><div class="ar">خطة العمل للأسبوع القادم</div><div class="en">Action Plan</div></div></div>
-    <p class="hint" style="margin:0 0 6px">واجبات محددة للمستفيد بين الجلستين.</p>
-    <table class="dyn" id="tWeek"><thead><tr><th style="width:92%">الواجب</th><th class="no-print"></th></tr></thead><tbody></tbody></table>
-    <button class="btn-add no-print" onclick="addRow('week')">+ إضافة واجب</button>
-  </div>
-
-  <div class="section">
-    <div class="sec-head"><div class="sec-num">٨</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
+    <div class="sec-head"><div class="sec-num">٧</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
     <div class="sub">قرار استكمال البرنامج</div>
     <div class="radios">
       <label><input type="radio" name="dec" value="استكمال البرنامج"> استكمال البرنامج</label>
@@ -217,11 +215,9 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
   </div>
 
   <div class="section">
-    <div class="sec-head"><div class="sec-num">٩</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
-    <div class="sign-grid">
+    <div class="sec-head"><div class="sec-num">٨</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
+    <div class="sign-grid one">
       <div class="sign-box"><div class="role">المستشار المنفِّذ (سارة)</div>
-        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
-      <div class="sign-box"><div class="role">معتمد كاش كلينيك</div>
         <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="text"></div></div>
     </div>
   </div>
@@ -240,7 +236,7 @@ const LV=[['ضعيف','0'],['متوسط','1'],['جيد','2'],['ممتاز','3']]
 function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove()">حذف</button></td>`}
 const ROWS={
   quote:()=>`<td><textarea placeholder="«...»" rows="2"></textarea></td>${del()}`,
-  smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><textarea rows="2"></textarea></td><td><input type="text" placeholder="مثال: 90%"></td>${del()}`,
+  smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><textarea rows="2"></textarea></td><td><textarea rows="2" placeholder="اكتب الملاحظة..."></textarea></td>${del()}`,
   week:()=>`<td><textarea rows="2"></textarea></td>${del()}`
 };
 const TBL={quote:'tQuotes',smart:'tSmart',week:'tWeek'};
@@ -289,13 +285,41 @@ function collectCase(){
   };
   return out;
 }
-function exportCase(){const d=collectCase();const cn=(d.base.caseNo||'00').replace(/[^0-9A-Za-z]/g,'');const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='case-'+cn+'-session1.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+function fieldSnapshot(){const d={};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{d['f'+i]=(el.type==='checkbox'||el.type==='radio')?el.checked:el.value;});return d;}
+function exportCase(){const d=collectCase();d._fields=fieldSnapshot();const cn=(d.base.caseNo||'00').replace(/[^0-9A-Za-z]/g,'');const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='case-'+cn+'-session1.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+function importCase(input){
+  const file=input.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const d=JSON.parse(e.target.result);
+      window.loadedCase=d;
+      // restore exact field values if present
+      if(d._fields){
+        document.querySelectorAll('input,textarea,select').forEach((el,i)=>{
+          if(d._fields['f'+i]!==undefined){
+            if(el.type==='checkbox'||el.type==='radio')el.checked=d._fields['f'+i];
+            else el.value=d._fields['f'+i];
+          }
+        });
+      } else if(d.base){
+        // fallback: at least fill the base identity fields
+        const set=(id,val)=>{const el=document.getElementById(id);if(el&&val)el.value=val;};
+        set('ce_caseNo',d.base.caseNo);set('ce_charityRef',d.base.charityRef);set('ce_name',d.base.name);set('ce_charity',d.base.charity);
+      }
+      recalc();
+      alert('تم استيراد الملف — تقدرين تكملين التعديل ثم تضغطين «احفظ وانتقل للتالي».');
+    }catch(err){alert('تعذّر قراءة الملف. تأكدي أنه ملف حالة صحيح.');}
+    input.value='';
+  };
+  r.readAsText(file);
+}
 
 function saveLocal(){try{const d={};document.querySelectorAll('input,textarea,select').forEach((el,i)=>{d['f'+i]=(el.type==='checkbox'||el.type==='radio')?el.checked:el.value;});localStorage.setItem('cc_s1',JSON.stringify(d));alert('تم الحفظ المؤقت.');}catch(e){alert('تعذّر الحفظ.');}}
 function loadLocal(){try{const raw=localStorage.getItem('cc_s1');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,textarea,select').forEach((el,i)=>{if(d['f'+i]!==undefined){if(el.type==='checkbox'||el.type==='radio')el.checked=d['f'+i];else el.value=d['f'+i];}});recalc();}catch(e){}}
 function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_s1');}catch(e){}location.reload();}
 
-['quote','quote','quote','smart','smart','week','week'].forEach(addRow);
+['quote','quote','quote','smart','smart'].forEach(addRow);
 loadLocal();recalc();
 </script>
 <script src="case-cloud.js"></script>

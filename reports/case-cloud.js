@@ -222,6 +222,87 @@
         return null;
       }
     },
+
+    /**
+     * Delete an entire case (all its sessions + the case root doc).
+     * Note: the Drive folder/PDFs are NOT deleted (kept for record); only the
+     * pipeline entry is removed.
+     */
+    deleteCase: async function (caseId) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+        // delete all session docs first
+        var snap = await ctx.fs.getDocs(
+          ctx.fs.collection(ctx.db, "cases", caseId, "sessions")
+        );
+        var dels = [];
+        snap.forEach(function (d) {
+          dels.push(ctx.fs.deleteDoc(ctx.fs.doc(ctx.db, "cases", caseId, "sessions", d.id)));
+        });
+        await Promise.all(dels);
+        // delete the case root
+        await ctx.fs.deleteDoc(ctx.fs.doc(ctx.db, "cases", caseId));
+        return { ok: true };
+      } catch (e) {
+        console.error("CaseCloud.deleteCase failed", e);
+        return { ok: false, error: String(e && e.message ? e.message : e) };
+      }
+    },
+
+    /**
+     * Delete a single stage/session of a case (e.g. remove the "s2" session so
+     * the case moves back to the "needs s2" column). Does not touch other stages.
+     */
+    deleteStage: async function (caseId, reportType) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+        await ctx.fs.deleteDoc(ctx.fs.doc(ctx.db, "cases", caseId, "sessions", reportType));
+        await ctx.fs.setDoc(
+          ctx.fs.doc(ctx.db, "cases", caseId),
+          { lastUpdated: ctx.fs.serverTimestamp() },
+          { merge: true }
+        );
+        return { ok: true };
+      } catch (e) {
+        console.error("CaseCloud.deleteStage failed", e);
+        return { ok: false, error: String(e && e.message ? e.message : e) };
+      }
+    },
+
+    /**
+     * Move a case to a target stage by marking earlier stages complete and
+     * removing the target + later stages, so nextStage becomes the target.
+     * Used by the pipeline "نقل" (move) control.
+     */
+    moveToStage: async function (caseId, targetStage) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+        var ORDER = ["s1", "s2", "s3", "s4", "invoice"];
+        var ti = ORDER.indexOf(targetStage);
+        if (ti < 0) return { ok: false, error: "bad stage" };
+        // remove the target stage and all later ones so the case lands in target's column
+        var ops = [];
+        for (var k = ti; k < ORDER.length; k++) {
+          ops.push(
+            ctx.fs.deleteDoc(ctx.fs.doc(ctx.db, "cases", caseId, "sessions", ORDER[k]))
+              .catch(function () {})
+          );
+        }
+        await Promise.all(ops);
+        await ctx.fs.setDoc(
+          ctx.fs.doc(ctx.db, "cases", caseId),
+          { lastUpdated: ctx.fs.serverTimestamp() },
+          { merge: true }
+        );
+        return { ok: true };
+      } catch (e) {
+        console.error("CaseCloud.moveToStage failed", e);
+        return { ok: false, error: String(e && e.message ? e.message : e) };
+      }
+    },
   };
 
   window.CaseCloud = CaseCloud;
@@ -280,8 +361,8 @@
       var bar = document.createElement("div");
       bar.textContent = "تم تحميل الحالة: " + name + " (" + caseId + ")";
       bar.style.cssText =
-        "position:sticky;top:0;z-index:60;background:#2A898C;color:#fff;" +
-        "padding:8px 14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;" +
+        "position:sticky;top:0;z-index:60;background:#2e9e5b;color:#fff;" +
+        "padding:8px 14px;font-family:Tajawal,sans-serif;font-weight:700;" +
         "font-size:13px;text-align:center;border-radius:0 0 10px 10px;";
       if (document.body) document.body.insertBefore(bar, document.body.firstChild);
     } catch (e) {
