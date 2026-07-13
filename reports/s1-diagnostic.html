@@ -78,6 +78,19 @@ body{
 .btn-gold{background:var(--cc-gold); color:#3a2b00}
 .btn-teal{background:var(--cc-teal)}
 .btn-cloud{background:#2D4A6B}
+.btn-data{background:var(--cc-teal)}
+/* Clients modal */
+.cl-overlay{display:none;position:fixed;inset:0;background:rgba(27,18,38,.55);z-index:200;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.cl-box{background:#fff;border-radius:18px;max-width:560px;width:100%;box-shadow:0 20px 60px rgba(27,18,38,.35);overflow:hidden}
+.cl-head{background:var(--cc-purple);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.cl-head h3{margin:0;font-size:17px;font-weight:600}
+.cl-head .cl-x{background:rgba(255,255,255,.15);border:0;color:#fff;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px}
+.cl-list{max-height:60vh;overflow:auto;padding:8px}
+.cl-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--cc-grey-200);border-radius:12px;margin:6px 4px;background:var(--cc-grey-050)}
+.cl-name{font-weight:600;color:var(--cc-purple);font-size:14px}
+.cl-meta{font-size:12px;color:var(--cc-grey-500);margin-top:2px}
+.cl-load{background:var(--cc-teal);color:#fff;border:0;border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.cl-load:hover{background:var(--cc-teal-700)}
 .btn-chain{background:var(--cc-teal-700)}
 .btn-invoice{background:var(--cc-gold-700); color:#fff}
 .btn-print{background:rgba(255,255,255,.14)}
@@ -280,14 +293,25 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
 .sign-box .role{font-size:13px;font-weight:600;color:var(--cc-purple);margin-bottom:12px}
 .sign-line{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .sign-line span{font-size:12.5px;color:var(--cc-grey-500);min-width:54px}
+/* Signature pad */
+.sig-wrap{margin-top:12px}
+.sig-label{font-size:12.5px;font-weight:600;color:var(--cc-grey-700);display:block;margin-bottom:6px}
+.sig-pad-box{border:1.5px dashed var(--cc-grey-300);border-radius:12px;background:var(--cc-grey-050);position:relative;overflow:hidden}
+.sig-pad{width:100%;height:150px;display:block;touch-action:none;cursor:crosshair}
+.sig-img{width:100%;max-height:150px;object-fit:contain;display:block;background:#fff}
+.sig-clear{margin-top:8px;background:transparent;border:1px solid var(--cc-grey-300);color:var(--cc-grey-700);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.sig-clear:hover{border-color:var(--cc-burgundy);color:var(--cc-burgundy)}
+@media print{.sig-pad-box{border:1px solid #ccc;min-height:80px}.sig-clear{display:none!important}.sig-pad{display:none}.sig-img[src]{display:block!important}.sig-img:not([src]),.sig-img[src=""]{display:none!important}}
 </style>
 </head>
 <body>
 <div class="toolbar no-print">
   <span class="sp">الجلسة الأولى — التشخيصية</span>
+  <a class="btn btn-ghost" href="../dashboard.html">↩ صفحة التقارير</a>
+  <button class="btn btn-ghost" onclick="openClients()">👥 العملاء</button>
   <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
-  <button class="btn btn-chain" onclick="CaseChain.saveAndNext('s1')">⏭ احفظ وانتقل للتالي</button>
   <button class="btn btn-invoice" onclick="CaseChain.generateInvoice()">🧾 فاتورة</button>
+  <button class="btn btn-data" onclick="saveData_s1(this)">💾 حفظ البيانات</button>
   <button class="btn btn-cloud" onclick="cloudSave_s1(this)">☁️ حفظ في Drive (PDF)</button>
   <button class="btn btn-print" onclick="window.print()">طباعة / PDF</button>
 </div>
@@ -315,7 +339,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     </div>
   </div>
 
-  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>ملاحظات المستشار</a><a href="#sec-3"><span class="jn-num">٤</span>التشخيص السلوكي</a><a href="#sec-4"><span class="jn-num">٥</span>تصنيف الحالة الأولي</a><a href="#sec-5"><span class="jn-num">٦</span>الأهداف المحددة للحالة</a><a href="#sec-6"><span class="jn-num">٧</span>التوصية للجمعية</a><a href="#sec-7"><span class="jn-num">٨</span>التوقيعات</a></div></div>
+  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>ملاحظات المستشار</a><a href="#sec-3"><span class="jn-num">٤</span>التشخيص السلوكي</a><a href="#sec-4"><span class="jn-num">٥</span>تصنيف الحالة الأولي</a><a href="#sec-6"><span class="jn-num">٦</span>التوصية للجمعية</a><a href="#sec-7"><span class="jn-num">٧</span>التوقيعات</a></div></div>
 
   <div class="section" id="sec-1">
     <div class="sec-head"><div class="sec-num">١</div><div class="sec-titles"><div class="ar">معلومات الجلسة والحالة</div><div class="en">Session &amp; Case Info</div></div></div>
@@ -436,32 +460,27 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     </div>
   </div>
 
-  <div class="section" id="sec-5">
-    <div class="sec-head"><div class="sec-num">٦</div><div class="sec-titles"><div class="ar">الأهداف المحددة للحالة</div><div class="en">SMART Goals</div></div></div>
-    <p class="hint" style="margin:0 0 6px">أهداف ذكية (SMART): محددة، قابلة للقياس، قابلة للتحقيق، واقعية، محددة بوقت.</p>
-    <table class="dyn" id="tSmart"><thead><tr><th style="width:22%">المدى</th><th style="width:48%">الهدف</th><th style="width:24%">معيار النجاح</th><th class="no-print"></th></tr></thead><tbody></tbody></table>
-    <button class="btn-add no-print" onclick="addRow('smart')">+ إضافة هدف</button>
-  </div>
-
   <div class="section" id="sec-6">
-    <div class="sec-head"><div class="sec-num">٧</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
-    <div class="sub">قرار استكمال البرنامج</div>
-    <div class="radios">
-      <label><input type="radio" name="dec" value="استكمال البرنامج"> استكمال البرنامج</label>
-      <label><input type="radio" name="dec" value="استكمال مع متابعة خاصة"> استكمال مع متابعة خاصة</label>
-      <label><input type="radio" name="dec" value="إحالة لجهة متخصصة"> إحالة لجهة متخصصة</label>
-    </div>
-    <div class="reco-dark">
-      <label>ملخص التوصية للجمعية</label>
-      <div style="margin-top:8px"><textarea style="min-height:90px"></textarea></div>
-    </div>
+    <div class="sec-head"><div class="sec-num">٦</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
+    <div class="field"><label>اكتب التوصية للجمعية</label><textarea style="min-height:150px" placeholder="اكتب فقرة التوصية هنا..."></textarea></div>
   </div>
 
   <div class="section" id="sec-7">
-    <div class="sec-head"><div class="sec-num">٨</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
+    <div class="sec-head"><div class="sec-num">٧</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
     <div class="sign-grid one">
       <div class="sign-box"><div class="role">المستشار المنفِّذ (سارة)</div>
-        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="date"></div></div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div>
+        <div class="sign-line"><span>التاريخ:</span><input type="date"></div>
+        <div class="sig-wrap">
+          <label class="sig-label">التوقيع (وقّع بإصبعك على الجوال أو بالماوس على الكمبيوتر):</label>
+          <div class="sig-pad-box">
+            <canvas class="sig-pad" id="sigPad1" width="440" height="150"></canvas>
+            <img class="sig-img" id="sigImg1" alt="التوقيع" style="display:none">
+          </div>
+          <input type="hidden" id="sigData1">
+          <button type="button" class="sig-clear no-print" onclick="clearSig(1)">مسح التوقيع</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -562,8 +581,72 @@ function saveLocal(){try{const d={};document.querySelectorAll('input,textarea,se
 function loadLocal(){try{const raw=localStorage.getItem('cc_s1');if(!raw)return;const d=JSON.parse(raw);document.querySelectorAll('input,textarea,select').forEach((el,i)=>{if(d['f'+i]!==undefined){if(el.type==='checkbox'||el.type==='radio')el.checked=d['f'+i];else el.value=d['f'+i];}});recalc();}catch(e){}}
 function resetAll(){if(!confirm('سيتم مسح كل البيانات. متابعة؟'))return;try{localStorage.removeItem('cc_s1');}catch(e){}location.reload();}
 
-['quote','quote','quote','smart','smart'].forEach(addRow);
+['quote','quote','quote'].forEach(addRow);
 loadLocal();recalc();
+
+// ---- Signature pad (draw with finger/mouse) ----
+function initSigPad(n){
+  var canvas=document.getElementById('sigPad'+n);
+  if(!canvas) return;
+  var ctx=canvas.getContext('2d');
+  var drawing=false, dirty=false;
+  // scale canvas to its displayed size for crisp lines
+  function resize(){
+    var rect=canvas.getBoundingClientRect();
+    var ratio=window.devicePixelRatio||1;
+    // preserve existing drawing
+    var data=dirty?canvas.toDataURL():null;
+    canvas.width=rect.width*ratio; canvas.height=rect.height*ratio;
+    ctx.scale(ratio,ratio);
+    ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#1B1226';
+    if(data){var img=new Image();img.onload=function(){ctx.drawImage(img,0,0,rect.width,rect.height);};img.src=data;}
+  }
+  setTimeout(resize,50);
+  window.addEventListener('resize',resize);
+  function pos(e){
+    var rect=canvas.getBoundingClientRect();
+    var t=e.touches?e.touches[0]:e;
+    return {x:t.clientX-rect.left, y:t.clientY-rect.top};
+  }
+  function start(e){drawing=true;dirty=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault();}
+  function move(e){if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault();}
+  function end(){if(!drawing)return;drawing=false;saveSig(n);}
+  canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});
+  canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',end);
+  canvas._isDirty=function(){return dirty;};
+  canvas._setDirty=function(v){dirty=v;};
+}
+function saveSig(n){
+  var canvas=document.getElementById('sigPad'+n);
+  var hidden=document.getElementById('sigData'+n);
+  var img=document.getElementById('sigImg'+n);
+  if(!canvas||!hidden)return;
+  var url=canvas.toDataURL('image/png');
+  hidden.value=url;
+  if(img){img.src=url;img.style.display='block';} // shown in print via CSS; baked into snapshot
+}
+function clearSig(n){
+  var canvas=document.getElementById('sigPad'+n);
+  var hidden=document.getElementById('sigData'+n);
+  var img=document.getElementById('sigImg'+n);
+  if(canvas){var ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);if(canvas._setDirty)canvas._setDirty(false);}
+  if(hidden)hidden.value='';
+  if(img){img.src='';img.style.display='none';}
+}
+// restore a saved signature (called after loadClientData fills sigData hidden inputs)
+function restoreSig(n){
+  var hidden=document.getElementById('sigData'+n);
+  var img=document.getElementById('sigImg'+n);
+  var canvas=document.getElementById('sigPad'+n);
+  if(hidden && hidden.value && img){
+    img.src=hidden.value; img.style.display='block';
+    if(canvas){var ctx=canvas.getContext('2d');var im=new Image();im.onload=function(){var r=canvas.getBoundingClientRect();ctx.drawImage(im,0,0,r.width,r.height);if(canvas._setDirty)canvas._setDirty(true);};im.src=hidden.value;}
+  }
+}
+initSigPad(1);
 </script>
 <script src="case-cloud.js"></script>
 <script src="case-chain.js"></script>
@@ -583,6 +666,81 @@ async function cloudSave_s1(btn){
     }
   }catch(e){ btn.textContent='⚠️ خطأ'; btn.disabled=false; console.error(e); }
 }
+
+// ---- Save DATA ONLY to the database (no PDF) ----
+async function saveData_s1(btn){
+  if(!window.CaseCloud){alert('وحدة الحفظ السحابي غير محمّلة.');return;}
+  var old=btn.textContent; btn.textContent='⏳ جاري حفظ البيانات...'; btn.disabled=true;
+  try{
+    var snap=(typeof fieldSnapshot==='function')?fieldSnapshot():null;
+    var res=await window.CaseCloud.saveDataOnly('s1', snap);
+    if(res && res.ok){
+      btn.textContent='✓ حُفظت البيانات في السحابة';
+      setTimeout(function(){btn.textContent=old;btn.disabled=false;},3500);
+    } else {
+      btn.textContent='⚠️ تعذّر حفظ البيانات'; btn.disabled=false; console.error(res&&res.error);
+    }
+  }catch(e){ btn.textContent='⚠️ خطأ'; btn.disabled=false; console.error(e); }
+}
+
+// ---- Clients: list saved clients + load one back into the form ----
+async function openClients(){
+  var modal=document.getElementById('clientsModal');
+  var body=document.getElementById('clientsBody');
+  modal.style.display='flex';
+  body.innerHTML='<div style="padding:30px;text-align:center;color:#756E80">⏳ جاري تحميل قائمة العملاء...</div>';
+  if(!window.CaseCloud){body.innerHTML='<div style="padding:30px;text-align:center;color:#962D38">وحدة السحابة غير محمّلة.</div>';return;}
+  try{
+    var cases=await window.CaseCloud.listCases();
+    if(!cases || !cases.length){ body.innerHTML='<div style="padding:30px;text-align:center;color:#756E80">لا يوجد عملاء محفوظون بعد.</div>'; return; }
+    var rows=cases.map(function(c){
+      var b=c.base||{};
+      var nm=b.name||'(بدون اسم)';
+      var no=b.caseNo?('# '+b.caseNo):'';
+      var ref=b.charityRef?('مرجع: '+b.charityRef):'';
+      return '<div class="cl-row">'+
+        '<div class="cl-info"><div class="cl-name">'+esc(nm)+'</div><div class="cl-meta">'+esc(no)+' '+esc(ref)+'</div></div>'+
+        '<button class="cl-load" onclick="loadClientData(\''+c.caseId+'\')">فتح في التقرير ↩</button>'+
+      '</div>';
+    }).join('');
+    body.innerHTML=rows;
+  }catch(e){ body.innerHTML='<div style="padding:30px;text-align:center;color:#962D38">تعذّر تحميل القائمة.</div>'; console.error(e); }
+}
+function closeClients(){ document.getElementById('clientsModal').style.display='none'; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
+
+async function loadClientData(caseId){
+  var body=document.getElementById('clientsBody');
+  body.innerHTML='<div style="padding:30px;text-align:center;color:#756E80">⏳ جاري فتح بيانات العميل...</div>';
+  try{
+    var r=await window.CaseCloud.loadReport(caseId, 's1');
+    if(!r){ alert('ما فيه بيانات محفوظة لهذا العميل في التقرير التشخيصي.'); closeClients(); return; }
+    window.loadedCase=r.data||null;
+    if(r.fieldsRaw){
+      // exact restore of every field
+      document.querySelectorAll('input,textarea,select').forEach(function(el,i){
+        var k='f'+i;
+        if(r.fieldsRaw[k]!==undefined){
+          if(el.type==='checkbox'||el.type==='radio') el.checked=r.fieldsRaw[k];
+          else el.value=r.fieldsRaw[k];
+        }
+      });
+    } else if(r.base){
+      var set=function(id,val){var el=document.getElementById(id);if(el&&val)el.value=val;};
+      set('ce_caseNo',r.base.caseNo);set('ce_charityRef',r.base.charityRef);set('ce_name',r.base.name);set('ce_charity',r.base.charity);
+    }
+    if(typeof recalc==='function') recalc();
+    if(typeof restoreSig==='function') restoreSig(1);
+    closeClients();
+    setTimeout(function(){ window.scrollTo({top:0,behavior:'smooth'}); },100);
+  }catch(e){ alert('تعذّر فتح بيانات العميل.'); console.error(e); }
+}
 </script>
+<div class="cl-overlay no-print" id="clientsModal">
+  <div class="cl-box">
+    <div class="cl-head"><h3>👥 العملاء المحفوظون</h3><button class="cl-x" onclick="closeClients()">✕</button></div>
+    <div class="cl-list" id="clientsBody"></div>
+  </div>
+</div>
 </body>
 </html>

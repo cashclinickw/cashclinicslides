@@ -138,6 +138,73 @@
       }
     },
 
+    /**
+     * Save ONLY the data to the database (no PDF generated).
+     * status:"draft" so the backend PDF trigger returns early.
+     * Also stores a raw field-value snapshot (fieldsRaw) so the exact
+     * form state can be restored later from the "العملاء" (Clients) list.
+     * @param {string} reportType
+     * @param {object} fieldsRaw  optional {f0:..,f1:..} snapshot of all inputs
+     */
+    saveDataOnly: async function (reportType, fieldsRaw) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+
+        var data = collectData();
+        var caseId = caseIdFrom(data);
+
+        var ref = ctx.fs.doc(ctx.db, "cases", caseId, "sessions", reportType);
+        await ctx.fs.setDoc(
+          ref,
+          {
+            reportType: reportType,
+            status: "draft",              // draft => backend does NOT make a PDF
+            base: (data && data.base) || {},
+            data: data,
+            fieldsRaw: fieldsRaw || null, // exact form snapshot for reload
+            updatedAt: ctx.fs.serverTimestamp(),
+          },
+          { merge: true }
+        );
+
+        await ctx.fs.setDoc(
+          ctx.fs.doc(ctx.db, "cases", caseId),
+          {
+            caseId: caseId,
+            base: (data && data.base) || {},
+            lastUpdated: ctx.fs.serverTimestamp(),
+          },
+          { merge: true }
+        );
+
+        return { ok: true, caseId: caseId };
+      } catch (e) {
+        console.error("CaseCloud.saveDataOnly failed", e);
+        return { ok: false, error: String(e && e.message ? e.message : e) };
+      }
+    },
+
+    /**
+     * Load a single saved report's data (including fieldsRaw) for a case.
+     * Returns { data, fieldsRaw, base } or null.
+     */
+    loadReport: async function (caseId, reportType) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+        var snap = await ctx.fs.getDoc(
+          ctx.fs.doc(ctx.db, "cases", caseId, "sessions", reportType)
+        );
+        if (!snap.exists()) return null;
+        var v = snap.data();
+        return { data: v.data || null, fieldsRaw: v.fieldsRaw || null, base: v.base || {} };
+      } catch (e) {
+        console.error("CaseCloud.loadReport failed", e);
+        return null;
+      }
+    },
+
     /** Load a case's merged data (latest of each session). */
     load: async function (caseId) {
       try {
