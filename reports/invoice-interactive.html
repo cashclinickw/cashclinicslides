@@ -23,6 +23,30 @@
 @media print{.jumpnav{display:none!important}}
 @media(max-width:680px){.jumpnav{padding:11px 14px}.jumpnav a{font-size:11.5px;padding:6px 10px}}
 
+
+/* Clients modal */
+.cl-overlay{display:none;position:fixed;inset:0;background:rgba(27,18,38,.55);z-index:200;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.cl-box{background:#fff;border-radius:18px;max-width:560px;width:100%;box-shadow:0 20px 60px rgba(27,18,38,.35);overflow:hidden}
+.cl-head{background:var(--cc-purple,#2F1748);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.cl-head h3{margin:0;font-size:17px;font-weight:600}
+.cl-head .cl-x{background:rgba(255,255,255,.15);border:0;color:#fff;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px}
+.cl-list{max-height:60vh;overflow:auto;padding:8px}
+.cl-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--cc-grey-200,#E4E1EA);border-radius:12px;margin:6px 4px;background:var(--cc-grey-050,#FAF9FB)}
+.cl-name{font-weight:600;color:var(--cc-purple,#2F1748);font-size:14px}
+.cl-meta{font-size:12px;color:var(--cc-grey-500,#756E80);margin-top:2px}
+.cl-load{background:var(--cc-teal,#2A898C);color:#fff;border:0;border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.cl-load:hover{background:var(--cc-teal-700,#1F696B)}
+.btn-data{background:var(--cc-teal,#2A898C)}
+/* Signature pad */
+.sig-wrap{margin-top:12px}
+.sig-label{font-size:12.5px;font-weight:600;color:var(--cc-grey-700,#4A4356);display:block;margin-bottom:6px}
+.sig-pad-box{border:1.5px dashed var(--cc-grey-300,#C7C2CF);border-radius:12px;background:var(--cc-grey-050,#FAF9FB);position:relative;overflow:hidden}
+.sig-pad{width:100%;height:150px;display:block;touch-action:none;cursor:crosshair}
+.sig-img{width:100%;max-height:150px;object-fit:contain;display:none;background:#fff}
+.sig-clear{margin-top:8px;background:transparent;border:1px solid var(--cc-grey-300,#C7C2CF);color:var(--cc-grey-700,#4A4356);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.sig-clear:hover{border-color:var(--cc-burgundy,#962D38);color:var(--cc-burgundy,#962D38)}
+@media print{.sig-pad-box{border:1px solid #ccc;min-height:80px}.sig-clear{display:none!important}.sig-pad{display:none}.sig-img[src]{display:block!important}.sig-img:not([src]),.sig-img[src=""]{display:none!important}}
+
 </style>
 <style>
 :root{
@@ -257,6 +281,8 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
   <div class="btns">
     <a class="btn btn-ghost" href="../dashboard.html">↩ صفحة التقارير</a>
     <button class="btn btn-ghost" onclick="resetAll()">مسح</button>
+    <button class="btn btn-ghost" onclick="openClients()">👥 العملاء</button>
+    <button class="btn btn-data" onclick="saveReportData(this)">💾 حفظ البيانات</button>
     <button class="btn btn-cloud" onclick="cloudSave_invoice(this)">☁️ حفظ في Drive (PDF)</button>
     <button class="btn btn-print" onclick="window.print()">طباعة / تصدير PDF</button>
   </div>
@@ -343,7 +369,7 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
     <h2><span class="num">٥</span> التواقيع</h2>
     <div class="sign-grid one">
       <div class="sign-box"><div class="role">ممثل شركة كاش كلينك</div>
-        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sign-line"><span>التوقيع:</span><input type="text"></div><div class="sign-line"><span>التاريخ:</span><input type="date"></div></div>
+        <div class="sign-line"><span>الاسم:</span><input type="text"></div><div class="sig-wrap"><label class="sig-label">التوقيع (وقّع بإصبعك على الجوال أو بالماوس على الكمبيوتر):</label><div class="sig-pad-box"><canvas class="sig-pad" id="sigPad1" width="440" height="150"></canvas><img class="sig-img" id="sigImg1" alt="التوقيع"></div><input type="hidden" id="sigData1"><button type="button" class="sig-clear no-print" onclick="clearSig(1)">مسح التوقيع</button></div><div class="sign-line"><span>التاريخ:</span><input type="date"></div></div>
     </div>
   </div>
 
@@ -404,5 +430,14 @@ async function cloudSave_invoice(btn){
   }catch(e){ btn.textContent='⚠️ خطأ'; btn.disabled=false; console.error(e); }
 }
 </script>
+
+<div class="cl-overlay no-print" id="clientsModal">
+  <div class="cl-box">
+    <div class="cl-head"><h3>👥 العملاء المحفوظون</h3><button class="cl-x" onclick="closeClients()">✕</button></div>
+    <div class="cl-list" id="clientsBody"></div>
+  </div>
+</div>
+<script>window.REPORT_TYPE="invoice";</script>
+<script src="report-features.js"></script>
 </body>
 </html>
