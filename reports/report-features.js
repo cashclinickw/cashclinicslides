@@ -88,16 +88,29 @@
     if (body) body.innerHTML = '<div style="padding:30px;text-align:center;color:#756E80">⏳ جاري فتح بيانات العميل...</div>';
     try {
       var r = await window.CaseCloud.loadReport(caseId, RT());
-      if (!r) { alert("ما فيه بيانات محفوظة لهذا العميل في هذا التقرير."); window.closeClients(); return; }
+      // Personal data lives on the case itself, so it carries between sessions
+      // even when this particular report has never been saved before.
+      var caseBase = null;
+      if (window.CaseCloud.loadCaseBase) {
+        try { caseBase = await window.CaseCloud.loadCaseBase(caseId); } catch (e) {}
+      }
+      if (!r) {
+        if (!caseBase) { alert("ما فيه بيانات محفوظة لهذا العميل."); window.closeClients(); return; }
+        r = { base: caseBase, data: null, fieldsRaw: null };
+      }
       window.loadedCase = r.data || null;
       if (r.fieldsRaw) restoreFields(r.fieldsRaw);
-      else if (r.base) {
+      if (!r.fieldsRaw && r.base) {
         var set = function (id, val) { var el = document.getElementById(id); if (el && val) el.value = val; };
         // fill common base ids across reports (cd_ and ce_ variants)
         set("ce_caseNo", r.base.caseNo); set("cd_caseNo", r.base.caseNo);
         set("ce_charityRef", r.base.charityRef); set("cd_charityRef", r.base.charityRef);
         set("ce_name", r.base.name); set("cd_name", r.base.name);
         set("ce_charity", r.base.charity);
+      }
+      // carry the shared personal data forward (never clobbers typed values)
+      if (window.SharedBase && window.SharedBase.apply) {
+        try { window.SharedBase.apply(caseBase || r.base); } catch (e) {}
       }
       // let the report re-run its calculations + apply logic
       if (typeof window.recalc === "function") { try { window.recalc(); } catch (e) {} }

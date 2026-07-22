@@ -305,7 +305,7 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
   </div>
 
   <!-- 1 -->
-  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>تاريخ الجلسة</a><a href="#sec-2"><span class="jn-num">٢</span>مقارنة سريعة — من أين بدأتُ إلى أين وصلتُ</a><a href="#sec-3"><span class="jn-num">٣</span>كيف تطوّرت عاداتي المالية؟</a><a href="#sec-4"><span class="jn-num">٤</span>أكثر ما أفخر به في رحلتي حتى الآن</a><a href="#sec-5"><span class="jn-num">٥</span>خطّتي للقادم وما أرغب في تعلّمه</a><a href="#sec-6"><span class="jn-num">٦</span>ما الذي يقلقني بخصوص ما بعد البرنامج؟</a><a href="#sec-7"><span class="jn-num">٧</span>توصية المستشار السلوكي (سارة)</a></div></div>
+  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>تاريخ الجلسة</a><a href="#sec-personal"><span class="jn-num">★</span>البيانات الشخصية</a><a href="#sec-2"><span class="jn-num">٢</span>ماذا تغيّر؟</a><a href="#sec-3"><span class="jn-num">٣</span>العادات</a><a href="#sec-4"><span class="jn-num">٤</span>ماذا تعلّمت؟</a><a href="#sec-5"><span class="jn-num">٥</span>الخطة لتجنّب العودة لدوامة الديون</a><a href="#sec-6"><span class="jn-num">٦</span>مخاوف المستفيد ما بعد البرنامج</a><a href="#sec-behav"><span class="jn-num">★</span>علامات الخطر السلوكي</a><a href="#sec-7"><span class="jn-num">٧</span>توصية المستشار السلوكي (سارة)</a></div></div>
 
   <div class="section" id="sec-1">
     <h2><span class="num">١</span> تاريخ الجلسة <span class="en">Session Date</span></h2>
@@ -320,28 +320,34 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
   </div>
 
   <!-- 2 -->
+  <div class="section" id="sec-personal">
+    <h2><span class="num">★</span> البيانات الشخصية <span class="en">Personal Data</span></h2>
+    <div class="grid3">
+      <div class="field"><label>العمر</label><input type="text" id="ce_age"></div>
+      <div class="field"><label>الحالة الاجتماعية</label><input type="text" id="ce_marital"></div>
+      <div class="field"><label>الحالة الوظيفية</label><input type="text" id="ce_job"></div>
+      <div class="field"><label>عدد الأبناء</label><input type="text" id="ce_kids"></div>
+      <div class="field" style="grid-column:span 2"><label>أعمار الأبناء وحالتهم</label><input type="text" id="ce_kidsDetails"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>المشكلة التي يعاني منها المستفيد</label><textarea id="ce_problem"></textarea></div>
+  </div>
+
   <div class="section" id="sec-2">
-    <h2><span class="num">٢</span> مقارنة سريعة — من أين بدأتُ إلى أين وصلتُ <span class="en">Quick Comparison</span></h2>
+    <h2><span class="num">٢</span> ماذا تغيّر؟ <span class="en">Quick Comparison</span></h2>
     <div class="field"><label>بصيغة المتكلّم التأمّلية</label><textarea style="min-height:90px" placeholder="أصف رحلتي حتى الآن…"></textarea></div>
   </div>
 
   <!-- 3 habits -->
   <div class="section" id="sec-3">
-    <h2><span class="num">٣</span> كيف تطوّرت عاداتي المالية؟ <span class="en">Habit Progress</span></h2>
-    <p class="hint" style="margin:0 0 6px;color:var(--muted)">المقياس: لا / أحياناً / دائماً. عمود «قبل البرنامج» يُستورد من الجلسات السابقة إن توفّر.</p>
+    <h2><span class="num">٣</span> العادات <span class="en">Habit Progress</span></h2>
+    <p class="hint" style="margin:0 0 6px;color:var(--muted)">المقياس: ضعيف / متوسط / ممتاز. عمود «قبل البرنامج» يُستورد من الجلسات السابقة إن توفّر.</p>
     <table class="cmp" id="tHab"><thead><tr><th style="width:46%">العادة</th><th style="width:27%">قبل البرنامج</th><th style="width:27%">اليوم</th></tr></thead><tbody></tbody></table>
     <div class="note">نسبة تقدّم العادات تُحتسب تلقائياً: عدد العادات التي تحسّنت من «قبل» إلى «اليوم» ÷ إجمالي العادات.</div>
   </div>
 
   <!-- 4 proud -->
   <div class="section" id="sec-4">
-    <h2><span class="num">٤</span> أكثر ما أفخر به في رحلتي حتى الآن <span class="en">Proudest Of</span></h2>
-    <div class="field"><textarea style="min-height:80px"></textarea></div>
-  </div>
-
-  <!-- 5 future -->
-  <div class="section" id="sec-5">
-    <h2><span class="num">٥</span> خطّتي للقادم وما أرغب في تعلّمه <span class="en">Next Plan</span></h2>
+    <h2><span class="num">٤</span> ماذا تعلّمت؟ <span class="en">What I Learned</span></h2>
     <div class="field"><textarea style="min-height:80px"></textarea></div>
     <div class="grid2" style="margin-top:10px">
       <div class="field"><label>الشعور</label><textarea></textarea></div>
@@ -349,9 +355,15 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
     </div>
   </div>
 
+  <!-- 5 future -->
+  <div class="section" id="sec-5">
+    <h2><span class="num">٥</span> الخطة لتجنّب العودة لدوامة الديون <span class="en">Relapse Prevention Plan</span></h2>
+    <div class="field"><textarea style="min-height:80px"></textarea></div>
+  </div>
+
   <!-- 6 worries -->
   <div class="section" id="sec-6">
-    <h2><span class="num">٦</span> ما الذي يقلقني بخصوص ما بعد البرنامج؟ <span class="en">Post-Program Worries</span></h2>
+    <h2><span class="num">٦</span> مخاوف المستفيد ما بعد البرنامج <span class="en">Post-Program Worries</span></h2>
     <div class="checks">
       <label><input type="checkbox" class="worry"> أخاف أن أعود إلى عاداتي القديمة</label>
       <label><input type="checkbox" class="worry"> أخاف ألّا أجد من يوجّهني لو احتجت</label>
@@ -364,6 +376,20 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
   </div>
 
   <!-- 7 recommendation (Sara) -->
+  <div class="section" id="sec-behav">
+    <h2><span class="num">★</span> علامات الخطر السلوكي <span class="en">Behavioral Risk Flags (0–7)</span></h2>
+    <p style="font-size:13px;color:var(--muted);margin:0 0 10px">تُحدَّد بناءً على ملاحظة المستشار. كل علامة تُحتسب في المكوّن السلوكي لمؤشر التعافي.</p>
+    <div class="behav" id="behavList3">
+      <label><input type="checkbox" class="bflag"> الاستلاف بشكل متكرر في نهاية الشهر</label>
+      <label><input type="checkbox" class="bflag"> الصرف على العروض رغم عدم الحاجة</label>
+      <label><input type="checkbox" class="bflag"> عدم تتبّع المصروفات اليومية بدقة</label>
+      <label><input type="checkbox" class="bflag"> غياب صندوق طوارئ يغطي 3 أشهر</label>
+      <label><input type="checkbox" class="bflag"> تأجيل قرار الاستثمار سنتين أو أكثر</label>
+      <label><input type="checkbox" class="bflag"> نزاعات مالية متكرّرة داخل الأسرة</label>
+      <label><input type="checkbox" class="bflag"> عدم معرفة القيمة الإجمالية للأصول</label>
+    </div>
+  </div>
+
   <div class="section" id="sec-7">
     <h2><span class="num">٧</span> توصية المستشار السلوكي (سارة) <span class="en">Behavioral Recommendation</span></h2>
     <p class="hint" style="margin:0 0 6px;color:var(--muted)">تُنقل هذه التوصية لاحقاً إلى التقرير الختامي ضمن التوصيات الثلاثية.</p>
@@ -376,8 +402,8 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
 
 <script>
 const $=id=>document.getElementById(id);
-const HAB=['أعدُّ ميزانية شهرية','أتابع مصاريفي اليومية','أُفرّق بين الحاجة والرغبة','أوفّر جزءاً من راتبي','أتجنّب الديون','أراجع كشف حسابي البنكي','أخطّط قبل أن أتسوّق'];
-const opt='<option value="">—</option><option value="0">لا</option><option value="1">أحياناً</option><option value="2">دائماً</option>';
+const HAB=['الالتزام بميزانية شهرية','متابعة المصاريف','التفرقة بين الحاجة والرغبة','توفير جزء من الراتب','تجنب الديون','تخطيط قبل الدفع'];
+const opt='<option value="">—</option><option value="0">ضعيف</option><option value="1">متوسط</option><option value="2">ممتاز</option>';
 (function(){const tb=document.querySelector('#tHab tbody');HAB.forEach((h,i)=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${h}</td><td><select class="hb" data-i="${i}">${opt}</select></td><td><select class="ha" data-i="${i}">${opt}</select></td>`;tb.appendChild(tr);});})();
 
 function recalc(){
@@ -425,6 +451,9 @@ function resetAll(){if(!confirm('سيتم مسح كل البيانات. متاب
 loadLocal();recalc();
 </script>
 <script src="case-cloud.js"></script>
+<script src="shared-base.js"></script>
+<script src="field-flow.js"></script>
+<script src="jump-nav.js"></script>
 <script src="case-chain.js"></script>
 
 <script>

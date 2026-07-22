@@ -48,6 +48,7 @@
 .sig-clear:hover{border-color:var(--cc-burgundy,#962D38);color:var(--cc-burgundy,#962D38)}
 @media print{.sig-pad-box{border:1px solid #ccc;min-height:80px}.sig-clear{display:none!important}.sig-pad{display:none}.sig-img[src]{display:block!important}.sig-img:not([src]),.sig-img[src=""]{display:none!important}}
 
+.ratio .rnote{margin-top:7px;font-size:11.5px;line-height:1.7;color:var(--cc-grey-500,#756E80);text-align:right;font-weight:400}
 </style>
 <style>
 :root{
@@ -253,12 +254,11 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
       <div class="metric"><div class="mk">نسبة عبء الدين</div><div class="mv" id="mDti">—</div></div>
       <div class="metric"><div class="mk">الفائض / العجز الشهري</div><div class="mv" id="mSurplus">—</div></div>
       <div class="metric"><div class="mk">أشهر الصمود</div><div class="mv" id="mResil">—</div></div>
-      <div class="metric"><div class="mk">علامات الخطر السلوكي</div><div class="mv" id="mBehav">0 / 7</div></div>
     </div>
   </div>
 
   <!-- 1 -->
-  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>البيانات الشخصية</a><a href="#sec-3"><span class="jn-num">٣</span>مصادر الدخل الشهرية</a><a href="#sec-4"><span class="jn-num">٤</span>الأصول المالية والاستثمارية</a><a href="#sec-5"><span class="jn-num">٥</span>الالتزامات المالية + جدول إدارة الديون</a><a href="#sec-6"><span class="jn-num">٦</span>الأهداف المالية للمستفيد</a><a href="#sec-7"><span class="jn-num">٧</span>استراتيجية الميزانية الشخصية</a><a href="#sec-8"><span class="jn-num">★</span>علامات الخطر السلوكي</a><a href="#sec-9"><span class="jn-num">٨</span>استراتيجية إدارة الديون المقترحة</a><a href="#sec-10"><span class="jn-num">٩</span>التوصية بالدعم من الجمعية</a><a href="#sec-11"><span class="jn-num">١٠</span>التوصية النهائية للجمعية بعد الجلسة الثانية</a><a href="#sec-12"><span class="jn-num">١١</span>التوقيعات</a></div></div>
+  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>البيانات الشخصية</a><a href="#sec-3"><span class="jn-num">٣</span>مصادر الدخل الشهرية</a><a href="#sec-4"><span class="jn-num">٤</span>الأصول المالية والاستثمارية</a><a href="#sec-5"><span class="jn-num">٥</span>الالتزامات المالية + جدول إدارة الديون</a><a href="#sec-6"><span class="jn-num">٦</span>الأهداف المالية للمستفيد</a><a href="#sec-7"><span class="jn-num">٧</span>استراتيجية الميزانية الشخصية</a><a href="#sec-9"><span class="jn-num">٨</span>استراتيجية إدارة الديون المقترحة</a><a href="#sec-10"><span class="jn-num">٩</span>التوصية بالدعم من الجمعية</a><a href="#sec-11"><span class="jn-num">١٠</span>التوصية النهائية للجمعية بعد الجلسة الثانية</a><a href="#sec-12"><span class="jn-num">١١</span>التوقيعات</a></div></div>
 
   <div class="section" id="sec-1">
     <h2><span class="num">١</span> معلومات الجلسة والحالة <span class="en">Session &amp; Case Info</span></h2>
@@ -297,8 +297,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
         <tr class="tot-row"><td colspan="3">إجمالي الدخل الشهري (الثابت)</td><td id="incomeTotal">0</td><td colspan="2" id="incomeIntermittentNote" style="text-align:right;font-weight:400;color:var(--cc-grey-500)">—</td><td class="no-print"></td></tr>
       </tfoot>
     </table>
-    <div class="note" id="intermittentHint" style="display:none">💡 المبلغ المتقطع (غير الثابت) لا يُحتسب ضمن إجمالي الدخل الشهري الثابت. احتمالية زيادة الدخل تكون أكثر إذا تم تحصيل هذا المبلغ المتقطع.</div>
-    <button class="btn btn-add no-print" onclick="addRow('income')">+ إضافة مصدر دخل</button>
+<button class="btn btn-add no-print" onclick="addRow('income')">+ إضافة مصدر دخل</button>
   </div>
 
   <!-- 4 -->
@@ -311,8 +310,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
     </table>
     <button class="btn btn-add no-print" onclick="addRow('assets')">+ إضافة أصل</button>
     <button class="btn btn-add no-print" onclick="toggleNone('assets')" id="noAssetsBtn" style="background:var(--cc-grey-100);color:var(--cc-grey-700);border-color:var(--cc-grey-300)">☐ عدم وجود أي أصل يذكر</button>
-    <div class="note">إن لم تكن هناك أصول، اكتب «لا يوجد أصول» في أول صف، أو اضغط زر «عدم وجود أي أصل يذكر».</div>
-  </div>
+</div>
 
   <!-- 5 -->
   <div class="section" id="sec-5">
@@ -340,26 +338,34 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
     </div>
     <button class="btn btn-add no-print" onclick="addRow('debts')">+ إضافة دين</button>
     <button class="btn btn-add no-print" onclick="toggleNone('debts')" id="noDebtsBtn" style="background:var(--cc-grey-100);color:var(--cc-grey-700);border-color:var(--cc-grey-300)">☐ لا يوجد ديون</button>
-    <div class="note">«سنوات للوصول لصفر» تُحتسب تلقائياً = المتبقي ÷ (القسط الشهري × 12). الأقساط غير الثابتة أو المجهولة تُستبعد من نسبة عبء الدين الثابتة ومن المصروفات الثابتة.</div>
-    <div class="warn" id="courtWarn">⚖️ تنبيه: يوجد التزام واحد أو أكثر عليه قضية قانونية. يُعالَج كأولوية وفق وضعه القانوني (تنفيذ / رفض دعوى / تسوية)، ويُوضَّح في الملاحظات.</div>
-    <div class="warn" id="unstableWarn">↔️ تنبيه: يوجد دين يُدفع بشكل غير ثابت حسب المقدرة والوفرة الشهرية. لم يُحتسب ضمن نسبة عبء الدين الثابتة، لكنه يمثّل عجزاً كامناً يظهر في الأشهر الضعيفة.</div>
-    <div class="warn" id="unknownWarn">⚠️ تنبيه: توجد بيانات دين مجهولة (قسط / متبقٍّ / تاريخ انتهاء). تم استبعادها من الاحتساب، ويُوصى بعدم اعتماد التصنيف النهائي بشكل قطعي حتى استكمال البيانات التفصيلية.</div>
 
-    <div class="sub">٥-٢ الجمعيات / القطيات <span style="color:var(--muted);font-weight:400">(Savings Circles)</span></div>
+
+<div class="sub">٥-٢ الجمعيات / القطيات <span style="color:var(--muted);font-weight:400">(Savings Circles)</span></div>
     <table class="dyn" id="tCircles">
       <thead><tr><th style="width:16%">اسم الجمعية</th><th style="width:11%">القسط الشهري</th><th style="width:11%">مبلغ الاستلام</th><th style="width:13%">تاريخ بداية القسط</th><th style="width:13%">تاريخ الاستلام المتوقع</th><th style="width:10%">تاريخ الانتهاء</th><th style="width:10%">تم الاستلام؟</th><th style="width:12%">ملاحظات</th><th class="no-print" style="width:6%"></th></tr></thead>
       <tbody></tbody>
     </table>
     <button class="btn btn-add no-print" onclick="addRow('circles')">+ إضافة جمعية</button>
-    <div class="note">إن لم تُستلَم الجمعية بعد، يُحتسب قسطها تلقائياً ضمن المصروفات الشهرية. أمّا إذا كان تاريخ بداية القسط مستقبلياً (لم يبدأ السداد بعد) فلا يُحتسب قسطها ضمن مجموع الأقساط والالتزامات الشهرية الكلية حتى يبدأ. وعند الاستلام تُعدّ دفعة كبيرة قابلة للتوجيه نحو إدارة الديون أو أهداف الميزانية.</div>
-
-    <div class="sub">٥-٣ المصروفات الثابتة الشهرية الأخرى <span style="color:var(--muted);font-weight:400">(Fixed Monthly Expenses)</span></div>
+<div class="sub">٥-٣ المصروفات الثابتة الشهرية الأخرى <span style="color:var(--muted);font-weight:400">(Fixed Monthly Expenses)</span></div>
     <table class="dyn" id="tFixed">
       <thead><tr><th style="width:34%">بند المصروف</th><th style="width:24%">المبلغ (د.ك)</th><th style="width:34%">ملاحظات</th><th class="no-print" style="width:8%"></th></tr></thead>
       <tbody></tbody>
       <tfoot><tr class="tot-row"><td>إجمالي المصروفات الثابتة (شاملة الأقساط والقطيات غير المستلمة)</td><td id="fixedTotal">0</td><td colspan="2"></td></tr></tfoot>
     </table>
     <button class="btn btn-add no-print" onclick="addRow('fixed')">+ إضافة بند</button>
+
+    <div class="sub">٥-٤ التقسيط الإلكتروني <span style="color:var(--muted);font-weight:400">(ديمة · تابي · تمارا · تالي)</span></div>
+    <table class="dyn" id="tBnpl">
+      <thead><tr><th style="width:30%">الجهة</th><th style="width:22%">القسط الشهري (د.ك)</th><th style="width:22%">عدد الدفعات المتبقية</th><th style="width:18%">ملاحظات</th><th class="no-print" style="width:8%"></th></tr></thead>
+      <tbody></tbody>
+      <tfoot><tr class="tot-row"><td>إجمالي أقساط التقسيط الإلكتروني</td><td id="bnplTotal">0</td><td colspan="3"></td></tr></tfoot>
+    </table>
+    <button class="btn btn-add no-print" onclick="addRow('bnpl')">+ إضافة جهة تقسيط</button>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="field"><label>مجموع الالتزامات الشهرية <span class="hint">٥-١ + ٥-٢ + ٥-٣ + ٥-٤</span></label>
+        <input type="text" id="obligTotal" value="0" readonly style="background:#f3f1f7;font-weight:700"></div>
+    </div>
   </div>
 
   <!-- 6 -->
@@ -374,8 +380,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
       <tbody></tbody>
     </table>
     <button class="btn btn-add no-print" onclick="addRow('goals')">+ إضافة هدف</button>
-    <div class="note">«المبلغ الشهري الواقعي» يُحتسب تلقائياً = المبلغ المطلوب ÷ المدة الواقعية محاسبياً، وهو ما يلزم ادخاره شهرياً لبلوغ الهدف ضمن المدة الواقعية.</div>
-  </div>
+</div>
 
   <!-- 7 -->
   <div class="section" id="sec-7">
@@ -395,38 +400,20 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
           <option value="season">تجميد المصاريف الموسمية (رمضان/مدارس/أعياد)</option>
         </select>
       </div>
-      <div class="field"><label>الفائض الشهري («مسرح اللعب المالي» بعد الثابتة)</label><input type="text" id="playMoney" readonly style="background:#f3f1f7"><div class="note" id="surplusFormula" style="margin-top:6px;line-height:1.9">المعادلة: <b>الفائض = إجمالي الدخل الثابت − (المصروفات الثابتة + المصروفات المتغيرة)</b></div></div>
+      <div class="field"><label>الفائض الشهري («مسرح اللعب المالي» بعد الثابتة)</label><input type="text" id="playMoney" readonly style="background:#f3f1f7">
+</div>
     </div>
-    <div class="guide" id="budgetGuide"></div>
-
-    <div class="sub">تحليل المصروفات المتغيرة من كشف الحساب</div>
-    <div class="grid3">
-      <div class="field"><label>مدة الكشف</label>
-        <select><option value="">— اختر —</option><option>شهر واحد</option><option>3 أشهر</option><option>6 أشهر</option></select></div>
-      <div class="field"><label>من تاريخ</label><input type="date"></div>
-      <div class="field"><label>إلى تاريخ</label><input type="date"></div>
-    </div>
-    <div class="upload-area no-print">
-      <p style="margin:0 0 8px;font-size:13px;color:var(--muted)">ارفع صور أو ملفات كشف الحساب لإرفاقها بالتقرير (صور تظهر داخل التقرير المطبوع، وملفات PDF تُدرَج بالاسم).</p>
-      <input type="file" id="stmtFiles" multiple accept="image/*,application/pdf" onchange="handleFiles(this)">
-    </div>
-    <div class="previews" id="stmtPreviews"></div>
-    <div class="field" style="margin-top:10px"><label>تعليق المستشار على كشف الحساب</label><textarea placeholder="أنماط الصرف المتغير، أبرز التسريبات المالية، البنود القابلة للتقليص…"></textarea></div>
-
-    <div class="sub">جدول المصروفات المتغيرة</div>
-    <table class="dyn" id="tBudget">
-      <thead><tr><th style="width:46%">البند</th><th style="width:24%">المبلغ المخصص (د.ك)</th><th style="width:22%">نسبته من الدخل</th><th class="no-print" style="width:8%"></th></tr></thead>
-      <tbody></tbody>
-      <tfoot><tr class="tot-row"><td>إجمالي المصروفات المتغيرة</td><td id="varTotal">0</td><td id="varPct">—</td><td class="no-print"></td></tr></tfoot>
-    </table>
-    <button class="btn btn-add no-print" onclick="addRow('budget')">+ إضافة بند متغير</button>
 
     <div class="sub">النسب المالية <span style="color:var(--muted);font-weight:400">Financial Ratios</span></div>
     <div class="ratios">
-      <div class="ratio"><div class="rk">نسبة عبء الدين<br>(الأقساط ÷ الدخل)</div><div class="rv" id="rDti">—</div></div>
-      <div class="ratio"><div class="rk">نسبة الادخار<br>(الفائض ÷ الدخل)</div><div class="rv" id="rSave">—</div></div>
-      <div class="ratio"><div class="rk">نسبة الإنفاق<br>(المصروفات ÷ الدخل)</div><div class="rv" id="rSpend">—</div></div>
-      <div class="ratio"><div class="rk">أشهر الصمود<br>(السيولة ÷ المصروفات)</div><div class="rv" id="rResil">—</div></div>
+      <div class="ratio"><div class="rk">نسبة عبء الدين<br>(الأقساط ÷ الدخل)</div><div class="rv" id="rDti">—</div>
+        <div class="rnote">كم من دخلك رايح أقساط.<br>أقل من ٢٥٪ آمن · ٢٥–٤٠٪ متوسط · فوق ٤٠٪ خطر.<br>القاعدة الذهبية: الأقساط ما تتجاوز ٤٠٪ من الدخل.</div></div>
+      <div class="ratio"><div class="rk">نسبة الادخار<br>(الفائض ÷ الدخل)</div><div class="rv" id="rSave">—</div>
+        <div class="rnote">كم تقدر تدّخر من دخلك.<br>فوق ٢٠٪ ممتاز · ١٠–٢٠٪ جيد · أقل من ١٠٪ ضعيف.</div></div>
+      <div class="ratio"><div class="rk">نسبة الإنفاق<br>(المصروفات ÷ الدخل)</div><div class="rv" id="rSpend">—</div>
+        <div class="rnote">كم من دخلك يروح مصاريف.<br>اللي ما تدّخره تصرفه.</div></div>
+      <div class="ratio"><div class="rk">أشهر الصمود<br>(السيولة ÷ المصروفات)</div><div class="rv" id="rResil">—</div>
+        <div class="rnote">لو وقف دخلك، كم شهر تعيش من سيولتك — وهذا نفسه «صندوق الطوارئ».<br>فوق ٣ شهور آمن · ١–٣ مؤقت · أقل من شهر خطر.</div></div>
       <div class="ratio"><div class="rk">المدة للوصول<br>لصفر دين</div><div class="rv" id="rZero">—</div></div>
     </div>
     <div class="grid3" style="margin-top:14px">
@@ -434,9 +421,7 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
       <div class="metric" style="text-align:right"><div class="mk">التصنيف</div><div class="mv" id="surplusClass">—</div></div>
       <div class="metric" style="text-align:right"><div class="mk">نسبة عبء الدين</div><div class="mv" id="dtiOut">—</div></div>
     </div>
-    <div class="note">ملاحظة ثابتة: نسبة عبء الدين فوق 40٪ من الدخل مؤشّر تهديد مالي يستوجب تدخّلاً (قاعدة الـ40٪ — نوتة كاش كلينيك).</div>
-
-    <div class="sub">٧-١ الحد الأدنى للعيش بارتياح</div>
+<div class="sub">٧-١ الحد الأدنى للعيش بارتياح</div>
     <div class="grid2">
       <div class="field"><label>المبلغ الذي تشعر فيه المستفيدة بالراحة المالية (د.ك)</label><input type="number" id="comfortAmount" placeholder="0"></div>
       <div class="field"><label>المتبقي من الراتب الفعلي (الفائض/العجز)</label><input type="text" id="comfortLeft" readonly style="background:#f3f1f7"></div>
@@ -446,20 +431,6 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
   </div>
 
   <!-- Behavioral -->
-  <div class="section" id="sec-8">
-    <h2><span class="num">★</span> علامات الخطر السلوكي <span class="en">Behavioral Risk Flags (0–7)</span></h2>
-    <p style="font-size:13px;color:var(--muted);margin:0 0 10px">تُحدَّد بناءً على ملاحظة المستشار. كل علامة تُحتسب في المكوّن السلوكي لمؤشر التعافي.</p>
-    <div class="behav" id="behavList">
-      <label><input type="checkbox" class="bflag"> الاستلاف بشكل متكرر في نهاية الشهر</label>
-      <label><input type="checkbox" class="bflag"> الصرف على العروض رغم عدم الحاجة</label>
-      <label><input type="checkbox" class="bflag"> عدم تتبّع المصروفات اليومية بدقة</label>
-      <label><input type="checkbox" class="bflag"> غياب صندوق طوارئ يغطي 3 أشهر</label>
-      <label><input type="checkbox" class="bflag"> تأجيل قرار الاستثمار سنتين أو أكثر</label>
-      <label><input type="checkbox" class="bflag"> نزاعات مالية متكرّرة داخل الأسرة</label>
-      <label><input type="checkbox" class="bflag"> عدم معرفة القيمة الإجمالية للأصول</label>
-    </div>
-  </div>
-
   <!-- 8 -->
   <div class="section" id="sec-9">
     <h2><span class="num">٨</span> استراتيجية إدارة الديون المقترحة <span class="en">Debt Management Strategy</span></h2>
@@ -482,7 +453,6 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
           <option>الرافعة المالية للأصول (القرض لشراء أصل يزيد قيمته)</option>
         </select>
       </div>
-      <div class="field"><label>المدة المتوقعة للوصول إلى صفر دين</label><input type="text" id="debtZeroManual" placeholder="مثال: 18 شهراً"></div>
     </div>
     <div class="field" style="margin-top:12px"><label>مبرّرات اختيار المنهج</label><textarea placeholder="لماذا هذا المنهج مناسب لوضع الحالة وفق منهج كاش كلينيك؟"></textarea></div>
 
@@ -500,20 +470,11 @@ table.dyn td textarea{border:0;background:transparent;padding:6px;font-size:13px
         <select><option value="">— اختر —</option><option>سداد الديون بالكامل</option><option>سداد جزئي</option><option>دعم شهري</option><option>لا يوجد دعم مالي مباشر</option></select></div>
       <div class="field"><label>المبلغ المقترح (د.ك)</label><input type="text" placeholder="0"></div>
     </div>
-    <div class="field" style="margin-top:12px"><label>الجهة / القرض الموجَّه له الدعم</label><input type="text"></div>
-    <div class="field" style="margin-top:12px"><label>الأثر المتوقع على الموقف المالي بعد الدعم</label><textarea></textarea></div>
-    <div class="grid2" style="margin-top:12px">
-      <div class="field"><label>الفائض الشهري المتوقع بعد التدخل (د.ك)</label><input type="text" placeholder="0"></div>
-      <div class="field"><label>هل سيُغلق ملف الحالة بعد هذا الدعم؟</label>
-        <select><option value="">— اختر —</option><option>نعم</option><option>لا — مع متابعة</option></select></div>
-    </div>
   </div>
 
   <!-- 10 -->
   <div class="section" id="sec-11">
     <h2><span class="num">١٠</span> التوصية النهائية للجمعية بعد الجلسة الثانية <span class="en">Final Recommendation</span></h2>
-    <div class="field"><label>قرار استكمال البرنامج</label>
-      <select><option value="">— اختر —</option><option>الاستمرار في البرنامج (الجلسة 3 من 4)</option><option>الاستمرار مع متابعة مكثّفة</option><option>إيقاف مؤقت لاستكمال البيانات</option></select></div>
     <div class="field" style="margin-top:12px"><label>ملخص التوصية للجمعية</label><textarea style="min-height:90px"></textarea></div>
   </div>
 
@@ -549,16 +510,23 @@ const ROWS={
   circles:()=>`<td><input type="text"></td><td><input type="number" class="cMonthly" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><input type="date" class="cStart"></td><td><input type="text"></td><td><input type="text"></td><td class="flag-cell"><input type="checkbox" class="cReceived"></td><td><input type="text" placeholder="ملاحظة…"></td>${del()}`,
   fixed:()=>`<td><input type="text"></td><td><input type="number" class="num" data-k="fixed" placeholder="0"></td><td><input type="text"></td>${del()}`,
   goals:()=>`<td><input type="text"></td><td><input type="number" class="gAmount" placeholder="0"></td><td><input type="number" placeholder="0"></td><td><select class="gFund" onchange="toggleGoalOther(this)"><option value="">—</option><option>الراتب</option><option>زيادة الدخل</option><option>قرض</option><option>أخرى</option></select><input type="text" class="gFundOther" placeholder="اكتب المصدر..." style="display:none;margin-top:5px"></td><td><input type="number" class="gReal" placeholder="0"></td><td class="auto-cell gMonthly">—</td>${del()}`,
+  bnpl:()=>`<td><select><option value="">— اختر —</option><option>ديمة</option><option>تابي</option><option>تمارا</option><option>تالي</option><option>أخرى</option></select></td><td><input type="number" class="bInst" placeholder="0"></td><td><input type="number" class="bLeft" placeholder="0"></td><td><input type="text" placeholder="ملاحظة…"></td>${del()}`,
   budget:()=>`<td><input type="text"></td><td><input type="number" class="num" data-k="var" placeholder="0"></td><td class="pctCell">—</td>${del()}`
 };
 function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove();recalc()">حذف</button></td>`}
-const TBL={income:'tIncome',assets:'tAssets',debts:'tDebts',circles:'tCircles',fixed:'tFixed',goals:'tGoals',budget:'tBudget'};
+const TBL={income:'tIncome',assets:'tAssets',debts:'tDebts',circles:'tCircles',fixed:'tFixed',goals:'tGoals',budget:'tBudget',bnpl:'tBnpl'};
 function addRow(kind){
+  if(!TBL[kind]||!ROWS[kind]) return null;
   const tb=document.querySelector('#'+TBL[kind]+' tbody');
+  if(!tb) return null;
   const tr=document.createElement('tr');tr.innerHTML=ROWS[kind]();tb.appendChild(tr);
   tr.querySelectorAll('input,select').forEach(i=>{i.addEventListener('input',recalc);i.addEventListener('change',recalc);});
   recalc();
+  return tr;
 }
+// Safety net: any change anywhere in the report re-runs the totals.
+document.addEventListener('input',function(){try{recalc();}catch(e){}});
+document.addEventListener('change',function(){try{recalc();}catch(e){}});
 // "لا يوجد" toggle for assets / debts
 const NONE_STATE={assets:false,debts:false};
 function toggleNone(kind){
@@ -601,8 +569,8 @@ function recalc(){
     const uns=tr.querySelector('.dUnstable').checked;
     const crt=tr.querySelector('.dCourt').checked;
     if(unk)hasUnknown=true; if(uns)hasUnstable=true; if(crt)hasCourt=true;
-    debtRemain+=remain;
-    if(!unk&&!uns) installSum+=inst;
+    // rows marked "دفع غير ثابت" (or with unknown data) stay out of every total
+    if(!unk&&!uns){ debtRemain+=remain; installSum+=inst; }
     const yc=tr.querySelector('.dYears');
     yc.textContent=(inst>0&&remain>0&&!unk)?(remain/(inst*12)).toFixed(1)+' سنة':'—';
   });
@@ -641,16 +609,20 @@ function recalc(){
     if(intHint) intHint.style.display='none';
   }
   $('assetsTotal').textContent=fmt(assets);
+  let bnplInst=0;
+  document.querySelectorAll('#tBnpl .bInst').forEach(e=>bnplInst+=num(e));
+  if($('bnplTotal'))$('bnplTotal').textContent=fmt(bnplInst);
+  if($('obligTotal'))$('obligTotal').value=fmt(installSum+circleUnreceived+fixedOther+bnplInst)+' د.ك';
   $('debtRemainTotal').textContent=fmt(debtRemain);
   $('debtInstallTotal').textContent=fmt(installSum);
   $('fixedTotal').textContent=fmt(fixedTotal);
-  $('varTotal').textContent=fmt(varExp);
+  if($('varTotal'))$('varTotal').textContent=fmt(varExp);
 
   document.querySelectorAll('#tBudget tbody tr').forEach(tr=>{
     const amt=num(tr.querySelector('.num'));
     tr.querySelector('.pctCell').textContent=income>0?((amt/income*100).toFixed(1)+'٪'):'—';
   });
-  $('varPct').textContent=income>0?((varExp/income*100).toFixed(1)+'٪'):'—';
+  if($('varPct'))$('varPct').textContent=income>0?((varExp/income*100).toFixed(1)+'٪'):'—';
 
   const monthlyExp=fixedTotal+varExp;
   const surplus=income-monthlyExp;
@@ -694,7 +666,7 @@ function recalc(){
   $('ovDti').textContent=dtiTxt;
 
   const flags=document.querySelectorAll('.bflag:checked').length;
-  $('mBehav').textContent=flags+' / 7';
+  if($('mBehav'))$('mBehav').textContent=flags+' / 7';
 
   let sClass='—',sColor='';
   if(income>0){const r=surplus/income;
@@ -709,7 +681,6 @@ function recalc(){
   if(dti!==null)ranks.push(dti<25?0:dti<=40?2:3);
   if(income>0){const r=surplus/income;ranks.push(surplus<0?3:r>=0.15?0:r>=0.05?1:2);}
   if(resil!==null)ranks.push(resil>3?0:resil>=1?1:3);
-  ranks.push(flags<=1?0:flags===2?1:flags<=4?2:3);
   const worst=ranks.length?Math.max(...ranks):0;
   const sevMap=[{t:'أخضر — مستقرة',c:'color-green',pos:88},{t:'أصفر — متوسطة',c:'color-yellow',pos:62},{t:'برتقالي — متوسطة/عالية',c:'color-orange',pos:35},{t:'أحمر — حرجة',c:'color-red',pos:10}];
   const sev=sevMap[worst];
@@ -721,7 +692,7 @@ function recalc(){
   if(income>0){const r=surplus/income;comps.push(surplus<0?20:r>=0.15?100:r>=0.05?70:45);}
   if(resil!==null)comps.push(resil>3?100:resil>=1?60:25);
   const acc=comps.length?comps.reduce((a,b)=>a+b,0)/comps.length:0;
-  const beh=(7-flags)/7*100;
+  const beh=100; // behavioural flags moved to session 3
   const recovery=Math.round(0.6*acc+0.4*beh);
   const hasData=comps.length>0||income>0;
   $('accScore').textContent=comps.length?Math.round(acc):'—';
@@ -736,12 +707,9 @@ function recalc(){
   else $('comfortGap').value='';
 
   // warnings
-  $('courtWarn').classList.toggle('show',hasCourt);
-  $('unstableWarn').classList.toggle('show',hasUnstable);
-  $('unknownWarn').classList.toggle('show',hasUnknown);
 
   // budget guide
-  const bt=$('budgetType').value;const g=$('budgetGuide');
+  const bt=($('budgetType')||{}).value||'';const g=$('budgetGuide'); if(!g){/* guide removed */}
   if(bt&&income>0){
     let html='';
     if(bt==='503020')html=`توزيع 50/30/20 على دخلك: الاحتياجات ${fmt(income*0.5)} • الرغبات ${fmt(income*0.3)} • الادخار وسداد الديون ${fmt(income*0.2)} د.ك.`;
@@ -752,8 +720,8 @@ function recalc(){
     else if(bt==='flex')html='الميزانية المرنة: تُعدَّل نسب البنود عند ارتفاع أو انخفاض الدخل فجأة مع الحفاظ على الأهداف.';
     else if(bt==='dates')html='توزيع الدخل حسب التواريخ: جدولة الالتزامات على تواريخ نزول كل مصدر دخل لتفادي العجز المؤقت.';
     else if(bt==='season')html='تجميد المصاريف الموسمية: تجميع مبالغ شهرية مسبقة لرمضان والمدارس والأعياد لتفادي صدمات الصرف.';
-    g.innerHTML=html;g.classList.add('show');
-  }else g.classList.remove('show');
+    if(g){g.innerHTML=html;g.classList.add('show');}
+  }else if(g) g.classList.remove('show');
 
   // framework / crisis note by severity color
   const fn=$('frameNote');
@@ -776,7 +744,7 @@ function recalc(){
 
 // file upload preview
 function handleFiles(input){
-  const box=$('stmtPreviews');
+  const box=$('stmtPreviews'); if(!box) return;
   Array.from(input.files).forEach(file=>{
     const pv=document.createElement('div');pv.className='pv';
     if(file.type.startsWith('image/')){
@@ -859,6 +827,9 @@ function exportCase(){
 loadLocal();recalc();
 </script>
 <script src="case-cloud.js"></script>
+<script src="shared-base.js"></script>
+<script src="field-flow.js"></script>
+<script src="jump-nav.js"></script>
 <script src="case-chain.js"></script>
 
 <script>

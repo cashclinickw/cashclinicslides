@@ -319,7 +319,7 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
   </div>
 
   <!-- base data -->
-  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">i</span>ملف العميلة الأساسي</a><a href="#sec-2"><span class="jn-num">📎</span>إرفاق تقارير الجلسات السابقة</a><a href="#sec-3"><span class="jn-num">١٢</span>المقارنة المالية</a><a href="#sec-4"><span class="jn-num">١٣</span>المقارنة السلوكية</a><a href="#sec-5"><span class="jn-num">١٤</span>المقارنة النفسية</a><a href="#sec-6"><span class="jn-num">١٥</span>بطاقة النتيجة الكلية قبل/بعد</a><a href="#sec-7"><span class="jn-num">١٦</span>مؤشر التعافي قبل/بعد البرنامج</a><a href="#sec-8"><span class="jn-num">١٧</span>أبرز الإنجازات</a><a href="#sec-9"><span class="jn-num">١٨</span>الهوية المالية الاستراتيجية</a><a href="#sec-17"><span class="jn-num">!</span>تدرّج عمق الخطة حسب لون الشدة</a><a href="#sec-18"><span class="jn-num">١٩</span>الخطوات والمهام العملية</a><a href="#sec-19"><span class="jn-num">٢٠</span>التوصية بالدعم من الجمعية + التوصية النهائية</a><a href="#sec-20"><span class="jn-num">٥</span>التوصيات الثلاثية</a><a href="#sec-21"><span class="jn-num">✓</span>الخاتمة</a><a href="#sec-22"><span class="jn-num">٢١</span>التوقيعات</a></div></div>
+  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">i</span>ملف العميلة الأساسي</a><a href="#sec-2"><span class="jn-num">📎</span>إرفاق تقارير الجلسات السابقة</a><a href="#sec-3"><span class="jn-num">١٢</span>المقارنة المالية</a><a href="#sec-5"><span class="jn-num">١٤</span>المقارنة النفسية</a><a href="#sec-6"><span class="jn-num">١٥</span>بطاقة النتيجة الكلية قبل/بعد</a><a href="#sec-7"><span class="jn-num">١٦</span>مؤشر التعافي قبل/بعد البرنامج</a><a href="#sec-8"><span class="jn-num">١٧</span>أبرز الإنجازات</a><a href="#sec-9"><span class="jn-num">١٨</span>الهوية المالية الاستراتيجية</a><a href="#sec-17"><span class="jn-num">!</span>تدرّج عمق الخطة حسب لون الشدة</a><a href="#sec-18"><span class="jn-num">١٩</span>الخطوات والمهام العملية</a><a href="#sec-19"><span class="jn-num">٢٠</span>التوصية بالدعم من الجمعية + التوصية النهائية</a><a href="#sec-20"><span class="jn-num">٥</span>التوصيات الثلاثية</a><a href="#sec-21"><span class="jn-num">✓</span>الخاتمة</a><a href="#sec-22"><span class="jn-num">٢١</span>التوقيعات</a></div></div>
 
   <div class="section" id="sec-1">
     <h2><span class="num">i</span> ملف العميلة الأساسي <span class="en">Client Profile (imported)</span></h2>
@@ -385,17 +385,6 @@ table.set td.lbl{text-align:right;font-weight:600;background:var(--cc-grey-050)}
       <div class="field"><label>نسبته من قيمة الهدف الأول</label><input type="text" id="savedGoal1Pct" readonly style="background:#f3f1f7"></div>
     </div>
     <div class="legend">الفائض = الدخل − (الثابتة + المتغيرة) • أشهر الصمود = السيولة ÷ المصروفات • نسبة عبء الدين = الأقساط ÷ الدخل (تُحتسب تلقائياً).</div>
-  </div>
-
-  <!-- 13 behavioral -->
-  <div class="section" id="sec-4">
-    <span class="part-tag">الجزء (أ) — النتائج</span>
-    <h2><span class="num">١٣</span> المقارنة السلوكية <span class="en">Behavioral Before/After</span></h2>
-    <p class="explain">المقياس: لا (0) / أحياناً (1) / دائماً (2). عمود «قبل» يُملأ بالرجوع إلى تقرير الجلسة الأولى والثالثة المرفقَين. عمود التغيير يبيّن مقدار التحسّن.</p>
-    <table class="cmp" id="tBehav">
-      <thead><tr><th style="width:40%">العادة المالية</th><th style="width:22%">قبل البرنامج</th><th style="width:22%">عند الختام</th><th style="width:16%">التغيير</th></tr></thead>
-      <tbody></tbody>
-    </table>
   </div>
 
   <!-- 14 psychological -->
@@ -628,7 +617,7 @@ const fmt=n=>Math.round(n).toLocaleString('en-US');
 /* behavioral + psychological rows */
 const HABITS=['إعداد ميزانية شهرية مكتوبة','متابعة المصاريف اليومية','التمييز بين الحاجة والرغبة','الادخار التلقائي','تجنّب القروض الجديدة','مراجعة كشف الحساب البنكي','التخطيط قبل الشراء','التفاوض على المصاريف الثابتة','وجود صندوق طوارئ','الاعتماد على النفس قبل المساعدات'];
 const opt='<option value="">—</option><option value="0">لا</option><option value="1">أحياناً</option><option value="2">دائماً</option>';
-(function(){const tb=document.querySelector('#tBehav tbody');HABITS.forEach(h=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${h}</td><td><select class="bh-b">${opt}</select></td><td><select class="bh-a">${opt}</select></td><td class="auto bchg">—</td>`;tb.appendChild(tr);});})();
+(function(){const tb=document.querySelector('#tBehav tbody');if(!tb)return;HABITS.forEach(h=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${h}</td><td><select class="bh-b">${opt}</select></td><td><select class="bh-a">${opt}</select></td><td class="auto bchg">—</td>`;tb.appendChild(tr);});})();
 const PSY=['علاقة العميل بالمال','القلق المالي','الثقة بالقدرة على الإدارة','الشعور بالسيطرة','الاعتماد على الذات'];
 const popt='<option value="">—</option><option>منخفض</option><option>متوسط</option><option>مرتفع</option>';
 (function(){const tb=document.querySelector('#tPsy tbody');PSY.forEach(p=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${p}</td><td><select class="psy-b">${popt}</select></td><td><select class="psy-a">${popt}</select></td><td><input type="text"></td>`;tb.appendChild(tr);});})();
@@ -832,6 +821,9 @@ function resetAll(){if(!confirm('سيتم مسح كل البيانات. متاب
 setDebtMode();loadLocal();recalc();
 </script>
 <script src="case-cloud.js"></script>
+<script src="shared-base.js"></script>
+<script src="field-flow.js"></script>
+<script src="jump-nav.js"></script>
 <script src="case-chain.js"></script>
 
 <script>

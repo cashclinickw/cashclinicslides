@@ -48,11 +48,21 @@
 
   // Build the canonical case object from whatever collector the report has.
   function collectData() {
+    var d = null;
     try {
-      if (typeof window.collectCase === "function") return window.collectCase();
-      if (typeof window.collectCaseData === "function") return window.collectCaseData();
+      if (typeof window.collectCase === "function") d = window.collectCase();
+      else if (typeof window.collectCaseData === "function") d = window.collectCaseData();
     } catch (e) {}
-    return { base: {} };
+    if (!d) d = { base: {} };
+    if (!d.base) d.base = {};
+    // personal data typed in ANY session is written to the shared case base
+    if (window.SharedBase && window.SharedBase.collect) {
+      try {
+        var sb = window.SharedBase.collect();
+        Object.keys(sb).forEach(function (k) { if (sb[k] !== "" && sb[k] != null) d.base[k] = sb[k]; });
+      } catch (e) {}
+    }
+    return d;
   }
 
   // Derive a stable caseId from the case number (fallback to a timestamp).
@@ -87,6 +97,11 @@
     clone.querySelectorAll(".no-print, .toolbar").forEach(function (n) {
       n.parentNode && n.parentNode.removeChild(n);
     });
+    // Turn every field into flowing text so long answers are never cut
+    // off inside a fixed-height box in the PDF.
+    if (window.FieldFlow && window.FieldFlow.flatten) {
+      try { window.FieldFlow.flatten(clone); } catch (e) { console.warn("FieldFlow", e); }
+    }
     return "<!DOCTYPE html>\n" + clone.outerHTML;
   }
 
@@ -182,6 +197,21 @@
       } catch (e) {
         console.error("CaseCloud.saveDataOnly failed", e);
         return { ok: false, error: String(e && e.message ? e.message : e) };
+      }
+    },
+
+    /**
+     * Read the case-level shared base (personal data entered in session 1).
+     */
+    loadCaseBase: async function (caseId) {
+      try {
+        var ctx = await fb();
+        await ensureAuth(ctx);
+        var snap = await ctx.fs.getDoc(ctx.fs.doc(ctx.db, "cases", caseId));
+        return snap.exists() ? ((snap.data() || {}).base || null) : null;
+      } catch (e) {
+        console.error("CaseCloud.loadCaseBase failed", e);
+        return null;
       }
     },
 

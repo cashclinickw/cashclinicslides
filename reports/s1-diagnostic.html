@@ -326,7 +326,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
       <span class="badge-tpl">تقرير سرّي · CONFIDENTIAL</span>
     </div>
     <div class="cover-titles">
-      <div class="kicker">نموذج تقرير سريري مالي · A CASH CLINIC REPORT</div>
+      <div class="kicker">نموذج تقرير مالي · A CASH CLINIC REPORT</div>
       <h1>تقرير الجلسة الأولى التشخيصية</h1>
       <div class="en">Session 1 · Diagnostic Report</div>
       <p class="confid">ملاحظات المستشار: سرية لكاش كلينيك وجمعية بذل الندى فقط.</p>
@@ -339,7 +339,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     </div>
   </div>
 
-  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>ملاحظات المستشار</a><a href="#sec-3"><span class="jn-num">٤</span>التشخيص السلوكي</a><a href="#sec-4"><span class="jn-num">٥</span>تصنيف الحالة الأولي</a><a href="#sec-6"><span class="jn-num">٦</span>التوصية للجمعية</a><a href="#sec-7"><span class="jn-num">٧</span>التوقيعات</a></div></div>
+  <div class="jumpnav no-print"><div class="jn-title">التنقّل السريع بين أقسام التقرير</div><div class="jn-items"><a href="#sec-1"><span class="jn-num">١</span>معلومات الجلسة والحالة</a><a href="#sec-2"><span class="jn-num">٢</span>ملاحظات المستشار</a><a href="#sec-3"><span class="jn-num">٣</span>التشخيص السلوكي</a><a href="#sec-4"><span class="jn-num">٤</span>تصنيف الحالة الأولي</a><a href="#sec-6"><span class="jn-num">٥</span>التوصية للجمعية</a><a href="#sec-7"><span class="jn-num">٦</span>التوقيعات</a></div></div>
 
   <div class="section" id="sec-1">
     <div class="sec-head"><div class="sec-num">١</div><div class="sec-titles"><div class="ar">معلومات الجلسة والحالة</div><div class="en">Session &amp; Case Info</div></div></div>
@@ -349,9 +349,18 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
       <div class="field"><label>اسم المستفيد <span class="hint">أول + ثاني</span></label><input type="text" id="ce_name"></div>
       <div class="field" style="grid-column:span 2"><label>الجمعية المحوِّلة</label><input type="text" id="ce_charity" value="جمعية بذل الندى الخيرية للأعمال الخيرية"></div>
       <div class="field"><label>تاريخ الجلسة</label><input type="date" id="ce_date"></div>
-      <div class="field"><label>مدة الجلسة الفعلية</label><input type="text" placeholder="60 دقيقة"></div>
       <div class="field"><label>المستشار المنفِّذ</label><input type="text" placeholder="سارة الهندي"></div>
+      <div class="field"><label>الجنسية</label><input type="text" id="ce_nat" placeholder="كويتي"></div>
+      <div class="field"><label>تاريخ الميلاد</label><input type="date" id="ce_dob" onchange="calcAge()"></div>
+      <div class="field"><label>العمر <span class="hint">يُحتسب تلقائياً</span></label><input type="text" id="ce_age" placeholder="—" readonly></div>
+      <div class="field"><label>الحالة الاجتماعية</label><select id="ce_marital"><option value="">—</option><option>أعزب / عزباء</option><option>متزوج / متزوجة</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></div>
+      <div class="field"><label>الحالة الوظيفية</label><select id="ce_job"><option value="">—</option><option>موظف حكومي</option><option>موظف قطاع خاص</option><option>أعمال حرة</option><option>متقاعد</option><option>عاطل عن العمل</option><option>طالب</option><option>ربة منزل</option></select></div>
+      <div class="field"><label>الراتب <span class="hint">د.ك شهرياً</span></label><input type="number" id="ce_salary" placeholder="0"></div>
+      <div class="field"><label>عدد الأبناء</label><input type="number" id="ce_kids" placeholder="0" min="0"></div>
     </div>
+    <div class="sub" style="margin-top:12px">أعمار الأبناء وحالتهم</div>
+    <table class="dyn" id="tChildren"><thead><tr><th style="width:22%">العمر</th><th>الحالة الاجتماعية</th><th>الحالة الوظيفية</th><th class="no-print"></th></tr></thead><tbody></tbody></table>
+    <button class="btn-add no-print" onclick="addRow('child')">+ إضافة ابن</button>
   </div>
 
   <div class="section" id="sec-2">
@@ -360,7 +369,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     <div class="sub">٢-١ الانطباع العام والربط الإنساني</div>
     <div class="field"><label>كيف بدأت الجلسة؟ هل كان المستفيد مرتاحاً؟ متعاوناً؟ متحفظاً؟ ما الذي كسر الجليد؟</label><textarea></textarea></div>
 
-    <div class="sub">٢-٢ المستفيد بكلماته (اقتباسات حرفية)</div>
+    <div class="sub">٢-٢ ملاحظات السلوكية</div>
     <p class="hint" style="margin:0 0 6px">سجّل ٣–٥ جمل قالها المستفيد بحرفيتها — تكشف الكثير لاحقاً.</p>
     <table class="dyn" id="tQuotes"><thead><tr><th>الاقتباس</th><th class="no-print"></th></tr></thead><tbody></tbody></table>
     <button class="btn-add no-print" onclick="addRow('quote')">+ إضافة اقتباس</button>
@@ -398,7 +407,7 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     <div class="field" style="margin-top:10px"><label>أخرى</label><textarea rows="2" placeholder="اكتب مؤشراً آخر..."></textarea></div>
 
     <div class="sub">٢-٧ علامات تحذيرية (Red Flags)</div>
-    <p class="hint" style="margin:0 0 6px;color:var(--cc-burgundy)">انتبه لهذي العلامات — تستدعي تقييماً إضافياً أو إحالة.</p>
+    
     <div class="checks danger" id="redBox">
       <label><input type="checkbox" class="red"> <span>إشارات إلى رهانات أو قمار</span></label>
       <label><input type="checkbox" class="red"> <span>علامات أو ذكر إدمان مواد</span></label>
@@ -414,12 +423,12 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
   </div>
 
   <div class="section" id="sec-3">
-    <div class="sec-head"><div class="sec-num">٤</div><div class="sec-titles"><div class="ar">التشخيص السلوكي</div><div class="en">Behavioral Diagnosis</div></div></div>
-    <div class="sub">٤-١ تقييم الوعي المالي</div>
+    <div class="sec-head"><div class="sec-num">٣</div><div class="sec-titles"><div class="ar">التشخيص السلوكي</div><div class="en">Behavioral Diagnosis</div></div></div>
+    <div class="sub">٣-١ تقييم الوعي المالي</div>
     <table class="awtable" id="tAware"><thead><tr><th style="width:40%">المهارة</th><th>المستوى</th></tr></thead><tbody></tbody></table>
     <div class="note">مؤشر الوعي المالي يُحتسب تلقائياً: ضعيف=0، متوسط=1، جيد=2، ممتاز=3 → النسبة من الإجمالي.</div>
 
-    <div class="sub">٤-٢ السلوكيات الإشكالية الملاحظة</div>
+    <div class="sub">٣-٢ السلوكيات الإشكالية الملاحظة</div>
     <div class="checks danger" id="behBox">
       <label><input type="checkbox" class="beh"> <span>صرف انفعالي / اندفاعي</span></label>
       <label><input type="checkbox" class="beh"> <span>الاعتماد المزمن على القروض</span></label>
@@ -432,12 +441,12 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
     </div>
     <div class="field" style="margin-top:10px"><label>أخرى</label><textarea rows="2" placeholder="اكتب سلوكاً آخر..."></textarea></div>
 
-    <div class="sub">٤-٣ نقاط القوة في الحالة</div>
+    <div class="sub">٣-٣ نقاط القوة في الحالة</div>
     <div class="field"><label>ما الذي تستطيع البناء عليه في خطة العلاج؟</label><textarea></textarea></div>
   </div>
 
   <div class="section" id="sec-4">
-    <div class="sec-head"><div class="sec-num">٥</div><div class="sec-titles"><div class="ar">تصنيف الحالة الأولي</div><div class="en">Initial Classification</div></div></div>
+    <div class="sec-head"><div class="sec-num">٤</div><div class="sec-titles"><div class="ar">تصنيف الحالة الأولي</div><div class="en">Initial Classification</div></div></div>
     <div class="sub">شدة الحالة</div>
     <div class="radios" id="sevRadios">
       <label><input type="radio" name="sev" value="0"> بسيطة</label>
@@ -445,28 +454,23 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
       <label><input type="radio" name="sev" value="2"> معقّدة</label>
       <label><input type="radio" name="sev" value="3"> حرجة</label>
     </div>
-    <div class="sub">احتمالية التحسّن مع البرنامج</div>
-    <div class="radios">
-      <label><input type="radio" name="prob" value="عالية"> عالية</label>
-      <label><input type="radio" name="prob" value="متوسطة"> متوسطة</label>
-      <label><input type="radio" name="prob" value="ضعيفة"> ضعيفة</label>
+    <div class="sub">يحتاج تدخلاً خارجياً حالاً؟</div>
+    <div class="checks" id="extBox">
+      <label><input type="checkbox" class="ext" value="لا"> <span>لا</span></label>
+      <label><input type="checkbox" class="ext" value="دعم نفسي"> <span>دعم نفسي</span></label>
+      <label><input type="checkbox" class="ext" value="قانوني"> <span>قانوني</span></label>
+      <label><input type="checkbox" class="ext" value="مساعدة مالية"> <span>مساعدة مالية</span></label>
     </div>
-    <div class="sub">يحتاج تدخلاً خارجياً إضافياً؟</div>
-    <div class="radios">
-      <label><input type="radio" name="ext" value="لا"> لا</label>
-      <label><input type="radio" name="ext" value="دعم نفسي"> دعم نفسي</label>
-      <label><input type="radio" name="ext" value="قانوني"> قانوني</label>
-      <label><input type="radio" name="ext" value="بنكي/إعادة جدولة"> بنكي / إعادة جدولة</label>
-    </div>
+    <div class="field" style="margin-top:8px"><label>أخرى</label><textarea id="ce_extOther" rows="2" placeholder="اكتب تدخلاً آخر..."></textarea></div>
   </div>
 
   <div class="section" id="sec-6">
-    <div class="sec-head"><div class="sec-num">٦</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
+    <div class="sec-head"><div class="sec-num">٥</div><div class="sec-titles"><div class="ar">التوصية للجمعية</div><div class="en">Recommendation</div></div></div>
     <div class="field"><label>اكتب التوصية للجمعية</label><textarea style="min-height:150px" placeholder="اكتب فقرة التوصية هنا..."></textarea></div>
   </div>
 
   <div class="section" id="sec-7">
-    <div class="sec-head"><div class="sec-num">٧</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
+    <div class="sec-head"><div class="sec-num">٦</div><div class="sec-titles"><div class="ar">التوقيعات</div><div class="en">Signatures</div></div></div>
     <div class="sign-grid one">
       <div class="sign-box"><div class="role">المستشار المنفِّذ (سارة)</div>
         <div class="sign-line"><span>الاسم:</span><input type="text"></div>
@@ -492,16 +496,28 @@ table.awtable tr:nth-child(even) td{background:var(--cc-grey-050)}
 
 <script>
 const $=id=>document.getElementById(id);
-const AWARE=['إعداد ميزانية شهرية','متابعة المصاريف','التمييز بين الحاجة والرغبة','عادة الادخار','الوعي بحجم الديون','التخطيط المالي طويل المدى'];
+const AWARE=['متابعة المصاريف','التمييز بين الحاجة والرغبة','الوعي بحجم الديون','التخطيط المالي طويل المدى'];
 const LV=[['ضعيف','0'],['متوسط','1'],['جيد','2'],['ممتاز','3']];
 (function(){const tb=document.querySelector('#tAware tbody');AWARE.forEach((s,i)=>{const tr=document.createElement('tr');let lv='<div class="lvl">';LV.forEach(l=>lv+=`<label><input type="radio" name="aw${i}" class="aw" value="${l[1]}"> ${l[0]}</label>`);lv+='</div>';tr.innerHTML=`<td>${s}</td><td>${lv}</td>`;tb.appendChild(tr);});})();
+function calcAge(){
+  var d=document.getElementById('ce_dob'), a=document.getElementById('ce_age');
+  if(!d||!a) return;
+  if(!d.value){ a.value=''; return; }
+  var b=new Date(d.value), t=new Date();
+  if(isNaN(b.getTime())){ a.value=''; return; }
+  var age=t.getFullYear()-b.getFullYear();
+  var m=t.getMonth()-b.getMonth();
+  if(m<0||(m===0&&t.getDate()<b.getDate())) age--;
+  a.value = (age>=0&&age<130) ? (age+' سنة') : '';
+}
 function del(){return `<td class="no-print"><button class="btn-del" onclick="this.closest('tr').remove()">حذف</button></td>`}
 const ROWS={
+  child:()=>`<td><input type="number" min="0" placeholder="—"></td><td><select><option value="">—</option><option>أعزب / عزباء</option><option>متزوج / متزوجة</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></td><td><select><option value="">—</option><option>طالب</option><option>موظف</option><option>أعمال حرة</option><option>لا يعمل</option><option>طفل</option></select></td>${del()}`,
   quote:()=>`<td><textarea placeholder="«...»" rows="2"></textarea></td>${del()}`,
   smart:()=>`<td><select><option value="">—</option><option>قصير (4 أسابيع)</option><option>متوسط (6 أشهر)</option><option>طويل (سنة)</option></select></td><td><textarea rows="2"></textarea></td><td><textarea rows="2" placeholder="اكتب الملاحظة..."></textarea></td>${del()}`,
   week:()=>`<td><textarea rows="2"></textarea></td>${del()}`
 };
-const TBL={quote:'tQuotes',smart:'tSmart',week:'tWeek'};
+const TBL={child:'tChildren',quote:'tQuotes',smart:'tSmart',week:'tWeek'};
 function addRow(k,val){const tb=document.querySelector('#'+TBL[k]+' tbody');const tr=document.createElement('tr');tr.innerHTML=ROWS[k]();tb.appendChild(tr);if(val){const i=tr.querySelector('input,textarea');if(i)i.value=val;}recalc();return tr;}
 
 function recalc(){
@@ -543,7 +559,7 @@ function collectCase(){
   out.session1={
     roots:chk('.root:checked'),psychFlags:chk('.psy:checked'),redFlags:chk('.red:checked'),
     awareIndex:awarePct,problemBehaviors:chk('.beh:checked'),behavRisk:beh,entryBehav,
-    severity:rget('sev'),improveProb:rget('prob'),extNeed:rget('ext'),decision:rget('dec')
+    severity:rget('sev'),extNeed:chk('.ext:checked'),extOther:(document.getElementById('ce_extOther')||{}).value||'',decision:rget('dec')
   };
   return out;
 }
@@ -649,6 +665,9 @@ function restoreSig(n){
 initSigPad(1);
 </script>
 <script src="case-cloud.js"></script>
+<script src="shared-base.js"></script>
+<script src="field-flow.js"></script>
+<script src="jump-nav.js"></script>
 <script src="case-chain.js"></script>
 
 <script>
@@ -698,13 +717,33 @@ async function openClients(){
       var nm=b.name||'(بدون اسم)';
       var no=b.caseNo?('# '+b.caseNo):'';
       var ref=b.charityRef?('مرجع: '+b.charityRef):'';
-      return '<div class="cl-row">'+
+      var hay=((b.name||'')+' '+(b.caseNo||'')+' '+(b.charityRef||'')).toLowerCase();
+      return '<div class="cl-row" data-find="'+esc(hay)+'">'+
         '<div class="cl-info"><div class="cl-name">'+esc(nm)+'</div><div class="cl-meta">'+esc(no)+' '+esc(ref)+'</div></div>'+
         '<button class="cl-load" onclick="loadClientData(\''+c.caseId+'\')">فتح في التقرير ↩</button>'+
       '</div>';
     }).join('');
     body.innerHTML=rows;
+    var sb=document.getElementById('clientsSearch'); if(sb){ sb.value=''; sb.focus(); }
   }catch(e){ body.innerHTML='<div style="padding:30px;text-align:center;color:#962D38">تعذّر تحميل القائمة.</div>'; console.error(e); }
+}
+function filterClients(){
+  var q=(document.getElementById('clientsSearch')||{}).value||'';
+  q=q.trim().toLowerCase();
+  var rows=document.querySelectorAll('#clientsBody .cl-row'), shown=0;
+  Array.prototype.forEach.call(rows,function(r){
+    var hit=!q || (r.getAttribute('data-find')||'').indexOf(q)>-1;
+    r.style.display=hit?'':'none';
+    if(hit) shown++;
+  });
+  var body=document.getElementById('clientsBody');
+  var none=document.getElementById('clNoHits');
+  if(!shown && rows.length){
+    if(!none){ none=document.createElement('div'); none.id='clNoHits';
+      none.style.cssText='padding:24px;text-align:center;color:#756E80';
+      none.textContent='لا توجد نتائج مطابقة.'; body.appendChild(none); }
+    none.style.display='';
+  } else if(none){ none.style.display='none'; }
 }
 function closeClients(){ document.getElementById('clientsModal').style.display='none'; }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
@@ -729,6 +768,7 @@ async function loadClientData(caseId){
       var set=function(id,val){var el=document.getElementById(id);if(el&&val)el.value=val;};
       set('ce_caseNo',r.base.caseNo);set('ce_charityRef',r.base.charityRef);set('ce_name',r.base.name);set('ce_charity',r.base.charity);
     }
+    if(window.SharedBase&&window.SharedBase.apply){ try{ window.SharedBase.apply(r.base); }catch(e){} }
     if(typeof recalc==='function') recalc();
     if(typeof restoreSig==='function') restoreSig(1);
     closeClients();
@@ -739,6 +779,7 @@ async function loadClientData(caseId){
 <div class="cl-overlay no-print" id="clientsModal">
   <div class="cl-box">
     <div class="cl-head"><h3>👥 العملاء المحفوظون</h3><button class="cl-x" onclick="closeClients()">✕</button></div>
+    <div style="padding:10px 14px 4px"><input type="text" id="clientsSearch" placeholder="🔍 ابحث برقم الحالة أو الاسم أو مرجع الجمعية..." oninput="filterClients()" style="width:100%;font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid #E3E1E8;border-radius:9px;background:#F7F6F9"></div>
     <div class="cl-list" id="clientsBody"></div>
   </div>
 </div>
